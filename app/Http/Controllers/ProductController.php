@@ -48,7 +48,7 @@ class ProductController extends Controller
         ]);
         $product = new Product([
             'name' => $request->get('name'),
-            'internal_identification' => $request->get('internal_identification'),
+            'identification_code' => $request->get('identification_code'),
             'user_id' => $user->id,
         ]);
         $product->save();
@@ -88,9 +88,15 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $hash)
     {
-        //
+        $user = Auth::user();
+        $product = Product::where('hash', $hash)->first();
+        if (!$product) abort(404);
+        if($product->user_id != $user->id) abort(403);
+        $product->name = $request->get('name');
+        $product->identification_code = $request->get('identification_code');
+        $product->save();
     }
 
     /**
@@ -99,8 +105,13 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($hash)
     {
-        //
+        $user = Auth::user();
+        $product = Product::where('hash', $hash)->first();
+        if (!$product) abort(404);
+        if($product->user_id != $user->id) abort(403);
+        $product->delete();
+        redirect()->back()->with('success','deleted');
     }
 }

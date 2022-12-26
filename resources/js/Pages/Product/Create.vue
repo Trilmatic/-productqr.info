@@ -4,7 +4,7 @@ import { reactive } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 const form = reactive({
   name: null,
-  internal_identification: null,
+  identification_code: null,
 });
 function submit() {
   Inertia.post("/product/store", form);
@@ -30,14 +30,14 @@ function submit() {
             <div>
               <label
                 class="block text-sm font-medium mb-1"
-                for="internal_identification"
+                for="identification_code"
                 >Internal identification</label
               >
               <input
-                id="internal_identification"
+                id="identification_code"
                 type="text"
                 class="form-input w-full"
-                @change="form.internal_identification = $event.target.value"
+                @change="form.identification_code = $event.target.value"
               />
             </div>
           </div>

@@ -38,6 +38,8 @@ Route::middleware([
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
-        Route::get('/{hash}', 'show')->name('show');
+        Route::get('/{hash}', 'show')->name('show');    
+        Route::put('/{hash}/update', 'update')->name('update');
+        Route::delete('/{hash}/delete', 'destroy')->name('destroy');
     });
 });

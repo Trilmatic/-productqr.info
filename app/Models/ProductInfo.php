@@ -19,7 +19,7 @@ class ProductInfo extends Model
     {
         parent::boot();
         static::created(function ($record) {
-            $hashids = new Hashids('7a761b3c42a239e08b68021fd8515685', 6);
+            $hashids = new Hashids('7a761b3c42a239e08b68021fd8515685', 8);
             $record->hash = $hashids->encode($record->id);
             $record->save();
         });
