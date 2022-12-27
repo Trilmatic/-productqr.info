@@ -1,4 +1,20 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require("tailwindcss/colors");
+const defaultTheme = require("tailwindcss/defaultTheme");
+
+const customColors = {
+    primary: colors.sky[600],
+    "primary-focus": colors.sky[500],
+    secondary: colors.indigo[600],
+    "secondary-focus": colors.indigo[500],
+    info: colors.emerald[600],
+    "info-focus": colors.emerald[500],
+    warning: colors.amber[600],
+    "warning-focus": colors.amber[500],
+    error: colors.red[600],
+    "error-focus": colors.red[500],
+    success: colors.green[600],
+    "success-focus": colors.green[500],
+};
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -15,6 +31,7 @@ module.exports = {
                 aspekta: ['Aspekta', 'sans-serif'],
                 'cabinet-grotesk': ['Cabinet Grotesk', 'sans-serif'],
             },
+            colors: customColors,
             fontSize: {
                 xs: ['0.75rem', { lineHeight: '1.5' }],
                 sm: ['0.875rem', { lineHeight: '1.5715' }],
@@ -35,6 +52,13 @@ module.exports = {
                 wide: '0.01em',
                 wider: '0.02em',
                 widest: '0.4em',
+            },
+            zIndex: {
+                1: "1",
+                2: "2",
+                3: "3",
+                4: "4",
+                5: "5",
             },
         },
     },

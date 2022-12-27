@@ -11,6 +11,10 @@
 
 @import 'tailwindcss/utilities';
 
+/*Components*/
+@import 'components/select.css';
+@import 'components/pagination.css';
+
 /* Additional Tailwind directives: https://tailwindcss.com/docs/functions-and-directives/#responsive */
 @layer utilities {
     .rtl {

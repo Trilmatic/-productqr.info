@@ -1,0 +1,23 @@
+.pagination{
+    @apply list-none inline-flex -space-x-px p-0 flex-wrap space-y-3;
+}
+
+.pagination .pagination-link{
+    @apply px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white;
+}
+
+.pagination .pagination-link.active{
+    @apply bg-primary dark:bg-primary hover:bg-primary-focus dark:hover:bg-primary-focus text-gray-700 text-white;
+}
+
+.pagination .pagination-link.disabled{
+    @apply bg-white dark:bg-gray-700 hover:bg-white dark:hover:bg-gray-700 hover:dark:text-gray-500 dark:hover:dark:text-gray-400;
+}
+
+.pagination li:first-child .pagination-link{
+    @apply rounded-l-lg;
+}
+
+.pagination li:last-child .pagination-link:last-child{
+    @apply rounded-r-lg;
+}

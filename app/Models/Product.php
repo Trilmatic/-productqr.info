@@ -6,13 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Hashids\Hashids;
+use Mehradsadeghi\FilterQueryString\FilterQueryString;
+use Database\Factories\ProductFactory;
 
 class Product extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use FilterQueryString;
 
-    protected $fillable = ['name', 'user_id', 'identification_code','status','hash'];
+    protected $filters = ['sort', 'where_any'];
+
+    protected $fillable = ['name', 'user_id', 'identification_code', 'status', 'hash'];
     protected $guarded = ['id'];
 
     protected static function boot()
@@ -23,5 +28,15 @@ class Product extends Model
             $record->hash = $hashids->encode($record->id);
             $record->save();
         });
+    }
+
+    public function where_any($query, $value)
+    {
+        return $query->where('identification_code', 'ILIKE', '%' . $value . '%')->orWhere('name', 'ILIKE', '%' . $value . '%')->orWhere('hash', 'ILIKE', '%' . $value . '%');
+    }
+
+    protected static function newFactory()
+    {
+        return ProductFactory::new();
     }
 }

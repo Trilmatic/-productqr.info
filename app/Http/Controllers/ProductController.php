@@ -14,12 +14,18 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
-        $products = Product::where('user_id', $user->id)->paginate(25);
+        $per_page = 25;
+        $per_page = $request->input('per_page') ? $request->input('per_page') : "25";
+        $products = Product::where('user_id', $user->id)->filter()->paginate($per_page);
         return Inertia::render('Product/Index', [
             'products' => $products,
+            'sort' => $request->input('sort'),
+            'where_any' => $request->input('where_any'),
+            'per_page' => $per_page,
+            'search' => $request->input('search'),
         ]);
     }
 
