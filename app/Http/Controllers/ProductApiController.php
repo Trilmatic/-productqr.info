@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 
-class ProductController extends Controller
+class ProductApiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,16 +16,11 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $per_page = 25;
-        $per_page = $request->input('per_page') ? $request->input('per_page') : "25";
-        $products = Product::where('user_id', $user->id)->filter()->paginate($per_page);
-        return Inertia::render('Product/Index', [
-            'products' => $products,
-            'sort' => $request->input('sort'),
-            'where_any' => $request->input('where_any'),
-            'per_page' => $per_page,
-            'search' => $request->input('search'),
-        ]);
+        if(!$user->tokenCan('read')) abort(403);
+        $products = Product::where('user_id', $user->id)->filter();
+        if($request->input('limit')) $products = $products->limit($request->input('limit'));
+        $products = $products->get();
+        return response()->json($products);
     }
 
     /**
@@ -38,7 +32,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-
+        if(!$user->tokenCan('create')) abort(403);
         $request->validate([
             'name' => 'required',
         ]);
@@ -48,7 +42,7 @@ class ProductController extends Controller
             'user_id' => $user->id,
         ]);
         $product->save();
-        return redirect()->route('product.show', $product->hash);
+        return response()->json($product);
     }
 
     /**
@@ -59,11 +53,11 @@ class ProductController extends Controller
      */
     public function show($hash)
     {
+        $user = Auth::user();
         $product = Product::where('hash', $hash)->first();
         if (!$product) abort(404);
-        return Inertia::render('Product/Show', [
-            'product' => $product,
-        ]);
+        if($user->cannot('read', $product)) abort(403);
+        return response()->json($product);
     }
 
     /**
@@ -82,7 +76,7 @@ class ProductController extends Controller
         $product->name = $request->get('name');
         $product->identification_code = $request->get('identification_code');
         $product->save();
-        redirect()->back()->with('success','deleted');
+        return response()->json($product);
     }
 
     /**
@@ -98,6 +92,6 @@ class ProductController extends Controller
         if (!$product) abort(404);
         if($user->cannot('delete', $product)) abort(403);
         $product->delete();
-        redirect()->back()->with('success','deleted');
+        return response('success');
     }
 }
