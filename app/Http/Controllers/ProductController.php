@@ -77,17 +77,6 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -103,6 +92,7 @@ class ProductController extends Controller
         $product->name = $request->get('name');
         $product->identification_code = $request->get('identification_code');
         $product->save();
+        redirect()->back()->with('success','deleted');
     }
 
     /**

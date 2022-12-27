@@ -1,5 +1,5 @@
 .pagination{
-    @apply list-none inline-flex -space-x-px p-0 flex-wrap space-y-3;
+    @apply list-none inline-flex -space-x-px p-0;
 }
 
 .pagination .pagination-link{

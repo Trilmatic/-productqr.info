@@ -8,12 +8,14 @@
 @import 'additional-styles/range-slider.css';
 @import 'additional-styles/toggle-switch.css';
 @import 'additional-styles/theme.css';
+@import 'transitions.css';
 
 @import 'tailwindcss/utilities';
 
 /*Components*/
 @import 'components/select.css';
 @import 'components/pagination.css';
+@import 'components/forms.css';
 
 /* Additional Tailwind directives: https://tailwindcss.com/docs/functions-and-directives/#responsive */
 @layer utilities {
