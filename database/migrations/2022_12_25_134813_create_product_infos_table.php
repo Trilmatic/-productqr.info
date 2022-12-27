@@ -19,8 +19,9 @@ return new class extends Migration
             $table->foreignId('product_id')->references('id')->on('products');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->string('hash');
-            $table->string('name')->nullable()->default(null);
+            $table->string('name');
             $table->longText('content')->nullable()->default(null);
+            $table->boolean('default')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
