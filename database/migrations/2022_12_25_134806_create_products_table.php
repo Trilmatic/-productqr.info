@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('hash')->nullable()->default(null);
             $table->string('name');
             $table->string('identification_code')->nullable()->default(null);
-            $table->integer('gtin')->nullable()->default(null);
             $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
             $table->softDeletes();
