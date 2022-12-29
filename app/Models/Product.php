@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Hashids\Hashids;
+use App\Models\ProductInfo;
 use Mehradsadeghi\FilterQueryString\FilterQueryString;
 use Database\Factories\ProductFactory;
 
@@ -38,5 +39,23 @@ class Product extends Model
     protected static function newFactory()
     {
         return ProductFactory::new();
+    }
+
+    public function product_infos()
+    {
+        return $this->hasMany(ProductInfo::class, 'product_id', 'id');
+    }
+
+    public function info()
+    {
+        $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+        return $this->hasOne(ProductInfo::class, 'product_id', 'id')->whereHas('language', function ($q) use ($lang) {
+            $q->where('code', $lang);
+        });
+    }
+
+    public function request_info($hash)
+    {
+        return $this->hasOne(ProductInfo::class, 'product_id', 'id')->where('hash', $hash);
     }
 }

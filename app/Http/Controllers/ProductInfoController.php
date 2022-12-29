@@ -75,10 +75,17 @@ class ProductInfoController extends Controller
      */
     public function show(Request $request, $hash)
     {
-        $product = Product::where('hash', $hash)->first();
+        $product = Product::with("product_infos")->where('hash', $hash)->first();
         if (!$product) abort(404);
+        if ($request->input('hash')) {
+            $info = $product->request_info($request->input('hash'));
+        } else {
+            $info = $product->info()->first();
+            if (!$info) $info = $product->product_infos()->first();
+        }
         return Inertia::render('ProductInfo/Show', [
             'product' => $product,
+            'info' => $info,
         ]);
     }
 

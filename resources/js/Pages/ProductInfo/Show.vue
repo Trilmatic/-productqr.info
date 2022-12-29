@@ -5,13 +5,23 @@ import { Inertia } from "@inertiajs/inertia";
 import { Link } from "@inertiajs/inertia-vue3";
 const props = defineProps({
   product: Object,
+  info: Object,
 });
 </script>
 <template>
   <AppLayout title="Dashboard">
     <div class="py-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-center items-center relative">
+        {{ product }}
+        {{ info }}
+        <div
+          class="flex justify-center items-center relative"
+          v-if="
+            product.product_infos.length === 0 &&
+            $page.props.user &&
+            $page.props.user.id === product.user_id
+          "
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             data-name="Layer 1"
