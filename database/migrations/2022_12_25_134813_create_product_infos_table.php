@@ -18,8 +18,7 @@ return new class extends Migration
             $table->foreignId('language_id')->references('id')->on('languages');
             $table->foreignId('product_id')->references('id')->on('products');
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->string('hash');
-            $table->string('name');
+            $table->string('hash')->nullable()->default(null);
             $table->longText('content')->nullable()->default(null);
             $table->boolean('default')->default(false);
             $table->timestamps();

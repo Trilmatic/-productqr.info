@@ -103,7 +103,7 @@ function edit(record) {
   form.hash = record.hash;
   form.name = record.name;
   form.identification_code = record.identification_code;
-  let nameInput = document.getElementById("name");
+  let nameInput = document.getElementById("product_name");
   let codeInput = document.getElementById("identification_code");
   if (nameInput) nameInput.value = record.name;
   if (codeInput) codeInput.value = record.identification_code;
@@ -200,7 +200,7 @@ onMounted(() => {
                           >Name</label
                         >
                         <input
-                          id="name"
+                          id="product_name"
                           type="text"
                           class="form-input w-full"
                           @change="form.name = $event.target.value"
@@ -233,11 +233,12 @@ onMounted(() => {
                           text-white
                           bg-gray-900
                           hover:bg-gray-800
+                          dark:hover:bg-gray-700
                           group
                         "
                         type="submit"
                       >
-                        <span v-if="!form.id">Create</span
+                        <span v-if="!form.hash">Create</span
                         ><span v-else>Edit</span>
                         <span
                           class="
@@ -386,7 +387,7 @@ onMounted(() => {
           </td>
           <td>
             <div class="flex space-x-2 items-center">
-              <Link :href="'/product/' + p.hash">
+              <Link :href="'/product/' + p.hash + '/info'">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="

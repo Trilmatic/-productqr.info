@@ -48,7 +48,7 @@ class ProductController extends Controller
             'user_id' => $user->id,
         ]);
         $product->save();
-        return redirect()->route('product.show', $product->hash);
+        return redirect()->route('product.info.show', $product->hash);
     }
 
     /**

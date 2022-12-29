@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProductInfo;
+use App\Models\Product;
+use App\Models\Language;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class ProductInfoController extends Controller
 {
@@ -22,9 +26,17 @@ class ProductInfoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($hash)
     {
-        //
+        $user = Auth::user();
+        $product = Product::where('hash', $hash)->first();
+        if (!$product) abort(404);
+        if ($user->id != $product->user_id) abort(403);
+        $languages = Language::all();
+        return Inertia::render('ProductInfo/Create', [
+            'product' => $product,
+            'languages' => $languages,
+        ]);
     }
 
     /**
@@ -33,9 +45,26 @@ class ProductInfoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $hash)
     {
-        //
+        $user = Auth::user();
+        $product = Product::where('hash', $hash)->first();
+        if (!$product) abort(404);
+        if ($user->id != $product->user_id) abort(403);
+        $request->validate([
+            'language_id' => 'required',
+        ]);
+        $infos = ProductInfo::where([['product_id', $product->id], ['default', true]])->get();
+        $default = $infos ? false : true;
+        $info = new ProductInfo([
+            'language_id' => $request->get('language_id'),
+            'product_id' => $product->id,
+            'user_id' => $user->id,
+            'content' => $request->get('conetnt'),
+            'default' => $default,
+        ]);
+        $info->save();
+        return redirect()->route('product.info.show', $product->hash);
     }
 
     /**
@@ -44,9 +73,13 @@ class ProductInfoController extends Controller
      * @param  \App\Models\ProductInfo  $productInfo
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductInfo $productInfo)
+    public function show(Request $request, $hash)
     {
-        //
+        $product = Product::where('hash', $hash)->first();
+        if (!$product) abort(404);
+        return Inertia::render('ProductInfo/Show', [
+            'product' => $product,
+        ]);
     }
 
     /**

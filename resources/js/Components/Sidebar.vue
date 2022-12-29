@@ -73,7 +73,7 @@ defineExpose({
           w-80
           shadow
           bg-white
-          dark:bg-gray-600
+          dark:bg-slate-800
         "
         v-show="opened"
       >

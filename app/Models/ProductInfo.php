@@ -12,7 +12,7 @@ class ProductInfo extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['name', 'user_id', 'status', 'language_id', 'product_id', 'content'];
+    protected $fillable = ['user_id', 'default', 'language_id', 'product_id', 'content'];
     protected $guarded = ['id','hash']; 
 
     protected static function boot()

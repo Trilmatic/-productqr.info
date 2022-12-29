@@ -137,3 +137,19 @@
 .swiper-button-disabled {
     @apply opacity-30 cursor-default pointer-events-none;
 }
+
+h1{
+    @apply h1 font-cabinet-grotesk
+}
+
+h2{
+    @apply h2 font-cabinet-grotesk
+}
+
+h3{
+    @apply h3 font-cabinet-grotesk
+}
+
+h4{
+    @apply h4
+}

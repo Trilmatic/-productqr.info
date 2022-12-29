@@ -18,7 +18,7 @@ class Product extends Model
     protected $filters = ['sort', 'where_any'];
 
     protected $fillable = ['name', 'user_id', 'identification_code', 'status', 'hash'];
-    protected $guarded = ['id'];
+    protected $guarded = ['id', 'hash'];
 
     protected static function boot()
     {

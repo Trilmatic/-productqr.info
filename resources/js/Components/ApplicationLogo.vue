@@ -1,24 +1,117 @@
 <template>
-  <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
-    <path
-      class="
-        fill-blue-100
-        group-hover:fill-white
-        transform
-        duration-150
-        ease-in-out
-      "
-      d="M12 6v24C5.373 30 0 24.627 0 18S5.373 6 12 6Z"
-    />
-    <path
-      class="
-        fill-sky-400
-        group-hover:fill-sky-300
-        transform
-        duration-150
-        ease-in-out
-      "
-      d="M10.807 6.059A10.003 10.003 0 0 1 20 0c5.523 0 10 4.477 10 10 0 4.123-2.496 7.664-6.059 9.193.04-.392.059-.79.059-1.193 0-6.627-5.373-12-12-12-.403 0-.8.02-1.193.059Z"
-    />
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon icon-tabler icon-tabler-qrcode"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    stroke-width="2"
+    stroke="currentColor"
+    fill="none"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect
+      x="4"
+      y="4"
+      width="6"
+      height="6"
+      rx="1"
+      class="stroke-gray-200 dark:stroke-gray-800"
+    ></rect>
+    <line
+      x1="7"
+      y1="17"
+      x2="7"
+      y2="17.01"
+      class="stroke-gray-200 dark:stroke-gray-800"
+    ></line>
+    <rect
+      x="14"
+      y="4"
+      width="6"
+      height="6"
+      rx="1"
+      class="stroke-gray-200 dark:stroke-gray-800"
+    ></rect>
+    <line
+      x1="7"
+      y1="7"
+      x2="7"
+      y2="7.01"
+      class="stroke-gray-200 dark:stroke-gray-800"
+    ></line>
+    <rect
+      x="4"
+      y="14"
+      width="6"
+      height="6"
+      rx="1"
+      class="stroke-gray-200 dark:stroke-gray-800"
+    ></rect>
+    <line
+      x1="17"
+      y1="7"
+      x2="17"
+      y2="7.01"
+      class="stroke-gray-200 dark:stroke-gray-800"
+    ></line>
+    <line
+      x1="14"
+      y1="14"
+      x2="17"
+      y2="14"
+      class="stroke-gray-200 dark:stroke-gray-800"
+    ></line>
+    <line
+      x1="20"
+      y1="14"
+      x2="20"
+      y2="14.01"
+      class="stroke-gray-200 dark:stroke-gray-800"
+    ></line>
+    <line
+      x1="14"
+      y1="14"
+      x2="14"
+      y2="17"
+      class="stroke-gray-200 dark:stroke-gray-800"
+    ></line>
+    <line
+      x1="14"
+      y1="20"
+      x2="17"
+      y2="20"
+      class="stroke-gray-200 dark:stroke-gray-800"
+    ></line>
+    <line
+      x1="17"
+      y1="17"
+      x2="20"
+      y2="17"
+      class="stroke-gray-200 dark:stroke-gray-800"
+    ></line>
+    <line
+      x1="20"
+      y1="17"
+      x2="20"
+      y2="20"
+      class="stroke-gray-200 dark:stroke-gray-800"
+    ></line>
+
+    <line x1="12" y1="8" x2="12.01" y2="8" class="stroke-primary"></line>
+    <rect
+      x="4"
+      y="4"
+      width="16"
+      height="16"
+      rx="2"
+      class="stroke-primary"
+    ></rect>
+    <polyline
+      points="11 12 12 12 12 16 13 16"
+      class="stroke-primary"
+    ></polyline>
   </svg>
 </template>

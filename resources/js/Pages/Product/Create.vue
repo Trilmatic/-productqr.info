@@ -18,7 +18,7 @@ function submit() {
           <div class="space-y-4">
             <div>
               <label class="block text-sm font-medium mb-1" for="name"
-                >Name</label
+                >Product Name</label
               >
               <input
                 id="name"

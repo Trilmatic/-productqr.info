@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductInfoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,8 +38,12 @@ Route::middleware([
     Route::controller(ProductController::class)->prefix('product')->name('product.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
-        Route::get('/{hash}', 'show')->name('show');    
         Route::put('/{hash}/update', 'update')->name('update');
         Route::delete('/{hash}/delete', 'destroy')->name('destroy');
+    });
+    Route::controller(ProductInfoController::class)->prefix('product')->name('product.info.')->group(function () {
+        Route::get('/{hash}/info', 'show')->name('show');
+        Route::get('/{hash}/info/create', 'create')->name('create');
+        Route::post('/{hash}/info/store', 'store')->name('store');
     });
 });

@@ -16,6 +16,7 @@
 @import 'components/select.css';
 @import 'components/pagination.css';
 @import 'components/forms.css';
+@import 'components/quill.css';
 
 /* Additional Tailwind directives: https://tailwindcss.com/docs/functions-and-directives/#responsive */
 @layer utilities {
