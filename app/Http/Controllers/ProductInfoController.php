@@ -83,6 +83,7 @@ class ProductInfoController extends Controller
             $info = $product->info()->first();
             if (!$info) $info = $product->product_infos()->first();
         }
+       
         return Inertia::render('ProductInfo/Show', [
             'product' => $product,
             'info' => $info,

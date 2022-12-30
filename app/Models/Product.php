@@ -9,6 +9,7 @@ use Hashids\Hashids;
 use App\Models\ProductInfo;
 use Mehradsadeghi\FilterQueryString\FilterQueryString;
 use Database\Factories\ProductFactory;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -27,6 +28,36 @@ class Product extends Model
         static::created(function ($record) {
             $hashids = new Hashids('4cfb2dc7962f4e0a3894043e95f776fc', 8);
             $record->hash = $hashids->encode($record->id);
+            //base settings
+            $size = '200x200';
+            $url = "/products/" . $record->hash . '/info';
+            $protocol = stripos($_SERVER['SERVER_PROTOCOL'], 'https') === 0 ? 'https://' : 'http://';
+            $data =  $protocol . $_SERVER['HTTP_HOST'] . $url;
+            //Get QR code
+            $QR = imagecreatefrompng('https://chart.googleapis.com/chart?cht=qr&chld=H|1&chs=' . $size . '&chl=' . urlencode($data));
+            //Add logo into QR
+            $logo = imagecreatefromstring(file_get_contents(public_path("qr-logo.png")));
+
+            $QR_width = imagesx($QR);
+            $QR_height = imagesy($QR);
+
+            $logo_width = imagesx($logo);
+            $logo_height = imagesy($logo);
+
+            // Scale logo to fit in the QR Code
+            $logo_qr_width = $QR_width / 3;
+            $scale = $logo_width / $logo_qr_width;
+            $logo_qr_height = $logo_height / $scale;
+
+            imagecopyresampled($QR, $logo, $QR_width / 3, $QR_height / 3, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height);
+            ob_start();
+            imagepng($QR);
+            $stringdata = ob_get_contents();
+            ob_end_clean();
+            //Sotre as file
+            $file = Storage::put('qrcodes/' . $record->hash . '_' . 'qr.png', $stringdata);
+            $path = '/qrcodes/' . $record->hash . '_' . 'qr.png';
+            $record->qr_code = $path;
             $record->save();
         });
     }

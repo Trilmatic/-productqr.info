@@ -93,7 +93,7 @@ const logout = () => {
                                                     Create New Team
                                                 </DropdownLink>
 
-                                                <div class="border-t border-gray-100" />
+                                                <div class="border-t border-gray-100 dark:border-gray-700" />
 
                                                 <!-- Team Switcher -->
                                                 <div class="block px-4 py-2 text-xs text-gray-400">

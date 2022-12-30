@@ -42,6 +42,7 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
+       
         $product = new Product([
             'name' => $request->get('name'),
             'identification_code' => $request->get('identification_code'),
@@ -78,11 +79,11 @@ class ProductController extends Controller
         $user = Auth::user();
         $product = Product::where('hash', $hash)->first();
         if (!$product) abort(404);
-        if($user->cannot('update', $product)) abort(403);
+        if ($user->cannot('update', $product)) abort(403);
         $product->name = $request->get('name');
         $product->identification_code = $request->get('identification_code');
         $product->save();
-        redirect()->back()->with('success','deleted');
+        redirect()->back()->with('success', 'deleted');
     }
 
     /**
@@ -96,8 +97,8 @@ class ProductController extends Controller
         $user = Auth::user();
         $product = Product::where('hash', $hash)->first();
         if (!$product) abort(404);
-        if($user->cannot('delete', $product)) abort(403);
+        if ($user->cannot('delete', $product)) abort(403);
         $product->delete();
-        redirect()->back()->with('success','deleted');
+        redirect()->back()->with('success', 'deleted');
     }
 }
