@@ -67,6 +67,7 @@ defineExpose({
               font-semibold
               text-gray-500
               dark:text-gray-400
+              pl-2
             "
           >
             <slot name="title"></slot>

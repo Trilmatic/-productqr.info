@@ -255,7 +255,12 @@ const qropened = ref(false);
                 </span>
               </template>
               <template #title><span>Languages</span></template>
-              <div class="flex justify-center py-2">
+              <div
+                class="flex justify-center py-2"
+                v-if="
+                  $page.props.user && product.user_id === $page.props.user.id
+                "
+              >
                 <a
                   class="
                     bg-primary
@@ -293,13 +298,7 @@ const qropened = ref(false);
                 ></a>
               </div>
               <ul
-                class="
-                  text-sm
-                  font-medium
-                  text-gray-900
-                  dark:text-white
-                  px-4
-                "
+                class="text-sm font-medium text-gray-900 dark:text-white px-4 mt-4"
               >
                 <li
                   v-for="i in product.product_infos"
@@ -319,6 +318,11 @@ const qropened = ref(false);
                     dark:focus:text-white
                     flex
                     items-center
+                  "
+                  :class="
+                    info.language_id === i.language_id
+                      ? 'bg-primary text-white'
+                      : ''
                   "
                 >
                   <Link
@@ -360,7 +364,8 @@ const qropened = ref(false);
             </Sidebar>
           </header>
           <!-- Main Content -->
-          <article v-if="info" v-html="info.content"></article>
+          <article class="py-2" v-if="info" v-html="info.content"></article>
+          <!-- QR modal -->
           <div
             class="
               fixed
