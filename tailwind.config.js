@@ -4,8 +4,8 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 const customColors = {
     primary: colors.sky[500],
     "primary-focus": colors.sky[400],
-    secondary: colors.indigo[600],
-    "secondary-focus": colors.indigo[500],
+    secondary: colors.lime[500],
+    "secondary-focus": colors.lime[400],
     info: colors.emerald[600],
     "info-focus": colors.emerald[500],
     warning: colors.amber[600],

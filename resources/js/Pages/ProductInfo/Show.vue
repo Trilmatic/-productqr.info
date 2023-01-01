@@ -5,6 +5,7 @@ import DropdownLink from "@/Components/DropdownLink.vue";
 import { reactive, onMounted, ref } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 import { Link } from "@inertiajs/inertia-vue3";
+import Sidebar from "@/Components/Sidebar.vue";
 const props = defineProps({
   product: Object,
   info: Object,
@@ -164,7 +165,7 @@ const qropened = ref(false);
           ></a>
         </div>
         <div v-else class="relative">
-          <div class="flex items-center justify-end">
+          <header class="flex items-center justify-end">
             <button
               type="button"
               class="
@@ -172,7 +173,7 @@ const qropened = ref(false);
                 bg-primary
                 hover:bg-primary-focus
                 font-medium
-                rounded-lg
+                rounded-full
                 text-sm
                 px-5
                 py-2.5
@@ -212,7 +213,154 @@ const qropened = ref(false);
                 <line x1="20" y1="17" x2="20" y2="20"></line>
               </svg>
             </button>
-          </div>
+            <Sidebar>
+              <template #button>
+                <span
+                  class="
+                    text-white
+                    bg-secondary
+                    hover:bg-secondary-focus
+                    font-medium
+                    rounded-full
+                    text-sm
+                    px-5
+                    py-2.5
+                    mr-2
+                    mb-2
+                    focus:outline-none
+                    inline-flex
+                    space-x-1
+                  "
+                >
+                  <span>Languages</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-world"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <line x1="3.6" y1="9" x2="20.4" y2="9"></line>
+                    <line x1="3.6" y1="15" x2="20.4" y2="15"></line>
+                    <path d="M11.5 3a17 17 0 0 0 0 18"></path>
+                    <path d="M12.5 3a17 17 0 0 1 0 18"></path>
+                  </svg>
+                </span>
+              </template>
+              <template #title><span>Languages</span></template>
+              <div class="flex justify-center py-2">
+                <a
+                  class="
+                    bg-primary
+                    hover:bg-primary-focus
+                    font-medium
+                    rounded-full
+                    text-sm
+                    px-5
+                    py-2.5
+                    mr-2
+                    mb-2
+                    focus:outline-none
+                    inline-flex
+                    space-x-1
+                  "
+                  :href="'/product/' + product.hash + '/info/create'"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="
+                      icon icon-tabler icon-tabler-circle-plus
+                      stroke-white
+                    "
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <line x1="9" y1="12" x2="15" y2="12"></line>
+                    <line x1="12" y1="9" x2="12" y2="15"></line></svg
+                ></a>
+              </div>
+              <ul
+                class="
+                  text-sm
+                  font-medium
+                  text-gray-900
+                  dark:text-white
+                  px-4
+                "
+              >
+                <li
+                  v-for="i in product.product_infos"
+                  :key="i"
+                  class="
+                    py-2
+                    px-4
+                    w-full
+                    border-b border-gray-200
+                    cursor-pointer
+                    hover:bg-gray-100 hover:text-primary
+                    focus:outline-none focus:ring-2
+                    dark:border-gray-600
+                    dark:hover:bg-gray-600
+                    dark:hover:text-white
+                    dark:focus:ring-gray-500
+                    dark:focus:text-white
+                    flex
+                    items-center
+                  "
+                >
+                  <Link
+                    class="w-full"
+                    :href="'/product/' + product.hash + '/info/?hash=' + i.hash"
+                    >{{ i.language.native_name }} ({{ i.language.name }})</Link
+                  ><Link
+                    v-if="$page.props.user && i.user_id === $page.props.user.id"
+                    :href="
+                      '/product/' + product.hash + '/info/' + i.hash + '/edit'
+                    "
+                  >
+                    <div class="p-2 hover:bg-primary rounded-lg">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="icon icon-tabler icon-tabler-pencil"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path
+                          stroke="none"
+                          d="M0 0h24v24H0z"
+                          fill="none"
+                        ></path>
+                        <path
+                          d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"
+                        ></path>
+                        <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"></line>
+                      </svg></div
+                  ></Link>
+                </li>
+              </ul>
+            </Sidebar>
+          </header>
+          <!-- Main Content -->
+          <article v-if="info" v-html="info.content"></article>
           <div
             class="
               fixed
@@ -230,7 +378,7 @@ const qropened = ref(false);
             "
             v-show="qropened"
           >
-            <div class="relative mx-auto w-full h-full max-w-2xl md:h-auto">
+            <div class="relative mx-auto w-full h-full max-w-lg md:h-auto">
               <!-- Modal content -->
               <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 <!-- Modal header -->
@@ -284,8 +432,12 @@ const qropened = ref(false);
                 </div>
                 <!-- Modal body -->
                 <div class="p-6">
-                  {{ product }}
-                  <img :src="product.qr_code" alt="QR code" id="qr-code" />
+                  <img
+                    class="mx-auto block"
+                    :src="product.qr_code"
+                    alt="QR code"
+                    id="qr-code"
+                  />
                 </div>
                 <!-- Modal footer -->
                 <div
@@ -299,8 +451,8 @@ const qropened = ref(false);
                     dark:border-gray-600
                   "
                 >
-                  <button
-                    data-modal-toggle="defaultModal"
+                  <a
+                    @click="qropened = false"
                     type="button"
                     class="
                       text-white
@@ -314,11 +466,12 @@ const qropened = ref(false);
                       py-2.5
                       text-center
                     "
+                    :href="product.qr_code"
+                    download
                   >
                     Download
-                  </button>
+                  </a>
                   <button
-                    data-modal-toggle="defaultModal"
                     type="button"
                     class="
                       text-gray-500

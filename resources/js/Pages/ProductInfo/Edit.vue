@@ -1,14 +1,17 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { reactive, onMounted, ref } from "vue";
+import { reactive, onMounted, ref, computed } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 import TomSelect from "tom-select/dist/js/tom-select.complete.min";
 import Quill from "quill/dist/quill.min";
 const props = defineProps({
   product: Object,
   languages: Array,
+  info: Object,
 });
 const editor = ref(null);
+const only_top = ref(false);
+const filteredLanguages = computed(() => {});
 async function initTextarea() {
   let el = document.getElementById("editor");
   editor.value = new Quill(el, {
@@ -42,10 +45,13 @@ async function initSelects() {
 function submit() {
   let content = editor.value.root.innerHTML;
   let language_id = document.getElementById("language").value;
-  Inertia.post("/product/" + props.product.hash + "/info/store", {
-    language_id: language_id,
-    content: content,
-  });
+  Inertia.put(
+    "/product/" + props.product.hash + "/info/" + props.info.hash + "/update",
+    {
+      language_id: language_id,
+      content: content,
+    }
+  );
 }
 onMounted(() => {
   initSelects();
@@ -60,7 +66,12 @@ onMounted(() => {
           <div>
             <select id="language">
               <option value=""></option>
-              <option v-for="lang in languages" :key="lang.id" :value="lang.id">
+              <option
+                v-for="lang in languages"
+                :key="lang.id"
+                :value="lang.id"
+                :selected="info.language_id === lang.id"
+              >
                 {{ lang.name }} ({{ lang.native_name }})
               </option>
             </select>
@@ -72,7 +83,7 @@ onMounted(() => {
             >
           </div>
           <div>
-            <div id="editor"></div>
+            <div id="editor" v-html="info.content"></div>
           </div>
           <button
             class="
@@ -87,7 +98,7 @@ onMounted(() => {
             "
             type="submit"
           >
-            <span>Create</span>
+            <span>Edit</span>
             <span
               class="
                 tracking-normal

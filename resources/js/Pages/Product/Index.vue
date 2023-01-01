@@ -189,6 +189,39 @@ onMounted(() => {
               </div>
               <div class="flex items-center space-x-2">
                 <Sidebar ref="sidebarComponent" @open-clicked="addNew">
+                  <template #button>
+                    <span
+                      class="
+                        btn
+                        bg-primary
+                        hover:bg-primary-focus
+                        dark:text-white
+                      "
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="icon icon-tabler icon-tabler-square-rounded-plus"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path
+                          stroke="none"
+                          d="M0 0h24v24H0z"
+                          fill="none"
+                        ></path>
+                        <path d="M9 12h6"></path>
+                        <path d="M12 9v6"></path>
+                        <path
+                          d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z"
+                        ></path></svg
+                    ></span>
+                  </template>
                   <template #title
                     ><span v-if="!form.id">Add product</span
                     ><span v-else>Edit product</span></template
@@ -383,7 +416,12 @@ onMounted(() => {
           :key="p.id"
         >
           <td class="px-4 py-2" v-for="(field, i) in fields" :key="i">
-            {{ p[field.key] }}
+            <span v-if="field.key === 'hash'"
+              ><Link class="text-primary hover:text-primary-focus" :href="'/product/' + p.hash + '/info'">{{
+                p[field.key]
+              }}</Link></span
+            >
+            <span v-else>{{ p[field.key] }}</span>
           </td>
           <td>
             <div class="flex space-x-2 items-center">
@@ -392,7 +430,7 @@ onMounted(() => {
                   xmlns="http://www.w3.org/2000/svg"
                   class="
                     icon icon-tabler icon-tabler-info-circle
-                    hover:stroke-sky-600
+                    hover:stroke-primary
                   "
                   width="24"
                   height="24"
@@ -422,34 +460,29 @@ onMounted(() => {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="
-                    icon icon-tabler icon-tabler-edit-circle
-                    pointer-events-none
+                    icon icon-tabler icon-tabler-pencil
+                    hover:stroke-warning
                   "
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
                   stroke-width="2"
+                  stroke="currentColor"
                   fill="none"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                   <path
-                    d="M12 15l8.385 -8.415a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3z"
+                    d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"
                   ></path>
-                  <path d="M16 5l3 3"></path>
-                  <path
-                    d="M9 7.07a7.002 7.002 0 0 0 1 13.93a7.002 7.002 0 0 0 6.929 -5.999"
-                  ></path>
+                  <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"></line>
                 </svg>
               </button>
               <button type="button" class="" @click="deleteRecord(p.hash)">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="
-                    icon icon-tabler icon-tabler-trash
-                    hover:stroke-red-600
-                  "
+                  class="icon icon-tabler icon-tabler-trash hover:stroke-error"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"

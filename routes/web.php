@@ -45,5 +45,11 @@ Route::middleware([
         Route::get('/{hash}/info', 'show')->name('show');
         Route::get('/{hash}/info/create', 'create')->name('create');
         Route::post('/{hash}/info/store', 'store')->name('store');
+        Route::get('/{hash}/info/{hash2}/edit', 'edit')->name('edit');
+        Route::put('/{hash}/info/{hash2}/update', 'update')->name('update');
     });
+});
+
+Route::controller(ProductInfoController::class)->prefix('product')->name('product.info.')->group(function () {
+    Route::get('/{hash}/info', 'show')->name('show');
 });

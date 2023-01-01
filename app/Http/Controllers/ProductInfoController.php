@@ -60,7 +60,7 @@ class ProductInfoController extends Controller
             'language_id' => $request->get('language_id'),
             'product_id' => $product->id,
             'user_id' => $user->id,
-            'content' => $request->get('conetnt'),
+            'content' => $request->get('content'),
             'default' => $default,
         ]);
         $info->save();
@@ -75,7 +75,7 @@ class ProductInfoController extends Controller
      */
     public function show(Request $request, $hash)
     {
-        $product = Product::with("product_infos")->where('hash', $hash)->first();
+        $product = Product::with("product_infos", "product_infos.language")->where('hash', $hash)->first();
         if (!$product) abort(404);
         if ($request->input('hash')) {
             $info = $product->request_info($request->input('hash'));
@@ -96,9 +96,21 @@ class ProductInfoController extends Controller
      * @param  \App\Models\ProductInfo  $productInfo
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductInfo $productInfo)
+    public function edit($hash, $hash2)
     {
-        //
+        $user = Auth::user();
+        $product = Product::where('hash', $hash)->first();
+        if (!$product) abort(404);
+        if ($user->id != $product->user_id) abort(403);
+        $info = ProductInfo::where('hash', $hash2)->first();
+        if (!$info) abort(404);
+        if ($user->id != $info->user_id) abort(403);
+        $languages = Language::all();
+        return Inertia::render('ProductInfo/Edit', [
+            'product' => $product,
+            'languages' => $languages,
+            'info' => $info,
+        ]);
     }
 
     /**
@@ -108,9 +120,22 @@ class ProductInfoController extends Controller
      * @param  \App\Models\ProductInfo  $productInfo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductInfo $productInfo)
+    public function update(Request $request, $hash, $hash2)
     {
-        //
+        $user = Auth::user();
+        $product = Product::where('hash', $hash)->first();
+        if (!$product) abort(404);
+        if ($user->id != $product->user_id) abort(403);
+        $info = ProductInfo::where('hash', $hash2)->first();
+        if (!$info) abort(404);
+        if ($user->id != $info->user_id) abort(403);
+        $request->validate([
+            'language_id' => 'required',
+        ]);
+        $info->language_id = $request->get('language_id');
+        $info->content = $request->get('content');
+        $info->save();
+        return redirect()->route('product.info.show', $product->hash);
     }
 
     /**

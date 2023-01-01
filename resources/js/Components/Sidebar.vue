@@ -36,31 +36,12 @@ defineExpose({
 <template>
   <div ref="sidebar">
     <button
-      class="btn bg-primary hover:bg-primary-focus dark:text-white"
       @click="
         opened = true;
         $emit('open-clicked');
       "
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="icon icon-tabler icon-tabler-square-rounded-plus"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        stroke-width="2"
-        stroke="currentColor"
-        fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        <path d="M9 12h6"></path>
-        <path d="M12 9v6"></path>
-        <path
-          d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z"
-        ></path>
-      </svg>
+      <slot name="button"></slot>
     </button>
     <Transition name="slide-sidebar">
       <div
@@ -73,7 +54,7 @@ defineExpose({
           w-80
           shadow
           bg-white
-          dark:bg-slate-800
+          dark:bg-gray-800
         "
         v-show="opened"
       >
