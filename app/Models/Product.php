@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Hashids\Hashids;
 use App\Models\ProductInfo;
+use App\Models\User;
 use Mehradsadeghi\FilterQueryString\FilterQueryString;
 use Database\Factories\ProductFactory;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +27,7 @@ class Product extends Model
     {
         parent::boot();
         static::created(function ($record) {
-            $hashids = new Hashids('4cfb2dc7962f4e0a3894043e95f776fc', 8);
+            $hashids = new Hashids(env('PRODUCT_HASH_KEY', 1), 8);
             $record->hash = $hashids->encode($record->id);
             //base settings
             $size = '200x200';
@@ -75,6 +76,11 @@ class Product extends Model
     public function product_infos()
     {
         return $this->hasMany(ProductInfo::class, 'product_id', 'id');
+    }
+
+    public function owner()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
     public function info()

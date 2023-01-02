@@ -29,7 +29,7 @@ class ProductInfoController extends Controller
     public function create($hash)
     {
         $user = Auth::user();
-        $product = Product::where('hash', $hash)->first();
+        $product = Product::with("owner")->where('hash', $hash)->first();
         if (!$product) abort(404);
         if ($user->id != $product->user_id) abort(403);
         $languages = Language::all();
@@ -64,7 +64,7 @@ class ProductInfoController extends Controller
             'default' => $default,
         ]);
         $info->save();
-        return redirect()->route('product.info.show', $product->hash);
+        return redirect('/product/' . $product->hash . '/info?hash=' . $info->hash);
     }
 
     /**
@@ -75,15 +75,16 @@ class ProductInfoController extends Controller
      */
     public function show(Request $request, $hash)
     {
-        $product = Product::with("product_infos", "product_infos.language")->where('hash', $hash)->first();
+        $product = Product::with("product_infos", "product_infos.language", "owner")->where('hash', $hash)->first();
         if (!$product) abort(404);
         if ($request->input('hash')) {
-            $info = $product->request_info($request->input('hash'));
+            $info = $product->request_info($request->input('hash'))->first();
+            if (!$info) abort(404);
         } else {
             $info = $product->info()->first();
             if (!$info) $info = $product->product_infos()->first();
         }
-       
+
         return Inertia::render('ProductInfo/Show', [
             'product' => $product,
             'info' => $info,
@@ -99,7 +100,7 @@ class ProductInfoController extends Controller
     public function edit($hash, $hash2)
     {
         $user = Auth::user();
-        $product = Product::where('hash', $hash)->first();
+        $product = Product::with("owner")->where('hash', $hash)->first();
         if (!$product) abort(404);
         if ($user->id != $product->user_id) abort(403);
         $info = ProductInfo::where('hash', $hash2)->first();
@@ -125,10 +126,10 @@ class ProductInfoController extends Controller
         $user = Auth::user();
         $product = Product::where('hash', $hash)->first();
         if (!$product) abort(404);
-        if ($user->id != $product->user_id) abort(403);
+        if ($user->cannot('update', $product)) abort(403);
         $info = ProductInfo::where('hash', $hash2)->first();
         if (!$info) abort(404);
-        if ($user->id != $info->user_id) abort(403);
+        if ($user->cannot('update', $info)) abort(403);
         $request->validate([
             'language_id' => 'required',
         ]);
@@ -144,8 +145,15 @@ class ProductInfoController extends Controller
      * @param  \App\Models\ProductInfo  $productInfo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductInfo $productInfo)
+    public function destroy($hash, $hash2)
     {
-        //
+        $user = Auth::user();
+        $product = Product::where('hash', $hash)->first();
+        if (!$product) abort(404);
+        $info = ProductInfo::where('hash', $hash2)->first();
+        if (!$info) abort(404);
+        if ($user->cannot('delete', $info)) abort(403);
+        $info->delete();
+        redirect()->back()->with('success', 'deleted');
     }
 }

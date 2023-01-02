@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Hashids\Hashids;
+use App\Models\User;
 use App\Models\Language;
 
 class ProductInfo extends Model
@@ -20,7 +21,7 @@ class ProductInfo extends Model
     {
         parent::boot();
         static::created(function ($record) {
-            $hashids = new Hashids('7a761b3c42a239e08b68021fd8515685', 8);
+            $hashids = new Hashids(env('PRODUCT_INFO_HASH_KEY', 1), 8);
             $record->hash = $hashids->encode($record->id);
             $record->save();
         });
@@ -29,5 +30,10 @@ class ProductInfo extends Model
     public function language()
     {
         return $this->hasOne(Language::class, 'id', 'language_id');
+    }
+
+    public function owner()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 }

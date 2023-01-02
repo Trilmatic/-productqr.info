@@ -2,6 +2,7 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { reactive, onMounted, ref } from "vue";
 import { Inertia } from "@inertiajs/inertia";
+import { Link } from "@inertiajs/inertia-vue3";
 import TomSelect from "tom-select/dist/js/tom-select.complete.min";
 import Quill from "quill/dist/quill.min";
 const props = defineProps({
@@ -56,6 +57,98 @@ onMounted(() => {
   <AppLayout title="Dashboard">
     <div class="py-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex mb-2">
+          <ol class="inline-flex items-center space-x-1 md:space-x-3">
+            <li class="inline-flex items-center">
+              <Link
+                href="/product"
+                class="
+                  inline-flex
+                  items-center
+                  text-sm
+                  font-medium
+                  text-primary
+                  hover:text-primary-focus
+                "
+              >
+                <img
+                  class="w-10 h-10 rounded-full"
+                  :src="product.owner.profile_photo_url"
+                  :alt="product.owner.name"
+                />
+              </Link>
+            </li>
+            <li>
+              <div class="flex items-center">
+                <svg
+                  class="w-6 h-6 text-gray-400"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <Link
+                  :href="'/product/' + product.hash + '/info'"
+                  class="
+                    ml-1
+                    text-sm
+                    font-medium
+                    text-primary
+                    hover:text-primary-focus
+                  "
+                  >{{ product.hash }}</Link
+                >
+              </div>
+            </li>
+            <li aria-current="page">
+              <div class="flex items-center">
+                <svg
+                  class="w-6 h-6 text-gray-400"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+                <span
+                  class="
+                    ml-1
+                    text-sm
+                    font-medium
+                    text-gray-500
+                    md:ml-2
+                    dark:text-gray-400
+                  "
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-circle-plus"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <line x1="9" y1="12" x2="15" y2="12"></line>
+                    <line x1="12" y1="9" x2="12" y2="15"></line></svg
+                ></span>
+              </div>
+            </li>
+          </ol>
+        </nav>
         <form @submit.prevent="submit" class="space-y-2">
           <div>
             <select id="language">

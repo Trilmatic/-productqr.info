@@ -47,7 +47,12 @@ Route::middleware([
         Route::post('/{hash}/info/store', 'store')->name('store');
         Route::get('/{hash}/info/{hash2}/edit', 'edit')->name('edit');
         Route::put('/{hash}/info/{hash2}/update', 'update')->name('update');
+        Route::delete('/{hash}/info/{hash2}/delete', 'destroy')->name('destroy');
     });
+});
+
+Route::controller(ProductController::class)->group(function () {
+    Route::get('/search', 'search')->name('search');
 });
 
 Route::controller(ProductInfoController::class)->prefix('product')->name('product.info.')->group(function () {
