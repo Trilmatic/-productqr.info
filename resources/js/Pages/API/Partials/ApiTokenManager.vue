@@ -6,6 +6,7 @@ import ActionSection from '@/Components/ActionSection.vue';
 import Checkbox from '@/Components/Checkbox.vue';
 import ConfirmationModal from '@/Components/ConfirmationModal.vue';
 import DangerButton from '@/Components/DangerButton.vue';
+import WarningButton from '@/Components/WarningButton.vue';
 import DialogModal from '@/Components/DialogModal.vue';
 import FormSection from '@/Components/FormSection.vue';
 import InputError from '@/Components/InputError.vue';
@@ -211,9 +212,9 @@ const deleteApiToken = () => {
             </template>
 
             <template #footer>
-                <SecondaryButton @click="managingPermissionsFor = null">
+                <WarningButton @click="managingPermissionsFor = null">
                     Cancel
-                </SecondaryButton>
+                </WarningButton>
 
                 <PrimaryButton
                     class="ml-3"
@@ -237,9 +238,9 @@ const deleteApiToken = () => {
             </template>
 
             <template #footer>
-                <SecondaryButton @click="apiTokenBeingDeleted = null">
+                <WarningButton @click="apiTokenBeingDeleted = null">
                     Cancel
-                </SecondaryButton>
+                </WarningButton>
 
                 <DangerButton
                     class="ml-3"

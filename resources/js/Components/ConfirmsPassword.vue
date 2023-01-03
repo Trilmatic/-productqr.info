@@ -3,6 +3,7 @@ import { ref, reactive, nextTick } from 'vue';
 import DialogModal from './DialogModal.vue';
 import InputError from './InputError.vue';
 import PrimaryButton from './PrimaryButton.vue';
+import WarningButton from './WarningButton.vue';
 import SecondaryButton from './SecondaryButton.vue';
 import TextInput from './TextInput.vue';
 
@@ -99,9 +100,9 @@ const closeModal = () => {
             </template>
 
             <template #footer>
-                <SecondaryButton @click="closeModal">
+                <WarningButton @click="closeModal">
                     Cancel
-                </SecondaryButton>
+                </WarningButton>
 
                 <PrimaryButton
                     class="ml-3"
