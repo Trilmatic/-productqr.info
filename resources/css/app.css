@@ -18,7 +18,9 @@
 @import 'components/forms.css';
 @import 'components/quill.css';
 
+/*Libraries css*/
 @import 'aos/dist/aos.css';
+@import 'swiper/css';
 
 /* Additional Tailwind directives: https://tailwindcss.com/docs/functions-and-directives/#responsive */
 @layer utilities {
