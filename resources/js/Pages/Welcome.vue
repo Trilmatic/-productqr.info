@@ -1,6 +1,6 @@
 <script setup>
-import { Head, Link } from '@inertiajs/inertia-vue3';
-
+import { Head, Link } from "@inertiajs/inertia-vue3";
+import AppLayout from "@/Layouts/AppLayout.vue";
 defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
@@ -11,169 +11,1899 @@ defineProps({
 
 <template>
     <Head title="Welcome" />
+    <AppLayout>
+        <!-- Hero -->
+        <section class="relative overflow-hidden">
+            <!-- Bg -->
+            <div
+                class="absolute inset-0 bg-blue-600 pointer-events-none -z-10"
+                aria-hidden="true"
+            ></div>
 
-    <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
-        <div v-if="canLogin" class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-            <Link v-if="$page.props.user" :href="route('dashboard')" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</Link>
-
-            <template v-else>
-                <Link :href="route('login')" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</Link>
-
-                <Link v-if="canRegister" :href="route('register')" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</Link>
-            </template>
-        </div>
-
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                <svg
-                    viewBox="0 0 651 192"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-16 w-auto text-gray-700 sm:h-20"
-                >
-                    <g clip-path="url(#clip0)" fill="#EF3B2D">
-                        <path d="M248.032 44.676h-16.466v100.23h47.394v-14.748h-30.928V44.676zM337.091 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.431 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162-.001 2.863-.479 5.584-1.432 8.161zM463.954 87.202c-2.101-3.341-5.083-5.965-8.949-7.875-3.865-1.909-7.756-2.864-11.669-2.864-5.062 0-9.69.931-13.89 2.792-4.201 1.861-7.804 4.417-10.811 7.661-3.007 3.246-5.347 6.993-7.016 11.239-1.672 4.249-2.506 8.713-2.506 13.389 0 4.774.834 9.26 2.506 13.459 1.669 4.202 4.009 7.925 7.016 11.169 3.007 3.246 6.609 5.799 10.811 7.66 4.199 1.861 8.828 2.792 13.89 2.792 3.913 0 7.804-.955 11.669-2.863 3.866-1.908 6.849-4.533 8.949-7.875v9.021h15.607V78.182h-15.607v9.02zm-1.432 32.503c-.955 2.578-2.291 4.821-4.009 6.73-1.719 1.91-3.795 3.437-6.229 4.582-2.435 1.146-5.133 1.718-8.091 1.718-2.96 0-5.633-.572-8.019-1.718-2.387-1.146-4.438-2.672-6.156-4.582-1.719-1.909-3.032-4.152-3.938-6.73-.909-2.577-1.36-5.298-1.36-8.161 0-2.864.451-5.585 1.36-8.162.905-2.577 2.219-4.819 3.938-6.729 1.718-1.908 3.77-3.437 6.156-4.582 2.386-1.146 5.059-1.718 8.019-1.718 2.958 0 5.656.572 8.091 1.718 2.434 1.146 4.51 2.674 6.229 4.582 1.718 1.91 3.054 4.152 4.009 6.729.953 2.577 1.432 5.298 1.432 8.162 0 2.863-.479 5.584-1.432 8.161zM650.772 44.676h-15.606v100.23h15.606V44.676zM365.013 144.906h15.607V93.538h26.776V78.182h-42.383v66.724zM542.133 78.182l-19.616 51.096-19.616-51.096h-15.808l25.617 66.724h19.614l25.617-66.724h-15.808zM591.98 76.466c-19.112 0-34.239 15.706-34.239 35.079 0 21.416 14.641 35.079 36.239 35.079 12.088 0 19.806-4.622 29.234-14.688l-10.544-8.158c-.006.008-7.958 10.449-19.832 10.449-13.802 0-19.612-11.127-19.612-16.884h51.777c2.72-22.043-11.772-40.877-33.023-40.877zm-18.713 29.28c.12-1.284 1.917-16.884 18.589-16.884 16.671 0 18.697 15.598 18.813 16.884h-37.402zM184.068 43.892c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002-35.648-20.524a2.971 2.971 0 00-2.964 0l-35.647 20.522-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v38.979l-29.706 17.103V24.493a3 3 0 00-.103-.776c-.024-.088-.073-.165-.104-.25-.058-.157-.108-.316-.191-.46-.056-.097-.137-.176-.203-.265-.087-.117-.161-.242-.265-.345-.085-.086-.194-.148-.29-.223-.109-.085-.206-.182-.327-.252l-.002-.001-.002-.002L40.098 1.396a2.971 2.971 0 00-2.964 0L1.487 21.919l-.002.002-.002.001c-.121.07-.219.167-.327.252-.096.075-.205.138-.29.223-.103.103-.178.228-.265.345-.066.089-.147.169-.203.265-.083.144-.133.304-.191.46-.031.085-.08.162-.104.25-.067.249-.103.51-.103.776v122.09c0 1.063.568 2.044 1.489 2.575l71.293 41.045c.156.089.324.143.49.202.078.028.15.074.23.095a2.98 2.98 0 001.524 0c.069-.018.132-.059.2-.083.176-.061.354-.119.519-.214l71.293-41.045a2.971 2.971 0 001.489-2.575v-38.979l34.158-19.666a2.971 2.971 0 001.489-2.575V44.666a3.075 3.075 0 00-.106-.774zM74.255 143.167l-29.648-16.779 31.136-17.926.001-.001 34.164-19.669 29.674 17.084-21.772 12.428-43.555 24.863zm68.329-76.259v33.841l-12.475-7.182-17.231-9.92V49.806l12.475 7.182 17.231 9.92zm2.97-39.335l29.693 17.095-29.693 17.095-29.693-17.095 29.693-17.095zM54.06 114.089l-12.475 7.182V46.733l17.231-9.92 12.475-7.182v74.537l-17.231 9.921zM38.614 7.398l29.693 17.095-29.693 17.095L8.921 24.493 38.614 7.398zM5.938 29.632l12.475 7.182 17.231 9.92v79.676l.001.005-.001.006c0 .114.032.221.045.333.017.146.021.294.059.434l.002.007c.032.117.094.222.14.334.051.124.088.255.156.371a.036.036 0 00.004.009c.061.105.149.191.222.288.081.105.149.22.244.314l.008.01c.084.083.19.142.284.215.106.083.202.178.32.247l.013.005.011.008 34.139 19.321v34.175L5.939 144.867V29.632h-.001zm136.646 115.235l-65.352 37.625V148.31l48.399-27.628 16.953-9.677v33.862zm35.646-61.22l-29.706 17.102V66.908l17.231-9.92 12.475-7.182v33.841z" />
-                    </g>
-                </svg>
+            <!-- Illustration -->
+            <div
+                class="absolute left-1/2 -translate-x-1/3 md:-translate-x-1/2 pointer-events-none -z-10"
+                aria-hidden="true"
+            >
+                <object
+                    type="image/svg+xml"
+                    data="/images/hero-illustration.svg"
+                    width="1440"
+                    height="1214"
+                ></object>
             </div>
 
-            <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                <div class="grid grid-cols-1 md:grid-cols-2">
-                    <div class="p-6">
-                        <div class="flex items-center">
-                            <svg
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                viewBox="0 0 24 24"
-                                class="w-8 h-8 text-gray-500"
-                            ><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
-                            <div class="ml-4 text-lg leading-7 font-semibold">
-                                <a href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">Documentation</a>
-                            </div>
-                        </div>
-
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                Laravel has wonderful, thorough documentation covering every aspect of the framework. Whether you are new to the framework or have previous experience with Laravel, we recommend reading all of the documentation from beginning to end.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-                        <div class="flex items-center">
-                            <svg
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                viewBox="0 0 24 24"
-                                class="w-8 h-8 text-gray-500"
-                            ><path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                            <div class="ml-4 text-lg leading-7 font-semibold">
-                                <a href="https://laracasts.com" class="underline text-gray-900 dark:text-white">Laracasts</a>
-                            </div>
-                        </div>
-
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-6 border-t border-gray-200 dark:border-gray-700">
-                        <div class="flex items-center">
-                            <svg
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                viewBox="0 0 24 24"
-                                class="w-8 h-8 text-gray-500"
-                            ><path d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" /></svg>
-                            <div class="ml-4 text-lg leading-7 font-semibold">
-                                <a href="https://laravel-news.com/" class="underline text-gray-900 dark:text-white">Laravel News</a>
-                            </div>
-                        </div>
-
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                Laravel News is a community driven portal and newsletter aggregating all of the latest and most important news in the Laravel ecosystem, including new package releases and tutorials.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l">
-                        <div class="flex items-center">
-                            <svg
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                viewBox="0 0 24 24"
-                                class="w-8 h-8 text-gray-500"
-                            ><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                            <div class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">
-                                Vibrant Ecosystem
-                            </div>
-                        </div>
-
-                        <div class="ml-12">
-                            <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                Laravel's robust library of first-party tools and libraries, such as <a href="https://forge.laravel.com" class="underline">Forge</a>, <a href="https://vapor.laravel.com" class="underline">Vapor</a>, <a href="https://nova.laravel.com" class="underline">Nova</a>, and <a href="https://envoyer.io" class="underline">Envoyer</a> help you take your projects to the next level. Pair them with powerful open source libraries like <a href="https://laravel.com/docs/billing" class="underline">Cashier</a>, <a href="https://laravel.com/docs/dusk" class="underline">Dusk</a>, <a href="https://laravel.com/docs/broadcasting" class="underline">Echo</a>, <a href="https://laravel.com/docs/horizon" class="underline">Horizon</a>, <a href="https://laravel.com/docs/sanctum" class="underline">Sanctum</a>, <a href="https://laravel.com/docs/telescope" class="underline">Telescope</a>, and more.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
-                <div class="text-center text-sm text-gray-500 sm:text-left">
-                    <div class="flex items-center">
-                        <svg
-                            fill="none"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            class="-mt-px w-5 h-5 text-gray-400"
+            <div class="max-w-6xl mx-auto px-4 sm:px-6">
+                <div class="pt-28 pb-16 md:pt-40 md:pb-20">
+                    <!-- Hero content -->
+                    <div class="max-w-3xl mx-auto text-center">
+                        <h1
+                            class="h1 font-cabinet-grotesk text-white mb-2"
+                            data-aos="fade-up"
                         >
-                            <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-
-                        <a href="https://laravel.bigcartel.com" class="ml-1 underline">
-                            Shop
-                        </a>
-
-                        <svg
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            viewBox="0 0 24 24"
-                            class="ml-4 -mt-px w-5 h-5 text-gray-400"
+                            {{
+                                __(
+                                    "Allow your customers to understand your products."
+                                )
+                            }}
+                        </h1>
+                        <p
+                            class="text-lg md:text-xl text-white text-opacity-80 mb-8"
+                            data-aos="fade-up"
+                            data-aos-delay="100"
                         >
-                            <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                        </svg>
+                            Our landing page template works on all devices, so
+                            you only have to set it up once, and get beautiful
+                            results forever.
+                        </p>
+                        <div data-aos="fade-up" data-aos-delay="200">
+                            <a
+                                class="btn inline-flex items-center text-white bg-gray-900 hover:bg-gray-800 group"
+                                href="schedule-call.html"
+                            >
+                                Schedule A Call
+                                <span
+                                    class="tracking-normal text-blue-500 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-2"
+                                >
+                                    <svg
+                                        class="fill-current"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="8"
+                                    >
+                                        <path
+                                            d="m10.865.013.747.148c.243.065.481.143.716.235.495.18.97.42 1.415.716.265.192.571.343.858.55.096.064.192.135.288.209l.196.154.192.178c.09.08.175.168.254.262.189.21.33.466.414.747.076.275.073.568-.008.84-.09.27-.236.513-.427.708-.096.1-.198.191-.306.274l-.152.117-.116.074c-.369.252-.75.482-1.14.69-.577.315-1.153.585-1.701.932-.408.262-.803.549-1.182.86-.083.064-.16.136-.247.193a.918.918 0 0 1-.113.072.644.644 0 0 1-.118.016.708.708 0 0 1-.191.01.559.559 0 0 1-.246-.088l-.072-.054a1.481 1.481 0 0 1-.141-.107c-.128-.122-.1-.377.05-.726.036-.08.079-.156.128-.226l.316-.401c.164-.188.336-.372.514-.543.178-.17.356-.342.546-.493.19-.152.394-.265.59-.39.53-.329 1.05-.626 1.552-.93-.159.018-.32.034-.48.04-.511.036-1.026.044-1.546.048a43.432 43.432 0 0 1-2.31-.058l-.005-.02a78.728 78.728 0 0 0-2.292-.148c-.279-.016-.558.01-.837-.006L4.543 3.81l-.977-.046a19.357 19.357 0 0 1-.49-.029 12.6 12.6 0 0 0-1.303.013l-.828.055-.406.021H.335l-.18.008c-.145 0-.208-.15-.102-.356.16-.268.422-.46.723-.531.57-.117 1.144-.205 1.72-.264.287-.026.576-.048.865-.053.29-.004.578.01.865.042.69.065 1.408-.015 2.113-.015.776.003 1.549.02 2.324.04l1.428.039 1.087.039c.359.012.716.02 1.075.013.442-.008.879-.065 1.318-.112a3.672 3.672 0 0 0-.186-.166 9.045 9.045 0 0 0-1.06-.762 9.82 9.82 0 0 0-1.034-.537 5.9 5.9 0 0 1-1.284-.854c-.12-.115-.053-.199.12-.26a1.55 1.55 0 0 1 .738-.083Z"
+                                        />
+                                    </svg>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                        <a href="https://github.com/sponsors/taylorotwell" class="ml-1 underline">
-                            Sponsor
+        <!-- Explainer -->
+        <section>
+            <div class="max-w-6xl mx-auto px-4 sm:px-6">
+                <div class="py-12 md:py-20">
+                    <!-- Section header -->
+                    <div class="max-w-3xl mx-auto text-center pb-12 md:pb-16">
+                        <h2 class="h2 font-cabinet-grotesk">
+                            We support early stage startups and leading tech
+                            giants.
+                        </h2>
+                    </div>
+
+                    <!-- Section image -->
+                    <div
+                        class="flex justify-center pb-12 md:pb-16"
+                        x-data="{ modalExpanded: false }"
+                        data-aos="fade-up"
+                    >
+                        <div
+                            class="relative inline-flex justify-center items-center"
+                        >
+                            <img
+                                src="/images/explainer.jpg"
+                                width="768"
+                                height="432"
+                                alt="Explainer"
+                            />
+                            <!-- Illustration -->
+                            <svg
+                                class="absolute right-0 top-0 -mt-11 mr-9"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="69"
+                                height="77"
+                            >
+                                <path
+                                    class="fill-emerald-400"
+                                    d="M19.987 69.903a16 16 0 0 1-4.12.88 10 10 0 0 1-4.6-.76 9.15 9.15 0 0 1-3.71-3l-.63-.93-.51-1a9.07 9.07 0 0 1-.76-2.31 16.42 16.42 0 0 1 1-8.18 46 46 0 0 1 3.11-6.78 58.58 58.58 0 0 1 8.65-11.79 60.66 60.66 0 0 1 11.18-9.44 45.88 45.88 0 0 1 9.67-4.87 28.1 28.1 0 0 1 11-1.65 25.07 25.07 0 0 1 9.68 2.59 18.08 18.08 0 0 1 4.34 2.92 12.86 12.86 0 0 1 3.16 4.55 13.64 13.64 0 0 1 1 5.31 20.71 20.71 0 0 1-.7 5 35.54 35.54 0 0 1-3.79 8.91 52.15 52.15 0 0 1-5.46 7.63 72.54 72.54 0 0 1-6.52 6.6 58.48 58.48 0 0 1-15.51 10.06 39.78 39.78 0 0 1-3.91 1.47c-.67.2-1.35.39-2 .56a10.66 10.66 0 0 1-2.74.25 7.59 7.59 0 0 1-2.73-.63 3.17 3.17 0 0 1-1.82-1.94c-.48-1.77.65-3.57 1.92-5 .15-.17.33-.38.46-.51l.37-.37c.25-.25.5-.5.75-.73.5-.49 1-.94 1.54-1.4 1-.91 2.11-1.76 3.2-2.59a66 66 0 0 1 6.81-4.53 44.56 44.56 0 0 1 9.75-4.32 22.28 22.28 0 0 1 5.53-.91 13.5 13.5 0 0 1 5.91 1.09 10.75 10.75 0 0 1 4.61 4.13l.74 1.32c.229.488.42.993.57 1.51.28.977.438 1.984.47 3a17.19 17.19 0 0 1-.73 5.58 21.73 21.73 0 0 1-2.16 5.06c-1.24 2-2.26 2.51-2.44 2.23-.18-.28.17-1.39.5-3.15a24.07 24.07 0 0 0 .33-7 13.91 13.91 0 0 0-.83-3.9 8.73 8.73 0 0 0-2.2-2.87 6.64 6.64 0 0 0-3-1.32 12.39 12.39 0 0 0-4 .05 31.68 31.68 0 0 0-8.84 3.07 59.18 59.18 0 0 0-8.36 5.16c-1.34 1-2.64 2-3.84 3.05-.3.27-.61.54-.88.81l-.54.52c-.11.1-.08.06-.12.11-.04.05 0 .15.12.16h.17l.42-.09.56-.14c.75-.2 1.51-.44 2.26-.71a47.25 47.25 0 0 0 8.79-4.41 65.55 65.55 0 0 0 14.92-13.36 41 41 0 0 0 6.16-10.25c1.47-3.62 2.17-7.66.82-10.69a8.43 8.43 0 0 0-3.29-3.74 19.61 19.61 0 0 0-2.45-1.33c-.45-.17-.89-.37-1.34-.54l-1.37-.43a23 23 0 0 0-11.5 0 38.32 38.32 0 0 0-12.15 5.44 58.11 58.11 0 0 0-10.35 8.85 53.09 53.09 0 0 0-8 11.06 32.11 32.11 0 0 0-2.51 6.2c-.57 2.09-.72 4.22.06 5.77a6.4 6.4 0 0 0 2.2 2.63 5.15 5.15 0 0 0 1.51.61 6.23 6.23 0 0 0 1.74.11 17.27 17.27 0 0 0 7.38-2.8c4.75-2.91 9-6.88 13.05-10.89a97.44 97.44 0 0 0 16-20.33 49.73 49.73 0 0 0 4.91-11.72l.37-1.49.27-1.54c.199-.989.32-1.992.36-3a9.11 9.11 0 0 0-1.23-5.27 6.61 6.61 0 0 0-3.08-2.43 13.93 13.93 0 0 0-4.31-.84 32 32 0 0 0-9.31 1.08 59.27 59.27 0 0 0-9.08 3.11 60.65 60.65 0 0 0-8.39 4.66c-2.37 1.57-4.58 3.3-6.83 5.12-2.09 1.69-3.79 3.15-5.22 4.38a77.994 77.994 0 0 1-3.64 2.95 14 14 0 0 1-4.68 2.64 10.65 10.65 0 0 1-1.73.49c-.72 0-.44-.89.68-2.61a54.19 54.19 0 0 1 5.93-7.22 86.61 86.61 0 0 1 14.37-12.19 60.24 60.24 0 0 1 4.18-2.53 45.5 45.5 0 0 1 4.49-2.2 55.38 55.38 0 0 1 9.54-3 37.12 37.12 0 0 1 10.52-.89 17.78 17.78 0 0 1 5.84 1.44 12.52 12.52 0 0 1 5.32 4.36 13.2 13.2 0 0 1 2.19 6.31 21.59 21.59 0 0 1-.28 5.76 45.26 45.26 0 0 1-2.91 9.94 68.73 68.73 0 0 1-7.37 13 104.64 104.64 0 0 1-9.37 11.25 134.3 134.3 0 0 1-10.58 9.94 61.69 61.69 0 0 1-6 4.45 32.1 32.1 0 0 1-6.92 3.51l-.04-.12Z"
+                                />
+                            </svg>
+                            <!-- Play button -->
+                            <div class="absolute">
+                                <button
+                                    class="btn h-10 px-4 inline-flex items-center text-gray-900 bg-white hover:bg-blue-50"
+                                    @click.prevent="modalExpanded = true"
+                                    aria-controls="video-modal"
+                                >
+                                    <span
+                                        class="tracking-normal text-blue-500 mr-2"
+                                    >
+                                        <svg
+                                            class="fill-current"
+                                            width="9"
+                                            height="12"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M.783.088A.5.5 0 0 0 0 .5v11a.5.5 0 0 0 .783.412l8-5.5a.5.5 0 0 0 0-.824l-8-5.5Z"
+                                            />
+                                        </svg>
+                                    </span>
+                                    Quick Explainer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Steps -->
+                    <div class="relative pb-12">
+                        <!-- Line -->
+                        <div
+                            class="hidden lg:block absolute top-4 left-32 right-32 mt-px h-0.5 bg-gray-200 -z-10"
+                            aria-hidden="true"
+                        ></div>
+
+                        <!-- Grid -->
+                        <div
+                            class="max-w-sm mx-auto grid gap-12 sm:grid-cols-2 sm:max-w-3xl lg:grid-cols-4 lg:max-w-none items-start"
+                        >
+                            <!-- #1 -->
+                            <div class="text-center">
+                                <div
+                                    class="w-9 h-9 bg-gray-900 border-2 border-white text-white text-[15px] font-bold rounded-full inline-flex items-center justify-center mb-3"
+                                >
+                                    1
+                                </div>
+                                <h3
+                                    class="font-cabinet-grotesk font-bold text-lg"
+                                >
+                                    Personalised Outreach
+                                </h3>
+                                <div class="text-gray-500">
+                                    Work is is changing faster than at any other
+                                    time in history.
+                                </div>
+                            </div>
+
+                            <!-- #2 -->
+                            <div class="text-center">
+                                <div
+                                    class="w-9 h-9 bg-gray-900 border-2 border-white text-white text-[15px] font-bold rounded-full inline-flex items-center justify-center mb-3"
+                                >
+                                    2
+                                </div>
+                                <h3
+                                    class="font-cabinet-grotesk font-bold text-lg"
+                                >
+                                    Personalised Outreach
+                                </h3>
+                                <div class="text-gray-500">
+                                    Work is is changing faster than at any other
+                                    time in history.
+                                </div>
+                            </div>
+
+                            <!-- #3 -->
+                            <div class="text-center">
+                                <div
+                                    class="w-9 h-9 bg-gray-900 border-2 border-white text-white text-[15px] font-bold rounded-full inline-flex items-center justify-center mb-3"
+                                >
+                                    3
+                                </div>
+                                <h3
+                                    class="font-cabinet-grotesk font-bold text-lg"
+                                >
+                                    Personalised Outreach
+                                </h3>
+                                <div class="text-gray-500">
+                                    Work is is changing faster than at any other
+                                    time in history.
+                                </div>
+                            </div>
+
+                            <!-- #4 -->
+                            <div class="text-center">
+                                <div
+                                    class="w-9 h-9 bg-gray-900 border-2 border-white text-white text-[15px] font-bold rounded-full inline-flex items-center justify-center mb-3"
+                                >
+                                    4
+                                </div>
+                                <h3
+                                    class="font-cabinet-grotesk font-bold text-lg"
+                                >
+                                    Personalised Outreach
+                                </h3>
+                                <div class="text-gray-500">
+                                    Work is is changing faster than at any other
+                                    time in history.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTA -->
+                    <div class="text-center">
+                        <a
+                            class="btn inline-flex items-center text-white bg-gray-900 hover:bg-gray-800 group"
+                            href="schedule-call.html"
+                        >
+                            Schedule A Call
+                            <span
+                                class="tracking-normal text-blue-500 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-2"
+                            >
+                                <svg
+                                    class="fill-current"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="8"
+                                >
+                                    <path
+                                        d="m10.865.013.747.148c.243.065.481.143.716.235.495.18.97.42 1.415.716.265.192.571.343.858.55.096.064.192.135.288.209l.196.154.192.178c.09.08.175.168.254.262.189.21.33.466.414.747.076.275.073.568-.008.84-.09.27-.236.513-.427.708-.096.1-.198.191-.306.274l-.152.117-.116.074c-.369.252-.75.482-1.14.69-.577.315-1.153.585-1.701.932-.408.262-.803.549-1.182.86-.083.064-.16.136-.247.193a.918.918 0 0 1-.113.072.644.644 0 0 1-.118.016.708.708 0 0 1-.191.01.559.559 0 0 1-.246-.088l-.072-.054a1.481 1.481 0 0 1-.141-.107c-.128-.122-.1-.377.05-.726.036-.08.079-.156.128-.226l.316-.401c.164-.188.336-.372.514-.543.178-.17.356-.342.546-.493.19-.152.394-.265.59-.39.53-.329 1.05-.626 1.552-.93-.159.018-.32.034-.48.04-.511.036-1.026.044-1.546.048a43.432 43.432 0 0 1-2.31-.058l-.005-.02a78.728 78.728 0 0 0-2.292-.148c-.279-.016-.558.01-.837-.006L4.543 3.81l-.977-.046a19.357 19.357 0 0 1-.49-.029 12.6 12.6 0 0 0-1.303.013l-.828.055-.406.021H.335l-.18.008c-.145 0-.208-.15-.102-.356.16-.268.422-.46.723-.531.57-.117 1.144-.205 1.72-.264.287-.026.576-.048.865-.053.29-.004.578.01.865.042.69.065 1.408-.015 2.113-.015.776.003 1.549.02 2.324.04l1.428.039 1.087.039c.359.012.716.02 1.075.013.442-.008.879-.065 1.318-.112a3.672 3.672 0 0 0-.186-.166 9.045 9.045 0 0 0-1.06-.762 9.82 9.82 0 0 0-1.034-.537 5.9 5.9 0 0 1-1.284-.854c-.12-.115-.053-.199.12-.26a1.55 1.55 0 0 1 .738-.083Z"
+                                    />
+                                </svg>
+                            </span>
                         </a>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                    Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }})
+        <!-- Features #1 -->
+        <section class="relative">
+            <!-- Bg -->
+            <div
+                class="absolute inset-0 bg-blue-600 -z-10"
+                aria-hidden="true"
+            ></div>
+
+            <!-- Illustration -->
+            <div
+                class="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none -z-10"
+                aria-hidden="true"
+            >
+                <img
+                    class="max-w-none"
+                    src="/images/features-illustration.svg"
+                    width="2120"
+                    height="931"
+                />
+            </div>
+
+            <div class="max-w-6xl mx-auto px-4 sm:px-6">
+                <div class="py-12 md:py-20">
+                    <!-- Section header -->
+                    <div class="max-w-3xl pb-12 md:pb-16">
+                        <h2 class="h2 font-cabinet-grotesk text-white">
+                            We bring you high-quality talents from 72+ countries
+                        </h2>
+                    </div>
+
+                    <!-- Carousel -->
+                    <div class="pb-12 md:pb-16">
+                        <!-- Carousel built with Swiper.js [https://swiperjs.com/] -->
+                        <!-- * Initialized in src/js/main.js -->
+                        <!-- * Custom styles in src/css/additional-styles/theme.scss -->
+                        <div
+                            class="carousel swiper-container max-w-sm mx-auto sm:max-w-none"
+                        >
+                            <div class="swiper-wrapper">
+                                <!-- Carousel items -->
+                                <div class="swiper-slide max-w-[446px] h-auto">
+                                    <!-- Image -->
+                                    <img
+                                        class="w-full aspect-[4/3] object-cover h-full"
+                                        src="/images/carousel-01.jpg"
+                                        width="446"
+                                        height="335"
+                                        alt="Carousel 01"
+                                    />
+                                </div>
+                                <div class="swiper-slide max-w-[446px] h-auto">
+                                    <!-- Image -->
+                                    <img
+                                        class="w-full aspect-[4/3] object-cover h-full"
+                                        src="/images/carousel-02.jpg"
+                                        width="446"
+                                        height="335"
+                                        alt="Carousel 02"
+                                    />
+                                </div>
+                                <div class="swiper-slide max-w-[446px] h-auto">
+                                    <!-- Image -->
+                                    <img
+                                        class="w-full aspect-[4/3] object-cover h-full"
+                                        src="/images/carousel-03.jpg"
+                                        width="446"
+                                        height="335"
+                                        alt="Carousel 03"
+                                    />
+                                </div>
+                                <div class="swiper-slide max-w-[446px] h-auto">
+                                    <!-- Image -->
+                                    <img
+                                        class="w-full aspect-[4/3] object-cover h-full"
+                                        src="/images/carousel-04.jpg"
+                                        width="446"
+                                        height="335"
+                                        alt="Carousel 04"
+                                    />
+                                </div>
+                                <div class="swiper-slide max-w-[446px] h-auto">
+                                    <!-- Image -->
+                                    <img
+                                        class="w-full aspect-[4/3] object-cover h-full"
+                                        src="/images/carousel-05.jpg"
+                                        width="446"
+                                        height="335"
+                                        alt="Carousel 05"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Arrows -->
+                        <div class="flex mt-12 space-x-3 justify-end">
+                            <button
+                                class="carousel-prev relative z-20 w-11 h-11 rounded-full flex items-center justify-center group bg-gray-900"
+                            >
+                                <span class="sr-only">Previous</span>
+                                <svg
+                                    class="fill-blue-500 group-hover:fill-white transition duration-150 ease-in-out"
+                                    width="13"
+                                    height="12"
+                                    viewBox="0 0 13 12"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="m3.914 5 3.5-3.5L6 .086 1.086 5H1v.086L.086 6 1 6.914V7h.086L6 11.914 7.414 10.5 3.914 7H13V5z"
+                                    />
+                                </svg>
+                            </button>
+                            <button
+                                class="carousel-next relative z-20 w-11 h-11 rounded-full flex items-center justify-center group bg-gray-900"
+                            >
+                                <span class="sr-only">Next</span>
+                                <svg
+                                    class="fill-blue-500 group-hover:fill-white transition duration-150 ease-in-out"
+                                    width="13"
+                                    height="12"
+                                    viewBox="0 0 13 12"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="m9.086 5-3.5-3.5L7 .086 11.914 5H12v.086l.914.914-.914.914V7h-.086L7 11.914 5.586 10.5l3.5-3.5H0V5z"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Grid -->
+                    <div
+                        class="max-w-sm mx-auto grid sm:grid-cols-2 sm:max-w-3xl lg:grid-cols-4 lg:max-w-none items-start"
+                    >
+                        <!-- #1 -->
+                        <div
+                            class="relative p-5 before:opacity-0 hover:before:opacity-20 before:absolute before:inset-0 before:rounded before:bg-gradient-to-tr before:from-white before:to-white/25 before:shadow-xl before:transition-all before:duration-150 before:ease-in-out"
+                            data-aos="fade-up"
+                        >
+                            <img
+                                class="mb-3"
+                                src="/images/icon-01.svg"
+                                width="40"
+                                height="40"
+                                alt="Icon 01"
+                            />
+                            <h3
+                                class="font-cabinet-grotesk font-bold text-lg text-white"
+                            >
+                                Reward Performers
+                            </h3>
+                            <div class="text-white text-opacity-80">
+                                No more endless task or wasted budget. With us,
+                                you and your team are taken care of.
+                            </div>
+                        </div>
+
+                        <!-- #2 -->
+                        <div
+                            class="relative p-5 before:opacity-0 hover:before:opacity-20 before:absolute before:inset-0 before:rounded before:bg-gradient-to-tr before:from-white before:to-white/25 before:shadow-xl before:transition-all before:duration-150 before:ease-in-out"
+                            data-aos="fade-up"
+                            data-aos-delay="100"
+                        >
+                            <img
+                                class="mb-3"
+                                src="/images/icon-02.svg"
+                                width="40"
+                                height="40"
+                                alt="Icon 02"
+                            />
+                            <h3
+                                class="font-cabinet-grotesk font-bold text-lg text-white"
+                            >
+                                Reward Performers
+                            </h3>
+                            <div class="text-white text-opacity-80">
+                                No more endless task or wasted budget. With us,
+                                you and your team are taken care of.
+                            </div>
+                        </div>
+
+                        <!-- #3 -->
+                        <div
+                            class="relative p-5 before:opacity-0 hover:before:opacity-20 before:absolute before:inset-0 before:rounded before:bg-gradient-to-tr before:from-white before:to-white/25 before:shadow-xl before:transition-all before:duration-150 before:ease-in-out"
+                            data-aos="fade-up"
+                            data-aos-delay="200"
+                        >
+                            <img
+                                class="mb-3"
+                                src="/images/icon-03.svg"
+                                width="40"
+                                height="40"
+                                alt="Icon 03"
+                            />
+                            <h3
+                                class="font-cabinet-grotesk font-bold text-lg text-white"
+                            >
+                                Reward Performers
+                            </h3>
+                            <div class="text-white text-opacity-80">
+                                No more endless task or wasted budget. With us,
+                                you and your team are taken care of.
+                            </div>
+                        </div>
+
+                        <!-- #4 -->
+                        <div
+                            class="relative p-5 before:opacity-0 hover:before:opacity-20 before:absolute before:inset-0 before:rounded before:bg-gradient-to-tr before:from-white before:to-white/25 before:shadow-xl before:transition-all before:duration-150 before:ease-in-out"
+                            data-aos="fade-up"
+                            data-aos-delay="300"
+                        >
+                            <img
+                                class="mb-3"
+                                src="/images/icon-04.svg"
+                                width="40"
+                                height="40"
+                                alt="Icon 04"
+                            />
+                            <h3
+                                class="font-cabinet-grotesk font-bold text-lg text-white"
+                            >
+                                Reward Performers
+                            </h3>
+                            <div class="text-white text-opacity-80">
+                                No more endless task or wasted budget. With us,
+                                you and your team are taken care of.
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
+
+        <!-- Features #2 -->
+        <section>
+            <div class="max-w-6xl mx-auto px-4 sm:px-6">
+                <div class="py-12 md:py-20">
+                    <!-- Section header -->
+                    <div class="max-w-3xl mx-auto text-center pb-12 md:pb-16">
+                        <h2 class="h2 font-cabinet-grotesk">
+                            Everything you need to find, hire, and manage
+                            talents
+                        </h2>
+                    </div>
+
+                    <div x-data="{ category: '1' }">
+                        <!-- Category buttons -->
+                        <div class="pb-12 md:pb-20">
+                            <div class="flex flex-wrap justify-center -m-1.5">
+                                <button
+                                    class="btn-sm m-1.5 h-8 shadow"
+                                    :class="
+                                        category === '1'
+                                            ? 'bg-blue-500 text-white'
+                                            : 'bg-white text-gray-900 hover:bg-blue-50'
+                                    "
+                                    @click="category = '1'"
+                                >
+                                    Flexible Features
+                                </button>
+                                <button
+                                    class="btn-sm m-1.5 h-8 shadow"
+                                    :class="
+                                        category === '2'
+                                            ? 'bg-blue-500 text-white'
+                                            : 'bg-white text-gray-900 hover:bg-blue-50'
+                                    "
+                                    @click="category = '2'"
+                                >
+                                    Flexible Features
+                                </button>
+                                <button
+                                    class="btn-sm m-1.5 h-8 shadow"
+                                    :class="
+                                        category === '3'
+                                            ? 'bg-blue-500 text-white'
+                                            : 'bg-white text-gray-900 hover:bg-blue-50'
+                                    "
+                                    @click="category = '3'"
+                                >
+                                    Flexible Features
+                                </button>
+                                <button
+                                    class="btn-sm m-1.5 h-8 shadow"
+                                    :class="
+                                        category === '4'
+                                            ? 'bg-blue-500 text-white'
+                                            : 'bg-white text-gray-900 hover:bg-blue-50'
+                                    "
+                                    @click="category = '4'"
+                                >
+                                    Flexible Features
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Section content -->
+                        <div
+                            class="max-w-xl mx-auto md:max-w-none flex flex-col md:flex-row md:space-x-8 lg:space-x-16 xl:space-x-20 space-y-8 space-y-reverse md:space-y-0"
+                        >
+                            <!-- Content -->
+                            <div
+                                class="md:w-7/12 lg:w-1/2 order-1 md:order-none"
+                                data-aos="fade-up"
+                            >
+                                <!-- Content #1 -->
+                                <div x-show="category === '1'">
+                                    <h3 class="h3 font-cabinet-grotesk mb-3">
+                                        The member-owned tech society.
+                                    </h3>
+                                    <p class="text-lg text-gray-500 mb-8">
+                                        Work is is changing faster than at any
+                                        other time in history. This rapid change
+                                        requires a new hiring model. A model
+                                        that is fair, inclusive, and empowering.
+                                        That's why we built this.
+                                    </p>
+                                    <ul class="inline-flex flex-col space-y-6">
+                                        <li class="flex items-start">
+                                            <svg
+                                                class="w-3 h-3 fill-current text-blue-500 mt-1.5 mr-3 shrink-0"
+                                                viewBox="0 0 12 12"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                                />
+                                            </svg>
+                                            <div>
+                                                <div
+                                                    class="font-cabinet-grotesk font-bold text-lg mb-1"
+                                                >
+                                                    Ensure Quick Turnarounds
+                                                </div>
+                                                <div class="text-gray-500">
+                                                    Work is is changing faster
+                                                    than at any other time in
+                                                    history. This rapid change
+                                                    requires a new hiring model.
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <svg
+                                                class="w-3 h-3 fill-current text-blue-500 mt-1.5 mr-3 shrink-0"
+                                                viewBox="0 0 12 12"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                                />
+                                            </svg>
+                                            <div>
+                                                <div
+                                                    class="font-cabinet-grotesk font-bold text-lg mb-1"
+                                                >
+                                                    Ensure Quick Turnarounds
+                                                </div>
+                                                <div class="text-gray-500">
+                                                    Work is is changing faster
+                                                    than at any other time in
+                                                    history. This rapid change
+                                                    requires a new hiring model.
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <svg
+                                                class="w-3 h-3 fill-current text-blue-500 mt-1.5 mr-3 shrink-0"
+                                                viewBox="0 0 12 12"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                                />
+                                            </svg>
+                                            <div>
+                                                <div
+                                                    class="font-cabinet-grotesk font-bold text-lg mb-1"
+                                                >
+                                                    Ensure Quick Turnarounds
+                                                </div>
+                                                <div class="text-gray-500">
+                                                    Work is is changing faster
+                                                    than at any other time in
+                                                    history. This rapid change
+                                                    requires a new hiring model.
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- Content #2 -->
+                                <div x-show="category === '2'">
+                                    <h3 class="h3 font-cabinet-grotesk mb-3">
+                                        Find talents, hire and manage them.
+                                    </h3>
+                                    <p class="text-lg text-gray-500 mb-8">
+                                        Work is is changing faster than at any
+                                        other time in history. This rapid change
+                                        requires a new hiring model. A model
+                                        that is fair, inclusive, and empowering.
+                                        That's why we built this.
+                                    </p>
+                                    <ul class="inline-flex flex-col space-y-6">
+                                        <li class="flex items-start">
+                                            <svg
+                                                class="w-3 h-3 fill-current text-blue-500 mt-1.5 mr-3 shrink-0"
+                                                viewBox="0 0 12 12"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                                />
+                                            </svg>
+                                            <div>
+                                                <div
+                                                    class="font-cabinet-grotesk font-bold text-lg mb-1"
+                                                >
+                                                    Ensure Quick Turnarounds
+                                                </div>
+                                                <div class="text-gray-500">
+                                                    Work is is changing faster
+                                                    than at any other time in
+                                                    history. This rapid change
+                                                    requires a new hiring model.
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <svg
+                                                class="w-3 h-3 fill-current text-blue-500 mt-1.5 mr-3 shrink-0"
+                                                viewBox="0 0 12 12"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                                />
+                                            </svg>
+                                            <div>
+                                                <div
+                                                    class="font-cabinet-grotesk font-bold text-lg mb-1"
+                                                >
+                                                    Ensure Quick Turnarounds
+                                                </div>
+                                                <div class="text-gray-500">
+                                                    Work is is changing faster
+                                                    than at any other time in
+                                                    history. This rapid change
+                                                    requires a new hiring model.
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- Content #3 -->
+                                <div x-show="category === '3'">
+                                    <h3 class="h3 font-cabinet-grotesk mb-3">
+                                        A model that is fair, inclusive, and
+                                        empowering.
+                                    </h3>
+                                    <p class="text-lg text-gray-500 mb-8">
+                                        Work is is changing faster than at any
+                                        other time in history. This rapid change
+                                        requires a new hiring model. A model
+                                        that is fair, inclusive, and empowering.
+                                        That's why we built this.
+                                    </p>
+                                    <ul class="inline-flex flex-col space-y-6">
+                                        <li class="flex items-start">
+                                            <svg
+                                                class="w-3 h-3 fill-current text-blue-500 mt-1.5 mr-3 shrink-0"
+                                                viewBox="0 0 12 12"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                                />
+                                            </svg>
+                                            <div>
+                                                <div
+                                                    class="font-cabinet-grotesk font-bold text-lg mb-1"
+                                                >
+                                                    Ensure Quick Turnarounds
+                                                </div>
+                                                <div class="text-gray-500">
+                                                    Work is is changing faster
+                                                    than at any other time in
+                                                    history. This rapid change
+                                                    requires a new hiring model.
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <svg
+                                                class="w-3 h-3 fill-current text-blue-500 mt-1.5 mr-3 shrink-0"
+                                                viewBox="0 0 12 12"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                                />
+                                            </svg>
+                                            <div>
+                                                <div
+                                                    class="font-cabinet-grotesk font-bold text-lg mb-1"
+                                                >
+                                                    Ensure Quick Turnarounds
+                                                </div>
+                                                <div class="text-gray-500">
+                                                    Work is is changing faster
+                                                    than at any other time in
+                                                    history. This rapid change
+                                                    requires a new hiring model.
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- Content #4 -->
+                                <div x-show="category === '4'">
+                                    <h3 class="h3 font-cabinet-grotesk mb-3">
+                                        This rapid change requires a new hiring
+                                        model.
+                                    </h3>
+                                    <p class="text-lg text-gray-500 mb-8">
+                                        Work is is changing faster than at any
+                                        other time in history. This rapid change
+                                        requires a new hiring model. A model
+                                        that is fair, inclusive, and empowering.
+                                        That's why we built this.
+                                    </p>
+                                    <ul class="inline-flex flex-col space-y-6">
+                                        <li class="flex items-start">
+                                            <svg
+                                                class="w-3 h-3 fill-current text-blue-500 mt-1.5 mr-3 shrink-0"
+                                                viewBox="0 0 12 12"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                                />
+                                            </svg>
+                                            <div>
+                                                <div
+                                                    class="font-cabinet-grotesk font-bold text-lg mb-1"
+                                                >
+                                                    Ensure Quick Turnarounds
+                                                </div>
+                                                <div class="text-gray-500">
+                                                    Work is is changing faster
+                                                    than at any other time in
+                                                    history. This rapid change
+                                                    requires a new hiring model.
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <svg
+                                                class="w-3 h-3 fill-current text-blue-500 mt-1.5 mr-3 shrink-0"
+                                                viewBox="0 0 12 12"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                                />
+                                            </svg>
+                                            <div>
+                                                <div
+                                                    class="font-cabinet-grotesk font-bold text-lg mb-1"
+                                                >
+                                                    Ensure Quick Turnarounds
+                                                </div>
+                                                <div class="text-gray-500">
+                                                    Work is is changing faster
+                                                    than at any other time in
+                                                    history. This rapid change
+                                                    requires a new hiring model.
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <svg
+                                                class="w-3 h-3 fill-current text-blue-500 mt-1.5 mr-3 shrink-0"
+                                                viewBox="0 0 12 12"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                                />
+                                            </svg>
+                                            <div>
+                                                <div
+                                                    class="font-cabinet-grotesk font-bold text-lg mb-1"
+                                                >
+                                                    Ensure Quick Turnarounds
+                                                </div>
+                                                <div class="text-gray-500">
+                                                    Work is is changing faster
+                                                    than at any other time in
+                                                    history. This rapid change
+                                                    requires a new hiring model.
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Image -->
+                            <div
+                                class="md:w-5/12 lg:w-1/2"
+                                data-aos="fade-up"
+                                data-aos-delay="100"
+                            >
+                                <img
+                                    class="mx-auto md:max-w-none"
+                                    src="/images/features-01.png"
+                                    width="540"
+                                    height="405"
+                                    alt="Features"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section class="bg-gray-900">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6">
+                <div class="py-12 md:py-20">
+                    <div class="relative">
+                        <!-- Section header -->
+                        <div
+                            class="max-w-3xl mx-auto text-center pb-12 md:pb-16"
+                        >
+                            <h2 class="h2 font-cabinet-grotesk text-gray-100">
+                                Scale your business with ready-to-buy services
+                            </h2>
+                        </div>
+
+                        <!-- Grid -->
+                        <div
+                            class="max-w-2xl mx-auto grid gap-4 sm:gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 lg:max-w-none items-start"
+                        >
+                            <!-- Item #1 -->
+                            <div class="h-full flex flex-col">
+                                <!-- Image -->
+                                <div class="mb-4">
+                                    <a
+                                        class="block group overflow-hidden"
+                                        href="#0"
+                                    >
+                                        <img
+                                            class="w-full aspect-[101/64] object-cover group-hover:scale-105 transition duration-700 ease-out"
+                                            src="/images/service-01.jpg"
+                                            width="202"
+                                            height="128"
+                                            alt="Item 01"
+                                        />
+                                    </a>
+                                </div>
+                                <div class="grow text-center">
+                                    <a
+                                        class="font-cabinet-grotesk font-bold text-gray-100 hover:text-blue-500 transition duration-150 ease-in-out"
+                                        href="#0"
+                                        >System Design</a
+                                    >
+                                </div>
+                            </div>
+                            <!-- Item #2 -->
+                            <div class="h-full flex flex-col">
+                                <!-- Image -->
+                                <div class="mb-4">
+                                    <a
+                                        class="block group overflow-hidden"
+                                        href="#0"
+                                    >
+                                        <img
+                                            class="w-full aspect-[101/64] object-cover group-hover:scale-105 transition duration-700 ease-out"
+                                            src="/images/service-02.jpg"
+                                            width="202"
+                                            height="128"
+                                            alt="Item 02"
+                                        />
+                                    </a>
+                                </div>
+                                <div class="grow text-center">
+                                    <a
+                                        class="font-cabinet-grotesk font-bold text-gray-100 hover:text-blue-500 transition duration-150 ease-in-out"
+                                        href="#0"
+                                        >Remote Team</a
+                                    >
+                                </div>
+                            </div>
+                            <!-- Item #3 -->
+                            <div class="h-full flex flex-col">
+                                <!-- Image -->
+                                <div class="mb-4">
+                                    <a
+                                        class="block group overflow-hidden"
+                                        href="#0"
+                                    >
+                                        <img
+                                            class="w-full aspect-[101/64] object-cover group-hover:scale-105 transition duration-700 ease-out"
+                                            src="/images/service-03.jpg"
+                                            width="202"
+                                            height="128"
+                                            alt="Item 03"
+                                        />
+                                    </a>
+                                </div>
+                                <div class="grow text-center">
+                                    <a
+                                        class="font-cabinet-grotesk font-bold text-gray-100 hover:text-blue-500 transition duration-150 ease-in-out"
+                                        href="#0"
+                                        >Illustration</a
+                                    >
+                                </div>
+                            </div>
+                            <!-- Item #4 -->
+                            <div class="h-full flex flex-col">
+                                <!-- Image -->
+                                <div class="mb-4">
+                                    <a
+                                        class="block group overflow-hidden"
+                                        href="#0"
+                                    >
+                                        <img
+                                            class="w-full aspect-[101/64] object-cover group-hover:scale-105 transition duration-700 ease-out"
+                                            src="/images/service-04.jpg"
+                                            width="202"
+                                            height="128"
+                                            alt="Item 04"
+                                        />
+                                    </a>
+                                </div>
+                                <div class="grow text-center">
+                                    <a
+                                        class="font-cabinet-grotesk font-bold text-gray-100 hover:text-blue-500 transition duration-150 ease-in-out"
+                                        href="#0"
+                                        >Articles & Posts</a
+                                    >
+                                </div>
+                            </div>
+                            <!-- Item #5 -->
+                            <div class="h-full flex flex-col">
+                                <!-- Image -->
+                                <div class="mb-4">
+                                    <a
+                                        class="block group overflow-hidden"
+                                        href="#0"
+                                    >
+                                        <img
+                                            class="w-full aspect-[101/64] object-cover group-hover:scale-105 transition duration-700 ease-out"
+                                            src="/images/service-05.jpg"
+                                            width="202"
+                                            height="128"
+                                            alt="Item 05"
+                                        />
+                                    </a>
+                                </div>
+                                <div class="grow text-center">
+                                    <a
+                                        class="font-cabinet-grotesk font-bold text-gray-100 hover:text-blue-500 transition duration-150 ease-in-out"
+                                        href="#0"
+                                        >Wireframing</a
+                                    >
+                                </div>
+                            </div>
+                            <!-- Item #6 -->
+                            <div class="h-full flex flex-col">
+                                <!-- Image -->
+                                <div class="mb-4">
+                                    <a
+                                        class="block group overflow-hidden"
+                                        href="#0"
+                                    >
+                                        <img
+                                            class="w-full aspect-[101/64] object-cover group-hover:scale-105 transition duration-700 ease-out"
+                                            src="/images/service-06.jpg"
+                                            width="202"
+                                            height="128"
+                                            alt="Item 06"
+                                        />
+                                    </a>
+                                </div>
+                                <div class="grow text-center">
+                                    <a
+                                        class="font-cabinet-grotesk font-bold text-gray-100 hover:text-blue-500 transition duration-150 ease-in-out"
+                                        href="#0"
+                                        >Website Content</a
+                                    >
+                                </div>
+                            </div>
+                            <!-- Item #7 -->
+                            <div class="h-full flex flex-col">
+                                <!-- Image -->
+                                <div class="mb-4">
+                                    <a
+                                        class="block group overflow-hidden"
+                                        href="#0"
+                                    >
+                                        <img
+                                            class="w-full aspect-[101/64] object-cover group-hover:scale-105 transition duration-700 ease-out"
+                                            src="/images/service-07.jpg"
+                                            width="202"
+                                            height="128"
+                                            alt="Item 07"
+                                        />
+                                    </a>
+                                </div>
+                                <div class="grow text-center">
+                                    <a
+                                        class="font-cabinet-grotesk font-bold text-gray-100 hover:text-blue-500 transition duration-150 ease-in-out"
+                                        href="#0"
+                                        >Copywriting</a
+                                    >
+                                </div>
+                            </div>
+                            <!-- Item #8 -->
+                            <div class="h-full flex flex-col">
+                                <!-- Image -->
+                                <div class="mb-4">
+                                    <a
+                                        class="block group overflow-hidden"
+                                        href="#0"
+                                    >
+                                        <img
+                                            class="w-full aspect-[101/64] object-cover group-hover:scale-105 transition duration-700 ease-out"
+                                            src="/images/service-08.jpg"
+                                            width="202"
+                                            height="128"
+                                            alt="Item 08"
+                                        />
+                                    </a>
+                                </div>
+                                <div class="grow text-center">
+                                    <a
+                                        class="font-cabinet-grotesk font-bold text-gray-100 hover:text-blue-500 transition duration-150 ease-in-out"
+                                        href="#0"
+                                        >Virtual Assistant</a
+                                    >
+                                </div>
+                            </div>
+                            <!-- Item #9 -->
+                            <div class="h-full flex flex-col">
+                                <!-- Image -->
+                                <div class="mb-4">
+                                    <a
+                                        class="block group overflow-hidden"
+                                        href="#0"
+                                    >
+                                        <img
+                                            class="w-full aspect-[101/64] object-cover group-hover:scale-105 transition duration-700 ease-out"
+                                            src="/images/service-09.jpg"
+                                            width="202"
+                                            height="128"
+                                            alt="Item 09"
+                                        />
+                                    </a>
+                                </div>
+                                <div class="grow text-center">
+                                    <a
+                                        class="font-cabinet-grotesk font-bold text-gray-100 hover:text-blue-500 transition duration-150 ease-in-out"
+                                        href="#0"
+                                        >Video Editing</a
+                                    >
+                                </div>
+                            </div>
+                            <!-- Item #10 -->
+                            <div class="h-full flex flex-col">
+                                <!-- Image -->
+                                <div class="mb-4">
+                                    <a
+                                        class="block group overflow-hidden"
+                                        href="#0"
+                                    >
+                                        <img
+                                            class="w-full aspect-[101/64] object-cover group-hover:scale-105 transition duration-700 ease-out"
+                                            src="/images/service-10.jpg"
+                                            width="202"
+                                            height="128"
+                                            alt="Item 10"
+                                        />
+                                    </a>
+                                </div>
+                                <div class="grow text-center">
+                                    <a
+                                        class="font-cabinet-grotesk font-bold text-gray-100 hover:text-blue-500 transition duration-150 ease-in-out"
+                                        href="#0"
+                                        >Web Development</a
+                                    >
+                                </div>
+                            </div>
+                            <!-- Item #11 -->
+                            <div class="h-full flex flex-col">
+                                <!-- Image -->
+                                <div class="mb-4">
+                                    <a
+                                        class="block group overflow-hidden"
+                                        href="#0"
+                                    >
+                                        <img
+                                            class="w-full aspect-[101/64] object-cover group-hover:scale-105 transition duration-700 ease-out"
+                                            src="/images/service-11.jpg"
+                                            width="202"
+                                            height="128"
+                                            alt="Item 11"
+                                        />
+                                    </a>
+                                </div>
+                                <div class="grow text-center">
+                                    <a
+                                        class="font-cabinet-grotesk font-bold text-gray-100 hover:text-blue-500 transition duration-150 ease-in-out"
+                                        href="#0"
+                                        >Signage</a
+                                    >
+                                </div>
+                            </div>
+                            <!-- Item #12 -->
+                            <div class="h-full flex flex-col">
+                                <!-- Image -->
+                                <div class="mb-4">
+                                    <a
+                                        class="block group overflow-hidden"
+                                        href="#0"
+                                    >
+                                        <img
+                                            class="w-full aspect-[101/64] object-cover group-hover:scale-105 transition duration-700 ease-out"
+                                            src="/images/service-12.jpg"
+                                            width="202"
+                                            height="128"
+                                            alt="Item 12"
+                                        />
+                                    </a>
+                                </div>
+                                <div class="grow text-center">
+                                    <a
+                                        class="font-cabinet-grotesk font-bold text-gray-100 hover:text-blue-500 transition duration-150 ease-in-out"
+                                        href="#0"
+                                        >Web Apps</a
+                                    >
+                                </div>
+                            </div>
+                            <!-- Item #13 -->
+                            <div class="h-full flex flex-col">
+                                <!-- Image -->
+                                <div class="mb-4">
+                                    <a
+                                        class="block group overflow-hidden"
+                                        href="#0"
+                                    >
+                                        <img
+                                            class="w-full aspect-[101/64] object-cover group-hover:scale-105 transition duration-700 ease-out"
+                                            src="/images/service-13.jpg"
+                                            width="202"
+                                            height="128"
+                                            alt="Item 13"
+                                        />
+                                    </a>
+                                </div>
+                                <div class="grow text-center">
+                                    <a
+                                        class="font-cabinet-grotesk font-bold text-gray-100 hover:text-blue-500 transition duration-150 ease-in-out"
+                                        href="#0"
+                                        >E-Commerce</a
+                                    >
+                                </div>
+                            </div>
+                            <!-- Item #14 -->
+                            <div class="h-full flex flex-col">
+                                <!-- Image -->
+                                <div class="mb-4">
+                                    <a
+                                        class="block group overflow-hidden"
+                                        href="#0"
+                                    >
+                                        <img
+                                            class="w-full aspect-[101/64] object-cover group-hover:scale-105 transition duration-700 ease-out"
+                                            src="/images/service-14.jpg"
+                                            width="202"
+                                            height="128"
+                                            alt="Item 14"
+                                        />
+                                    </a>
+                                </div>
+                                <div class="grow text-center">
+                                    <a
+                                        class="font-cabinet-grotesk font-bold text-gray-100 hover:text-blue-500 transition duration-150 ease-in-out"
+                                        href="#0"
+                                        >Data Entry</a
+                                    >
+                                </div>
+                            </div>
+                            <!-- Item #15 -->
+                            <div class="h-full flex flex-col">
+                                <!-- Image -->
+                                <div class="mb-4">
+                                    <a
+                                        class="block group overflow-hidden"
+                                        href="#0"
+                                    >
+                                        <img
+                                            class="w-full aspect-[101/64] object-cover group-hover:scale-105 transition duration-700 ease-out"
+                                            src="/images/service-15.jpg"
+                                            width="202"
+                                            height="128"
+                                            alt="Item 15"
+                                        />
+                                    </a>
+                                </div>
+                                <div class="grow text-center">
+                                    <a
+                                        class="font-cabinet-grotesk font-bold text-gray-100 hover:text-blue-500 transition duration-150 ease-in-out"
+                                        href="#0"
+                                        >Voice Recording</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom gradient -->
+                        <div
+                            class="flex justify-center items-center absolute bottom-0 w-full h-48 bg-gradient-to-t from-gray-900 pointer-events-none"
+                        >
+                            <div>
+                                <a
+                                    class="btn inline-flex items-center text-white bg-blue-500 hover:bg-blue-600 group pointer-events-auto"
+                                    href="#0"
+                                >
+                                    See All Services
+                                    <span
+                                        class="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-2"
+                                    >
+                                        <svg
+                                            class="fill-current"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="8"
+                                        >
+                                            <path
+                                                d="m10.865.013.747.148c.243.065.481.143.716.235.495.18.97.42 1.415.716.265.192.571.343.858.55.096.064.192.135.288.209l.196.154.192.178c.09.08.175.168.254.262.189.21.33.466.414.747.076.275.073.568-.008.84-.09.27-.236.513-.427.708-.096.1-.198.191-.306.274l-.152.117-.116.074c-.369.252-.75.482-1.14.69-.577.315-1.153.585-1.701.932-.408.262-.803.549-1.182.86-.083.064-.16.136-.247.193a.918.918 0 0 1-.113.072.644.644 0 0 1-.118.016.708.708 0 0 1-.191.01.559.559 0 0 1-.246-.088l-.072-.054a1.481 1.481 0 0 1-.141-.107c-.128-.122-.1-.377.05-.726.036-.08.079-.156.128-.226l.316-.401c.164-.188.336-.372.514-.543.178-.17.356-.342.546-.493.19-.152.394-.265.59-.39.53-.329 1.05-.626 1.552-.93-.159.018-.32.034-.48.04-.511.036-1.026.044-1.546.048a43.432 43.432 0 0 1-2.31-.058l-.005-.02a78.728 78.728 0 0 0-2.292-.148c-.279-.016-.558.01-.837-.006L4.543 3.81l-.977-.046a19.357 19.357 0 0 1-.49-.029 12.6 12.6 0 0 0-1.303.013l-.828.055-.406.021H.335l-.18.008c-.145 0-.208-.15-.102-.356.16-.268.422-.46.723-.531.57-.117 1.144-.205 1.72-.264.287-.026.576-.048.865-.053.29-.004.578.01.865.042.69.065 1.408-.015 2.113-.015.776.003 1.549.02 2.324.04l1.428.039 1.087.039c.359.012.716.02 1.075.013.442-.008.879-.065 1.318-.112a3.672 3.672 0 0 0-.186-.166 9.045 9.045 0 0 0-1.06-.762 9.82 9.82 0 0 0-1.034-.537 5.9 5.9 0 0 1-1.284-.854c-.12-.115-.053-.199.12-.26a1.55 1.55 0 0 1 .738-.083Z"
+                                            />
+                                        </svg>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section>
+            <div class="max-w-6xl mx-auto px-4 sm:px-6">
+                <div class="pt-12 md:pt-20">
+                    <!-- Section header -->
+                    <div class="max-w-3xl mx-auto text-center pb-8">
+                        <h2 class="h2 font-cabinet-grotesk">
+                            Find a plan that fits your business best
+                        </h2>
+                    </div>
+
+                    <!-- Pricing tables -->
+                    <div x-data="{ annual: false }">
+                        <!-- Pricing toggle -->
+                        <div
+                            class="flex justify-center max-w-[10rem] m-auto mb-8 lg:mb-14"
+                        >
+                            <div
+                                class="relative flex w-full p-1 bg-gray-100 rounded-full"
+                            >
+                                <span
+                                    class="absolute inset-0 m-1 pointer-events-none"
+                                    aria-hidden="true"
+                                >
+                                    <span
+                                        class="absolute inset-0 w-1/2 bg-blue-500 rounded-full shadow-sm transform transition duration-150 ease-in-out"
+                                        :class="
+                                            annual
+                                                ? 'translate-x-full'
+                                                : 'translate-x-0'
+                                        "
+                                    ></span>
+                                </span>
+                                <button
+                                    class="relative flex-1 text-sm font-cabinet-grotesk font-bold h-8 transition duration-150 ease-in-out"
+                                    :class="
+                                        annual ? 'text-gray-900' : 'text-white'
+                                    "
+                                    @click.prevent="annual = false"
+                                >
+                                    Monthly
+                                </button>
+                                <button
+                                    class="relative flex-1 text-sm font-cabinet-grotesk font-bold h-8 transition duration-150 ease-in-out"
+                                    :class="
+                                        annual ? 'text-white' : 'text-gray-900'
+                                    "
+                                    @click.prevent="annual = true"
+                                >
+                                    Annual
+                                </button>
+                            </div>
+                        </div>
+
+                        <div
+                            class="max-w-sm mx-auto grid gap-8 lg:grid-cols-3 lg:gap-6 items-start lg:max-w-none pt-4"
+                        >
+                            <!-- Pricing table 1 -->
+                            <div
+                                class="relative flex flex-col h-full p-6 rounded"
+                                data-aos="fade-up"
+                                data-aos-delay="100"
+                            >
+                                <div class="mb-6">
+                                    <div
+                                        class="font-cabinet-grotesk text-xl font-bold mb-1"
+                                    >
+                                        Basic
+                                    </div>
+                                    <div
+                                        class="font-cabinet-grotesk text-gray-900 font-bold inline-flex items-baseline mb-2"
+                                    >
+                                        <span class="text-3xl">$</span>
+                                        <span
+                                            class="text-5xl"
+                                            x-text="annual ? '449' : '499'"
+                                        ></span>
+                                        <span>/mo</span>
+                                    </div>
+                                    <div class="text-gray-500 mb-6">
+                                        Start building your team and hire the
+                                        most talented workers in the world.
+                                    </div>
+                                    <a
+                                        class="btn w-full inline-flex items-center text-white bg-gray-900 hover:bg-gray-800 group"
+                                        href="schedule-call.html"
+                                    >
+                                        Schedule A Call
+                                        <span
+                                            class="tracking-normal text-blue-500 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-2"
+                                        >
+                                            <svg
+                                                class="fill-current"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="8"
+                                            >
+                                                <path
+                                                    d="m10.865.013.747.148c.243.065.481.143.716.235.495.18.97.42 1.415.716.265.192.571.343.858.55.096.064.192.135.288.209l.196.154.192.178c.09.08.175.168.254.262.189.21.33.466.414.747.076.275.073.568-.008.84-.09.27-.236.513-.427.708-.096.1-.198.191-.306.274l-.152.117-.116.074c-.369.252-.75.482-1.14.69-.577.315-1.153.585-1.701.932-.408.262-.803.549-1.182.86-.083.064-.16.136-.247.193a.918.918 0 0 1-.113.072.644.644 0 0 1-.118.016.708.708 0 0 1-.191.01.559.559 0 0 1-.246-.088l-.072-.054a1.481 1.481 0 0 1-.141-.107c-.128-.122-.1-.377.05-.726.036-.08.079-.156.128-.226l.316-.401c.164-.188.336-.372.514-.543.178-.17.356-.342.546-.493.19-.152.394-.265.59-.39.53-.329 1.05-.626 1.552-.93-.159.018-.32.034-.48.04-.511.036-1.026.044-1.546.048a43.432 43.432 0 0 1-2.31-.058l-.005-.02a78.728 78.728 0 0 0-2.292-.148c-.279-.016-.558.01-.837-.006L4.543 3.81l-.977-.046a19.357 19.357 0 0 1-.49-.029 12.6 12.6 0 0 0-1.303.013l-.828.055-.406.021H.335l-.18.008c-.145 0-.208-.15-.102-.356.16-.268.422-.46.723-.531.57-.117 1.144-.205 1.72-.264.287-.026.576-.048.865-.053.29-.004.578.01.865.042.69.065 1.408-.015 2.113-.015.776.003 1.549.02 2.324.04l1.428.039 1.087.039c.359.012.716.02 1.075.013.442-.008.879-.065 1.318-.112a3.672 3.672 0 0 0-.186-.166 9.045 9.045 0 0 0-1.06-.762 9.82 9.82 0 0 0-1.034-.537 5.9 5.9 0 0 1-1.284-.854c-.12-.115-.053-.199.12-.26a1.55 1.55 0 0 1 .738-.083Z"
+                                                />
+                                            </svg>
+                                        </span>
+                                    </a>
+                                </div>
+                                <div
+                                    class="font-cabinet-grotesk font-bold mb-4"
+                                >
+                                    Features include:
+                                </div>
+                                <ul class="text-gray-500 space-y-3 grow">
+                                    <li class="flex items-center">
+                                        <svg
+                                            class="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0"
+                                            viewBox="0 0 12 12"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                            />
+                                        </svg>
+                                        <span>Unlimited placeholder texts</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg
+                                            class="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0"
+                                            viewBox="0 0 12 12"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                            />
+                                        </svg>
+                                        <span>Consectetur adipiscing elit</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg
+                                            class="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0"
+                                            viewBox="0 0 12 12"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                            />
+                                        </svg>
+                                        <span
+                                            >Excepteur sint occaecat
+                                            cupidatat</span
+                                        >
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg
+                                            class="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0"
+                                            viewBox="0 0 12 12"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                            />
+                                        </svg>
+                                        <span
+                                            >Officia deserunt mollit anim</span
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Pricing table 2 -->
+                            <div
+                                class="relative flex flex-col h-full p-6 rounded bg-blue-100"
+                                data-aos="fade-up"
+                            >
+                                <div class="mb-6">
+                                    <div
+                                        class="font-cabinet-grotesk text-xl font-bold mb-1"
+                                    >
+                                        Pro
+                                    </div>
+                                    <div
+                                        class="font-cabinet-grotesk text-gray-900 font-bold inline-flex items-baseline mb-2"
+                                    >
+                                        <span class="text-3xl">$</span>
+                                        <span
+                                            class="text-5xl"
+                                            x-text="annual ? '749' : '799'"
+                                        ></span>
+                                        <span>/mo</span>
+                                    </div>
+                                    <div class="text-gray-500 mb-6">
+                                        Start building your team and hire the
+                                        most talented workers in the world.
+                                    </div>
+                                    <a
+                                        class="btn w-full inline-flex items-center text-white bg-blue-500 hover:bg-blue-600 group"
+                                        href="schedule-call.html"
+                                    >
+                                        Schedule A Call
+                                        <span
+                                            class="tracking-normal text-white group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-2"
+                                        >
+                                            <svg
+                                                class="fill-current"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="8"
+                                            >
+                                                <path
+                                                    d="m10.865.013.747.148c.243.065.481.143.716.235.495.18.97.42 1.415.716.265.192.571.343.858.55.096.064.192.135.288.209l.196.154.192.178c.09.08.175.168.254.262.189.21.33.466.414.747.076.275.073.568-.008.84-.09.27-.236.513-.427.708-.096.1-.198.191-.306.274l-.152.117-.116.074c-.369.252-.75.482-1.14.69-.577.315-1.153.585-1.701.932-.408.262-.803.549-1.182.86-.083.064-.16.136-.247.193a.918.918 0 0 1-.113.072.644.644 0 0 1-.118.016.708.708 0 0 1-.191.01.559.559 0 0 1-.246-.088l-.072-.054a1.481 1.481 0 0 1-.141-.107c-.128-.122-.1-.377.05-.726.036-.08.079-.156.128-.226l.316-.401c.164-.188.336-.372.514-.543.178-.17.356-.342.546-.493.19-.152.394-.265.59-.39.53-.329 1.05-.626 1.552-.93-.159.018-.32.034-.48.04-.511.036-1.026.044-1.546.048a43.432 43.432 0 0 1-2.31-.058l-.005-.02a78.728 78.728 0 0 0-2.292-.148c-.279-.016-.558.01-.837-.006L4.543 3.81l-.977-.046a19.357 19.357 0 0 1-.49-.029 12.6 12.6 0 0 0-1.303.013l-.828.055-.406.021H.335l-.18.008c-.145 0-.208-.15-.102-.356.16-.268.422-.46.723-.531.57-.117 1.144-.205 1.72-.264.287-.026.576-.048.865-.053.29-.004.578.01.865.042.69.065 1.408-.015 2.113-.015.776.003 1.549.02 2.324.04l1.428.039 1.087.039c.359.012.716.02 1.075.013.442-.008.879-.065 1.318-.112a3.672 3.672 0 0 0-.186-.166 9.045 9.045 0 0 0-1.06-.762 9.82 9.82 0 0 0-1.034-.537 5.9 5.9 0 0 1-1.284-.854c-.12-.115-.053-.199.12-.26a1.55 1.55 0 0 1 .738-.083Z"
+                                                />
+                                            </svg>
+                                        </span>
+                                    </a>
+                                </div>
+                                <div
+                                    class="font-cabinet-grotesk font-bold mb-4"
+                                >
+                                    Everything in Basic, plus:
+                                </div>
+                                <ul class="text-gray-500 space-y-3 grow">
+                                    <li class="flex items-center">
+                                        <svg
+                                            class="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0"
+                                            viewBox="0 0 12 12"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                            />
+                                        </svg>
+                                        <span>Unlimited placeholder texts</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg
+                                            class="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0"
+                                            viewBox="0 0 12 12"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                            />
+                                        </svg>
+                                        <span>Consectetur adipiscing elit</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg
+                                            class="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0"
+                                            viewBox="0 0 12 12"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                            />
+                                        </svg>
+                                        <span
+                                            >Excepteur sint occaecat
+                                            cupidatat</span
+                                        >
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg
+                                            class="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0"
+                                            viewBox="0 0 12 12"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                            />
+                                        </svg>
+                                        <span
+                                            >Officia deserunt mollit anim</span
+                                        >
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg
+                                            class="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0"
+                                            viewBox="0 0 12 12"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                            />
+                                        </svg>
+                                        <span
+                                            >Excepteur sint occaecat
+                                            cupidatat</span
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Pricing table 3 -->
+                            <div
+                                class="relative flex flex-col h-full p-6 rounded bg-gray-100"
+                                data-aos="fade-up"
+                                data-aos-delay="100"
+                            >
+                                <div class="mb-6">
+                                    <div
+                                        class="font-cabinet-grotesk text-xl font-bold mb-1"
+                                    >
+                                        Enterprise
+                                    </div>
+                                    <div
+                                        class="font-cabinet-grotesk text-gray-900 font-bold inline-flex items-baseline mb-2"
+                                    >
+                                        <span class="text-3xl mt-2.5"
+                                            >Contact us</span
+                                        >
+                                    </div>
+                                    <div class="text-gray-500 mb-6">
+                                        Start building your team and hire the
+                                        most talented workers in the world.
+                                    </div>
+                                    <a
+                                        class="btn w-full inline-flex items-center text-white bg-gray-900 hover:bg-gray-800 group"
+                                        href="schedule-call.html"
+                                    >
+                                        Schedule A Call
+                                        <span
+                                            class="tracking-normal text-blue-500 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-2"
+                                        >
+                                            <svg
+                                                class="fill-current"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="8"
+                                            >
+                                                <path
+                                                    d="m10.865.013.747.148c.243.065.481.143.716.235.495.18.97.42 1.415.716.265.192.571.343.858.55.096.064.192.135.288.209l.196.154.192.178c.09.08.175.168.254.262.189.21.33.466.414.747.076.275.073.568-.008.84-.09.27-.236.513-.427.708-.096.1-.198.191-.306.274l-.152.117-.116.074c-.369.252-.75.482-1.14.69-.577.315-1.153.585-1.701.932-.408.262-.803.549-1.182.86-.083.064-.16.136-.247.193a.918.918 0 0 1-.113.072.644.644 0 0 1-.118.016.708.708 0 0 1-.191.01.559.559 0 0 1-.246-.088l-.072-.054a1.481 1.481 0 0 1-.141-.107c-.128-.122-.1-.377.05-.726.036-.08.079-.156.128-.226l.316-.401c.164-.188.336-.372.514-.543.178-.17.356-.342.546-.493.19-.152.394-.265.59-.39.53-.329 1.05-.626 1.552-.93-.159.018-.32.034-.48.04-.511.036-1.026.044-1.546.048a43.432 43.432 0 0 1-2.31-.058l-.005-.02a78.728 78.728 0 0 0-2.292-.148c-.279-.016-.558.01-.837-.006L4.543 3.81l-.977-.046a19.357 19.357 0 0 1-.49-.029 12.6 12.6 0 0 0-1.303.013l-.828.055-.406.021H.335l-.18.008c-.145 0-.208-.15-.102-.356.16-.268.422-.46.723-.531.57-.117 1.144-.205 1.72-.264.287-.026.576-.048.865-.053.29-.004.578.01.865.042.69.065 1.408-.015 2.113-.015.776.003 1.549.02 2.324.04l1.428.039 1.087.039c.359.012.716.02 1.075.013.442-.008.879-.065 1.318-.112a3.672 3.672 0 0 0-.186-.166 9.045 9.045 0 0 0-1.06-.762 9.82 9.82 0 0 0-1.034-.537 5.9 5.9 0 0 1-1.284-.854c-.12-.115-.053-.199.12-.26a1.55 1.55 0 0 1 .738-.083Z"
+                                                />
+                                            </svg>
+                                        </span>
+                                    </a>
+                                </div>
+                                <div
+                                    class="font-cabinet-grotesk font-bold mb-4"
+                                >
+                                    Everything in Pro, plus:
+                                </div>
+                                <ul class="text-gray-500 space-y-3 grow">
+                                    <li class="flex items-center">
+                                        <svg
+                                            class="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0"
+                                            viewBox="0 0 12 12"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                            />
+                                        </svg>
+                                        <span>Unlimited placeholder texts</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg
+                                            class="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0"
+                                            viewBox="0 0 12 12"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                            />
+                                        </svg>
+                                        <span>Consectetur adipiscing elit</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg
+                                            class="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0"
+                                            viewBox="0 0 12 12"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                            />
+                                        </svg>
+                                        <span
+                                            >Excepteur sint occaecat
+                                            cupidatat</span
+                                        >
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg
+                                            class="w-3 h-3 fill-current text-emerald-500 mr-3 shrink-0"
+                                            viewBox="0 0 12 12"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M10.28 2.28L3.989 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z"
+                                            />
+                                        </svg>
+                                        <span
+                                            >Officia deserunt mollit anim</span
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Single testimonial -->
+        <section class="relative" data-aos="fade-up">
+            <!-- Illustration -->
+            <div
+                class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 pointer-events-none -z-10 mt-5"
+                aria-hidden="true"
+            >
+                <img
+                    class="max-w-none"
+                    src="/images/testimonial-illustration.svg"
+                    width="1440"
+                    height="350"
+                />
+            </div>
+
+            <div class="max-w-6xl mx-auto px-4 sm:px-6">
+                <div class="py-12 md:mb-20">
+                    <div class="max-w-3xl mx-auto">
+                        <div class="text-center">
+                            <div class="inline-flex mb-3">
+                                <img
+                                    class="rounded-full"
+                                    src="/images/testimonial-01.jpg"
+                                    width="40"
+                                    height="40"
+                                    alt="Testimonial 01"
+                                />
+                            </div>
+                            <div
+                                class="font-cabinet-grotesk font-bold text-lg text-gray-900 mb-2"
+                            >
+                                "The service helped me find the perfect match.
+                                Two clear benefits I gained are a good
+                                assessment of my needs and a pool of reliable
+                                potential talents."
+                            </div>
+                            <div
+                                class="font-cabinet-grotesk text-gray-900 font-medium"
+                            >
+                                Patrick Mills
+                                <span class="text-gray-400">-</span> CEO,
+                                <a
+                                    class="text-blue-500 font-bold hover:text-blue-600"
+                                    href="#0"
+                                    >PraxyNet</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQs -->
+        <section>
+            <div class="max-w-6xl mx-auto px-4 sm:px-6">
+                <div class="pb-12 md:pb-20">
+                    <!-- Section header -->
+                    <div class="max-w-3xl mx-auto pb-10">
+                        <h2 class="h2 font-cabinet-grotesk">
+                            Frequently asked questions
+                        </h2>
+                    </div>
+
+                    <div class="max-w-3xl mx-auto space-y-6">
+                        <!-- Item -->
+                        <div class="space-y-2">
+                            <h4 class="text-xl font-cabinet-grotesk font-bold">
+                                How much is this going to cost?
+                            </h4>
+                            <p class="text-gray-500">
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua, ut
+                                enim ad minim veniam.
+                            </p>
+                        </div>
+                        <!-- Item -->
+                        <div class="space-y-2">
+                            <h4 class="text-xl font-cabinet-grotesk font-bold">
+                                What is the difference between the basic and pro
+                                plans?
+                            </h4>
+                            <p class="text-gray-500">
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua, ut
+                                enim ad minim veniam.
+                            </p>
+                        </div>
+                        <!-- Item -->
+                        <div class="space-y-2">
+                            <h4 class="text-xl font-cabinet-grotesk font-bold">
+                                Do you have student or non-profit discounts?
+                            </h4>
+                            <p class="text-gray-500">
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua, ut
+                                enim ad minim veniam.
+                            </p>
+                        </div>
+                        <!-- Item -->
+                        <div class="space-y-2">
+                            <h4 class="text-xl font-cabinet-grotesk font-bold">
+                                How is the price determined?
+                            </h4>
+                            <p class="text-gray-500">
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua, ut
+                                enim ad minim veniam.
+                            </p>
+                        </div>
+                        <!-- Item -->
+                        <div class="space-y-2">
+                            <h4 class="text-xl font-cabinet-grotesk font-bold">
+                                Have more questions?
+                            </h4>
+                            <p class="text-gray-500">
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua, ut
+                                enim ad minim veniam.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="relative overflow-hidden">
+            <!-- Bg -->
+            <div
+                class="absolute inset-0 bg-blue-600 pointer-events-none -z-10"
+                aria-hidden="true"
+            ></div>
+
+            <!-- Illustration -->
+            <div
+                class="absolute left-1/2 -translate-x-1/2 pointer-events-none -z-10"
+                aria-hidden="true"
+            >
+                <img
+                    class="max-w-none"
+                    src="/images/cta-illustration.svg"
+                    width="1440"
+                    height="242"
+                />
+            </div>
+
+            <div class="max-w-6xl mx-auto px-4 sm:px-6">
+                <div class="py-12 md:py-20">
+                    <div class="max-w-3xl mx-auto text-center">
+                        <h2
+                            class="h2 font-cabinet-grotesk text-white mb-6"
+                            data-aos="fade-up"
+                        >
+                            Start hiring reliable and trustworthy talents today.
+                        </h2>
+                        <div data-aos="fade-up" data-aos-delay="100">
+                            <a
+                                class="btn inline-flex items-center text-white bg-gray-900 hover:bg-gray-800 group"
+                                href="schedule-call.html"
+                            >
+                                Schedule A Call
+                                <span
+                                    class="tracking-normal text-blue-500 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-2"
+                                >
+                                    <svg
+                                        class="fill-current"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="8"
+                                    >
+                                        <path
+                                            d="m10.865.013.747.148c.243.065.481.143.716.235.495.18.97.42 1.415.716.265.192.571.343.858.55.096.064.192.135.288.209l.196.154.192.178c.09.08.175.168.254.262.189.21.33.466.414.747.076.275.073.568-.008.84-.09.27-.236.513-.427.708-.096.1-.198.191-.306.274l-.152.117-.116.074c-.369.252-.75.482-1.14.69-.577.315-1.153.585-1.701.932-.408.262-.803.549-1.182.86-.083.064-.16.136-.247.193a.918.918 0 0 1-.113.072.644.644 0 0 1-.118.016.708.708 0 0 1-.191.01.559.559 0 0 1-.246-.088l-.072-.054a1.481 1.481 0 0 1-.141-.107c-.128-.122-.1-.377.05-.726.036-.08.079-.156.128-.226l.316-.401c.164-.188.336-.372.514-.543.178-.17.356-.342.546-.493.19-.152.394-.265.59-.39.53-.329 1.05-.626 1.552-.93-.159.018-.32.034-.48.04-.511.036-1.026.044-1.546.048a43.432 43.432 0 0 1-2.31-.058l-.005-.02a78.728 78.728 0 0 0-2.292-.148c-.279-.016-.558.01-.837-.006L4.543 3.81l-.977-.046a19.357 19.357 0 0 1-.49-.029 12.6 12.6 0 0 0-1.303.013l-.828.055-.406.021H.335l-.18.008c-.145 0-.208-.15-.102-.356.16-.268.422-.46.723-.531.57-.117 1.144-.205 1.72-.264.287-.026.576-.048.865-.053.29-.004.578.01.865.042.69.065 1.408-.015 2.113-.015.776.003 1.549.02 2.324.04l1.428.039 1.087.039c.359.012.716.02 1.075.013.442-.008.879-.065 1.318-.112a3.672 3.672 0 0 0-.186-.166 9.045 9.045 0 0 0-1.06-.762 9.82 9.82 0 0 0-1.034-.537 5.9 5.9 0 0 1-1.284-.854c-.12-.115-.053-.199.12-.26a1.55 1.55 0 0 1 .738-.083Z"
+                                        />
+                                    </svg>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </AppLayout>
 </template>

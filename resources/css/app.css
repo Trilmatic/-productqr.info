@@ -18,6 +18,8 @@
 @import 'components/forms.css';
 @import 'components/quill.css';
 
+@import 'aos/dist/aos.css';
+
 /* Additional Tailwind directives: https://tailwindcss.com/docs/functions-and-directives/#responsive */
 @layer utilities {
     .rtl {
