@@ -61,7 +61,7 @@ defineProps({
                                 class="btn inline-flex items-center text-white bg-gray-900 hover:bg-gray-800 group"
                                 href="/register"
                             >
-                                Register
+                                Register for free
                                 <span
                                     class="tracking-normal text-blue-500 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-2"
                                 >
@@ -90,8 +90,8 @@ defineProps({
                     <!-- Section header -->
                     <div class="max-w-3xl mx-auto text-center pb-12 md:pb-16">
                         <h2 class="h2 font-cabinet-grotesk">
-                            We support early stage startups and leading tech
-                            giants.
+                            We have use for anybody, no matter if you are a
+                            small company or a multinational corporate.
                         </h2>
                     </div>
 
@@ -171,11 +171,12 @@ defineProps({
                                 <h3
                                     class="font-cabinet-grotesk font-bold text-lg"
                                 >
-                                    Personalised Outreach
+                                    Add info about your products.
                                 </h3>
                                 <div class="text-gray-500">
-                                    Work is is changing faster than at any other
-                                    time in history.
+                                    You will be able to add information about
+                                    your products that will be available on
+                                    specific url adress.
                                 </div>
                             </div>
 
@@ -189,11 +190,11 @@ defineProps({
                                 <h3
                                     class="font-cabinet-grotesk font-bold text-lg"
                                 >
-                                    Personalised Outreach
+                                    Localaze it.
                                 </h3>
                                 <div class="text-gray-500">
-                                    Work is is changing faster than at any other
-                                    time in history.
+                                    You will be able to localaze the information
+                                    about your products to any ISO language.
                                 </div>
                             </div>
 
@@ -207,11 +208,11 @@ defineProps({
                                 <h3
                                     class="font-cabinet-grotesk font-bold text-lg"
                                 >
-                                    Personalised Outreach
+                                    Get QR codes.
                                 </h3>
                                 <div class="text-gray-500">
-                                    Work is is changing faster than at any other
-                                    time in history.
+                                    We will autogenerate a downloadable QR code
+                                    for you that you can put on our products
                                 </div>
                             </div>
 
@@ -225,11 +226,12 @@ defineProps({
                                 <h3
                                     class="font-cabinet-grotesk font-bold text-lg"
                                 >
-                                    Personalised Outreach
+                                    Let customers access it.
                                 </h3>
                                 <div class="text-gray-500">
-                                    Work is is changing faster than at any other
-                                    time in history.
+                                    Let your customers access the information in
+                                    language of preference that will be
+                                    autodetected from their device.
                                 </div>
                             </div>
                         </div>
@@ -237,13 +239,13 @@ defineProps({
 
                     <!-- CTA -->
                     <div class="text-center">
-                        <a
-                            class="btn inline-flex items-center text-white bg-gray-900 hover:bg-gray-800 group"
-                            href="schedule-call.html"
+                        <Link
+                            class="btn inline-flex items-center text-white bg-primary hover:bg-primary-focus group"
+                            href="/register"
                         >
-                            Schedule A Call
+                            Register
                             <span
-                                class="tracking-normal text-blue-500 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-2"
+                                class="tracking-normal text-slate-900 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-2"
                             >
                                 <svg
                                     class="fill-current"
@@ -256,7 +258,7 @@ defineProps({
                                     />
                                 </svg>
                             </span>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -288,7 +290,7 @@ defineProps({
                     <!-- Section header -->
                     <div class="max-w-3xl pb-12 md:pb-16">
                         <h2 class="h2 font-cabinet-grotesk text-white">
-                            We bring you high-quality talents from 72+ countries
+                            Improve customers expirience.
                         </h2>
                     </div>
 
@@ -401,21 +403,46 @@ defineProps({
                             class="relative p-5 before:opacity-0 hover:before:opacity-20 before:absolute before:inset-0 before:rounded before:bg-gradient-to-tr before:from-white before:to-white/25 before:shadow-xl before:transition-all before:duration-150 before:ease-in-out"
                             data-aos="fade-up"
                         >
-                            <img
-                                class="mb-3"
-                                src="/images/icon-01.svg"
-                                width="40"
-                                height="40"
-                                alt="Icon 01"
-                            />
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="icon icon-tabler icon-tabler-seo"
+                                width="48"
+                                height="48"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <path
+                                    stroke="none"
+                                    d="M0 0h24v24H0z"
+                                    fill="none"
+                                ></path>
+                                <path
+                                    d="M7 8h-3a1 1 0 0 0 -1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-3"
+                                ></path>
+                                <path d="M14 16h-4v-8h4"></path>
+                                <path d="M11 12h2"></path>
+                                <rect
+                                    x="17"
+                                    y="8"
+                                    width="4"
+                                    height="8"
+                                    rx="1"
+                                ></rect>
+                            </svg>
                             <h3
                                 class="font-cabinet-grotesk font-bold text-lg text-white"
                             >
-                                Reward Performers
+                                Help yor SEO
                             </h3>
                             <div class="text-white text-opacity-80">
-                                No more endless task or wasted budget. With us,
-                                you and your team are taken care of.
+                                If you would add this functionality to your own
+                                company web it would significantly worsen your
+                                SEO capabilities. That is why outsourcing makes
+                                sense, especially with our prices.
                             </div>
                         </div>
 
@@ -425,21 +452,43 @@ defineProps({
                             data-aos="fade-up"
                             data-aos-delay="100"
                         >
-                            <img
-                                class="mb-3"
-                                src="/images/icon-02.svg"
-                                width="40"
-                                height="40"
-                                alt="Icon 02"
-                            />
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="icon icon-tabler icon-tabler-eyeglass"
+                                width="48"
+                                height="48"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <path
+                                    stroke="none"
+                                    d="M0 0h24v24H0z"
+                                    fill="none"
+                                ></path>
+                                <path d="M8 4h-2l-3 10"></path>
+                                <path d="M16 4h2l3 10"></path>
+                                <line x1="10" y1="16" x2="14" y2="16"></line>
+                                <path
+                                    d="M21 16.5a3.5 3.5 0 0 1 -7 0v-2.5h7v2.5"
+                                ></path>
+                                <path
+                                    d="M10 16.5a3.5 3.5 0 0 1 -7 0v-2.5h7v2.5"
+                                ></path>
+                            </svg>
                             <h3
                                 class="font-cabinet-grotesk font-bold text-lg text-white"
                             >
-                                Reward Performers
+                                Allow customers with worse vision read product
+                                information.
                             </h3>
                             <div class="text-white text-opacity-80">
-                                No more endless task or wasted budget. With us,
-                                you and your team are taken care of.
+                                Older people are having trouble reading product
+                                information especially with the small formating,
+                                but most fo them can scan a QR code.
                             </div>
                         </div>
 
@@ -449,21 +498,39 @@ defineProps({
                             data-aos="fade-up"
                             data-aos-delay="200"
                         >
-                            <img
-                                class="mb-3"
-                                src="/images/icon-03.svg"
-                                width="40"
-                                height="40"
-                                alt="Icon 03"
-                            />
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="icon icon-tabler icon-tabler-world"
+                                width="48"
+                                height="48"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <path
+                                    stroke="none"
+                                    d="M0 0h24v24H0z"
+                                    fill="none"
+                                ></path>
+                                <circle cx="12" cy="12" r="9"></circle>
+                                <line x1="3.6" y1="9" x2="20.4" y2="9"></line>
+                                <line x1="3.6" y1="15" x2="20.4" y2="15"></line>
+                                <path d="M11.5 3a17 17 0 0 0 0 18"></path>
+                                <path d="M12.5 3a17 17 0 0 1 0 18"></path>
+                            </svg>
                             <h3
                                 class="font-cabinet-grotesk font-bold text-lg text-white"
                             >
-                                Reward Performers
+                                Localize to any ISO language
                             </h3>
                             <div class="text-white text-opacity-80">
-                                No more endless task or wasted budget. With us,
-                                you and your team are taken care of.
+                                Localize the information to any ISO language to
+                                access all of the customers. It does not make
+                                sense to print as many localized packaging, but
+                                it makes sense to have it localized online.
                             </div>
                         </div>
 
@@ -473,21 +540,44 @@ defineProps({
                             data-aos="fade-up"
                             data-aos-delay="300"
                         >
-                            <img
-                                class="mb-3"
-                                src="/images/icon-04.svg"
-                                width="40"
-                                height="40"
-                                alt="Icon 04"
-                            />
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="icon icon-tabler icon-tabler-accessible"
+                                width="48"
+                                height="48"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <path
+                                    stroke="none"
+                                    d="M0 0h24v24H0z"
+                                    fill="none"
+                                ></path>
+                                <circle cx="12" cy="12" r="9"></circle>
+                                <path
+                                    d="M10 16.5l2 -3l2 3m-2 -3v-2l3 -1m-6 0l3 1"
+                                ></path>
+                                <circle
+                                    cx="12"
+                                    cy="7.5"
+                                    r=".5"
+                                    fill="currentColor"
+                                ></circle>
+                            </svg>
                             <h3
                                 class="font-cabinet-grotesk font-bold text-lg text-white"
                             >
-                                Reward Performers
+                                Let the customers be first.
                             </h3>
                             <div class="text-white text-opacity-80">
-                                No more endless task or wasted budget. With us,
-                                you and your team are taken care of.
+                                Customers should allways be on the first place
+                                when it comes to the product. We will help you
+                                improve cutomers expirience, which will
+                                positively impact customers view on you company.
                             </div>
                         </div>
                     </div>
@@ -911,7 +1001,7 @@ defineProps({
             </div>
 
             <div class="max-w-6xl mx-auto px-4 sm:px-6">
-                <div class="py-12 md:mb-20">
+                <div class="py-12 md:mb-20 hidden">
                     <div class="max-w-3xl mx-auto">
                         <div class="text-center">
                             <div class="inline-flex mb-3">
@@ -949,7 +1039,7 @@ defineProps({
         </section>
 
         <!-- FAQs -->
-        <section>
+        <section class="pt-8 sm:pt-12 md:pt-24">
             <div class="max-w-6xl mx-auto px-4 sm:px-6">
                 <div class="pb-12 md:pb-20">
                     <!-- Section header -->
@@ -1054,14 +1144,14 @@ defineProps({
                             class="h2 font-cabinet-grotesk text-white mb-6"
                             data-aos="fade-up"
                         >
-                            Start hiring reliable and trustworthy talents today.
+                            Start creting your product QR now.
                         </h2>
                         <div data-aos="fade-up" data-aos-delay="100">
-                            <a
+                            <Link
                                 class="btn inline-flex items-center text-white bg-gray-900 hover:bg-gray-800 group"
-                                href="schedule-call.html"
+                                href="/register"
                             >
-                                Schedule A Call
+                                Register
                                 <span
                                     class="tracking-normal text-blue-500 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-2"
                                 >
@@ -1076,7 +1166,7 @@ defineProps({
                                         />
                                     </svg>
                                 </span>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
