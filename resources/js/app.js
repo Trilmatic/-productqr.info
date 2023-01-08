@@ -8,7 +8,8 @@ import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
 import { translations } from "./translations";
 import AOS from "aos";
-import Swiper from "swiper";
+import Swiper, { Navigation } from "swiper";
+Swiper.use([Navigation]);
 
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";

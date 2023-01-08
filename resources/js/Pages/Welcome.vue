@@ -297,9 +297,6 @@ defineProps({
 
                     <!-- Carousel -->
                     <div class="pb-12 md:pb-16">
-                        <!-- Carousel built with Swiper.js [https://swiperjs.com/] -->
-                        <!-- * Initialized in src/js/main.js -->
-                        <!-- * Custom styles in src/css/additional-styles/theme.scss -->
                         <div
                             class="carousel swiper-container max-w-sm mx-auto sm:max-w-none"
                         >
@@ -589,7 +586,7 @@ defineProps({
 
         <!-- Pricing -->
         <section>
-            <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6" id="subscriptions">
                 <div class="pt-12 md:pt-20">
                     <!-- Section header -->
                     <div class="max-w-3xl mx-auto text-center pb-8">

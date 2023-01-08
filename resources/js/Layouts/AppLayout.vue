@@ -541,26 +541,15 @@ const logout = () => {
                         <!-- 1st block -->
                         <div class="sm:col-span-12 lg:col-span-2 lg:max-w-xs">
                             <!-- Logo -->
-                            <a
-                                class="block group"
-                                href="index.html"
-                                aria-label="Cruip"
+                            <Link
+                                :href="route('dashboard')"
+                                v-if="$page.props.user"
                             >
-                                <svg
-                                    width="30"
-                                    height="30"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        class="fill-blue-100 group-hover:fill-white transform duration-150 ease-in-out"
-                                        d="M12 6v24C5.373 30 0 24.627 0 18S5.373 6 12 6Z"
-                                    />
-                                    <path
-                                        class="fill-sky-400 group-hover:fill-sky-300 transform duration-150 ease-in-out"
-                                        d="M10.807 6.059A10.003 10.003 0 0 1 20 0c5.523 0 10 4.477 10 10 0 4.123-2.496 7.664-6.059 9.193.04-.392.059-.79.059-1.193 0-6.627-5.373-12-12-12-.403 0-.8.02-1.193.059Z"
-                                    />
-                                </svg>
-                            </a>
+                                <ApplicationMark class="block h-9 w-auto" />
+                            </Link>
+                            <Link href="/" v-else>
+                                <ApplicationMark class="block h-9 w-auto" />
+                            </Link>
                         </div>
 
                         <!-- 2nd block -->
@@ -581,28 +570,7 @@ const logout = () => {
                                 <li>
                                     <a
                                         class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
-                                        href="#0"
-                                        >Budgeting and analytics</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
-                                        href="#0"
-                                        >Open banking</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
-                                        href="#0"
-                                        >Pockets</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
-                                        href="#0"
+                                        href="/#subscriptions"
                                         >Subscriptions</a
                                     >
                                 </li>
@@ -628,35 +596,16 @@ const logout = () => {
                                     <a
                                         class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
                                         href="#0"
-                                        >Diversity / Inclusion</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
-                                        href="#0"
-                                        >Sustainability</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
-                                        href="#0"
-                                        >Code of conduct</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
-                                        href="#0"
-                                        >Financial statements</a
+                                        >Contact</a
                                     >
                                 </li>
                             </ul>
                         </div>
 
                         <!-- 4th block -->
-                        <div class="sm:col-span-6 md:col-span-3 lg:col-span-2">
+                        <div
+                            class="sm:col-span-6 md:col-span-3 lg:col-span-2 hidden"
+                        >
                             <h6
                                 class="text-xs text-gray-100 font-bold uppercase mb-3"
                             >
@@ -667,21 +616,7 @@ const logout = () => {
                                     <a
                                         class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
                                         href="#0"
-                                        >International products</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
-                                        href="#0"
-                                        >Product method</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
-                                        href="#0"
-                                        >Customers</a
+                                        >Our customers</a
                                     >
                                 </li>
                             </ul>
@@ -699,21 +634,7 @@ const logout = () => {
                                     <a
                                         class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
                                         href="#0"
-                                        >Community</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
-                                        href="#0"
-                                        >Contact</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
-                                        href="#0"
-                                        >DPA</a
+                                        >Docs</a
                                     >
                                 </li>
                                 <li>
@@ -721,6 +642,13 @@ const logout = () => {
                                         class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
                                         href="#0"
                                         >Terms of service</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
+                                        href="#0"
+                                        >Privacy policy</a
                                     >
                                 </li>
                             </ul>
@@ -788,7 +716,7 @@ const logout = () => {
 
                         <!-- Copyrights -->
                         <div class="text-sm text-blue-300">
-                            © Cruip.com. All rights reserved.
+                            © productqr.info All rights reserved.
                         </div>
                     </div>
                 </div>
