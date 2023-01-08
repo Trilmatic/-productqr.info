@@ -67,6 +67,12 @@ const logout = () => {
                                 >
                                     Dashboard
                                 </NavLink>
+                                <NavLink
+                                    :href="route('product.index')"
+                                    :active="$page.url.startsWith('/product')"
+                                >
+                                    Product
+                                </NavLink>
                             </div>
                         </div>
 
@@ -367,20 +373,28 @@ const logout = () => {
                         block: showingNavigationDropdown,
                         hidden: !showingNavigationDropdown,
                     }"
-                    class="sm:hidden"
+                    class="sm:hidden bg-gray-100 dark:bg-gray-800"
                 >
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink
+                            v-if="$page.props.user"
                             :href="route('dashboard')"
                             :active="route().current('dashboard')"
                         >
                             Dashboard
                         </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            v-if="$page.props.user"
+                            :href="route('product.index')"
+                            :active="$page.url.startsWith('/product')"
+                        >
+                            Product
+                        </ResponsiveNavLink>
                     </div>
 
                     <!-- Responsive Settings Options -->
                     <div
-                        class="pt-4 pb-1 border-t border-gray-200"
+                        class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600"
                         v-if="$page.props.user"
                     >
                         <div class="flex items-center px-4">
@@ -399,11 +413,13 @@ const logout = () => {
 
                             <div>
                                 <div
-                                    class="font-medium text-base text-gray-800"
+                                    class="font-medium text-base text-gray-800 dark:text-gray-200"
                                 >
                                     {{ $page.props.user.name }}
                                 </div>
-                                <div class="font-medium text-sm text-gray-500">
+                                <div
+                                    class="font-medium text-sm text-gray-500 dark:text-gray-400"
+                                >
                                     {{ $page.props.user.email }}
                                 </div>
                             </div>
@@ -522,7 +538,7 @@ const logout = () => {
 
                 <!-- Illustration -->
                 <div
-                    class="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none -z-10"
+                    class="absolute hidden bottom-0 left-1/2 -translate-x-1/2 pointer-events-none -z-10"
                     aria-hidden="true"
                 >
                     <img

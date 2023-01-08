@@ -689,11 +689,10 @@ defineProps({
                             </h4>
                             <p class="text-gray-500">
                                 Yes, you can change plans whenever you want.
-                                Just be aware that if you will move down from a
-                                paid plan to free and you will have more than
-                                100 products, users will not be able to access
-                                the url links for those products that are over
-                                the sum.
+                                Just be aware that if you will downgrade a plan
+                                you will loose the abilities of that plan, so if
+                                you have more products than plan allows, users
+                                will not be able to access theese products.
                             </p>
                         </div>
                         <!-- Item -->

@@ -64,7 +64,7 @@ const submit = () => {
                                 Welcome back!
                             </h1>
                             <span class="text-gray-500 text-sm"
-                                ><span class="hidden sm:inline"
+                                ><span class="inline"
                                     >Are you new here? </span
                                 ><Link
                                     class="font-medium text-secondary text-secondary-focus"
