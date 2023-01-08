@@ -5,6 +5,8 @@ import { Inertia } from "@inertiajs/inertia";
 import { Link } from "@inertiajs/inertia-vue3";
 import TomSelect from "tom-select/dist/js/tom-select.complete.min";
 import Sidebar from "@/Components/Sidebar.vue";
+import NoDataIcon from "@/Components/NoDataIcon.vue";
+import NoResultsIcon from "@/Components/NoResultsIcon.vue";
 
 const props = defineProps({
     products: Object,
@@ -353,6 +355,22 @@ onMounted(() => {
                 </thead>
                 <tbody>
                     <tr
+                        v-if="products.total === 0 && !filters.where_any"
+                        :colspan="fields.length + 1"
+                    >
+                        <div class="p-8">
+                            <NoDataIcon />
+                        </div>
+                    </tr>
+                    <tr
+                        v-else-if="products.total === 0 && filters.where_any"
+                        :colspan="fields.length + 1"
+                    >
+                        <div class="p-8">
+                            <NoResultsIcon />
+                        </div>
+                    </tr>
+                    <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-slate-800 group"
                         v-for="p in products.data"
                         :key="p.id"
@@ -510,7 +528,79 @@ onMounted(() => {
                                             :key="i"
                                         >
                                             <Link
-                                                class="pagination-link"
+                                                v-if="
+                                                    l.label ===
+                                                    'pagination.previous'
+                                                "
+                                                class="pagination-link block"
+                                                :href="l.url ? l.url : ''"
+                                                :data="filters"
+                                                :class="{
+                                                    active: l.active,
+                                                    disabled: !l.url,
+                                                }"
+                                                preserve-state
+                                                preserve-scroll
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon icon-tabler icon-tabler-chevron-left"
+                                                    width="15"
+                                                    height="15"
+                                                    viewBox="0 0 24 24"
+                                                    stroke-width="2"
+                                                    stroke="currentColor"
+                                                    fill="none"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                >
+                                                    <path
+                                                        stroke="none"
+                                                        d="M0 0h24v24H0z"
+                                                        fill="none"
+                                                    ></path>
+                                                    <polyline
+                                                        points="15 6 9 12 15 18"
+                                                    ></polyline></svg
+                                            ></Link>
+                                            <Link
+                                                v-else-if="
+                                                    l.label ===
+                                                    'pagination.next'
+                                                "
+                                                class="pagination-link block"
+                                                :href="l.url ? l.url : ''"
+                                                :data="filters"
+                                                :class="{
+                                                    active: l.active,
+                                                    disabled: !l.url,
+                                                }"
+                                                preserve-state
+                                                preserve-scroll
+                                                ><svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon icon-tabler icon-tabler-chevron-right"
+                                                    width="15"
+                                                    height="15"
+                                                    viewBox="0 0 24 24"
+                                                    stroke-width="2"
+                                                    stroke="currentColor"
+                                                    fill="none"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                >
+                                                    <path
+                                                        stroke="none"
+                                                        d="M0 0h24v24H0z"
+                                                        fill="none"
+                                                    ></path>
+                                                    <polyline
+                                                        points="9 6 15 12 9 18"
+                                                    ></polyline></svg
+                                            ></Link>
+                                            <Link
+                                                v-else
+                                                class="pagination-link block"
                                                 :href="l.url ? l.url : ''"
                                                 :data="filters"
                                                 :class="{
@@ -531,7 +621,79 @@ onMounted(() => {
                                             :key="i"
                                         >
                                             <Link
-                                                class="pagination-link"
+                                                v-if="
+                                                    l.label ===
+                                                    'pagination.previous'
+                                                "
+                                                class="pagination-link block"
+                                                :href="l.url ? l.url : ''"
+                                                :data="filters"
+                                                :class="{
+                                                    active: l.active,
+                                                    disabled: !l.url,
+                                                }"
+                                                preserve-state
+                                                preserve-scroll
+                                            >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon icon-tabler icon-tabler-chevron-left"
+                                                    width="15"
+                                                    height="15"
+                                                    viewBox="0 0 24 24"
+                                                    stroke-width="2"
+                                                    stroke="currentColor"
+                                                    fill="none"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                >
+                                                    <path
+                                                        stroke="none"
+                                                        d="M0 0h24v24H0z"
+                                                        fill="none"
+                                                    ></path>
+                                                    <polyline
+                                                        points="15 6 9 12 15 18"
+                                                    ></polyline></svg
+                                            ></Link>
+                                            <Link
+                                                v-else-if="
+                                                    l.label ===
+                                                    'pagination.next'
+                                                "
+                                                class="pagination-link block"
+                                                :href="l.url ? l.url : ''"
+                                                :data="filters"
+                                                :class="{
+                                                    active: l.active,
+                                                    disabled: !l.url,
+                                                }"
+                                                preserve-state
+                                                preserve-scroll
+                                                ><svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon icon-tabler icon-tabler-chevron-right"
+                                                    width="15"
+                                                    height="15"
+                                                    viewBox="0 0 24 24"
+                                                    stroke-width="2"
+                                                    stroke="currentColor"
+                                                    fill="none"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                >
+                                                    <path
+                                                        stroke="none"
+                                                        d="M0 0h24v24H0z"
+                                                        fill="none"
+                                                    ></path>
+                                                    <polyline
+                                                        points="9 6 15 12 9 18"
+                                                    ></polyline></svg
+                                            ></Link>
+                                            <Link
+                                                v-else
+                                                class="pagination-link block"
                                                 :href="l.url ? l.url : ''"
                                                 :data="filters"
                                                 :class="{
