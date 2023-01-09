@@ -44,6 +44,7 @@ async function addSection() {
         title: null,
         content: "",
         hash: Date.now(),
+        sort: sections.value.length,
     });
     await nextTick();
     initTextarea();
@@ -72,6 +73,12 @@ function removeSection(section, index) {
     }
     sections.value.splice(index, 1);
     editors.value.splice(index, 1);
+}
+function moveUp(section, index) {
+    
+}
+function moveDown(section, index) {
+
 }
 function submit() {
     let language_id = document.getElementById("language").value;
@@ -228,7 +235,95 @@ onMounted(() => {
                             v-for="(section, i) in sections"
                             :key="section.hash"
                         >
-                            <div class="flex justify-end">
+                            <div class="flex justify-end space-x-2">
+                                <button
+                                    class="btn bg-primary hover:bg-primary-focus text-white"
+                                    type="button"
+                                    @click="moveUp(section, i)"
+                                    v-if="section.sort != 0"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="icon icon-tabler icon-tabler-arrow-up-circle"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="2"
+                                        stroke="currentColor"
+                                        fill="none"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path
+                                            stroke="none"
+                                            d="M0 0h24v24H0z"
+                                            fill="none"
+                                        ></path>
+                                        <circle cx="12" cy="12" r="9"></circle>
+                                        <line
+                                            x1="12"
+                                            y1="8"
+                                            x2="8"
+                                            y2="12"
+                                        ></line>
+                                        <line
+                                            x1="12"
+                                            y1="8"
+                                            x2="12"
+                                            y2="16"
+                                        ></line>
+                                        <line
+                                            x1="16"
+                                            y1="12"
+                                            x2="12"
+                                            y2="8"
+                                        ></line>
+                                    </svg>
+                                </button>
+                                <button
+                                    class="btn bg-primary hover:bg-primary-focus text-white"
+                                    type="button"
+                                    @click="moveDown(section, i)"
+                                    v-if="sections.sort < sections.length"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="icon icon-tabler icon-tabler-arrow-down-circle"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="2"
+                                        stroke="currentColor"
+                                        fill="none"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path
+                                            stroke="none"
+                                            d="M0 0h24v24H0z"
+                                            fill="none"
+                                        ></path>
+                                        <circle cx="12" cy="12" r="9"></circle>
+                                        <line
+                                            x1="8"
+                                            y1="12"
+                                            x2="12"
+                                            y2="16"
+                                        ></line>
+                                        <line
+                                            x1="12"
+                                            y1="8"
+                                            x2="12"
+                                            y2="16"
+                                        ></line>
+                                        <line
+                                            x1="16"
+                                            y1="12"
+                                            x2="12"
+                                            y2="16"
+                                        ></line>
+                                    </svg>
+                                </button>
                                 <button
                                     class="btn bg-error hover:bg-error-focus text-white"
                                     type="button"

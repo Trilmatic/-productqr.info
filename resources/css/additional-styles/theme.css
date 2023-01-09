@@ -164,3 +164,6 @@ h4{
 .info-content ol li{
     @apply pl-2
 }
+.info-content a{
+    @apply text-primary hover:text-primary-focus
+}

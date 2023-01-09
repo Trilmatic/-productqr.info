@@ -69,6 +69,7 @@ class ProductInfoController extends Controller
                 'user_id' => $user->id,
                 'title' => $section['title'],
                 'content' => $section['content'],
+                'sort' => $section['sort'],
             ]);
             $sec_new->save();
         }
@@ -157,6 +158,7 @@ class ProductInfoController extends Controller
                     'user_id' => $user->id,
                     'title' => $section['title'],
                     'content' => $section['content'],
+                    'sort' => $section['sort'],
                 ]);
                 $sec_new->save();
             }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('product_info_id')->references('id')->on('product_infos');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->string('hash')->nullable()->default(null);
+            $table->integer('sort');
             $table->string('title');
             $table->longText('content')->nullable()->default(null);
             $table->timestamps();

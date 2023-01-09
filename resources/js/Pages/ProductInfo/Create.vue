@@ -69,6 +69,7 @@ async function initSelects() {
 function submit() {
     editors.value.forEach((editor, index) => {
         sections.value[index].content = editor.root.innerHTML;
+        sections.value[index].sort = index;
     });
     let language_id = document.getElementById("language").value;
     Inertia.post("/product/" + props.product.hash + "/info/store", {
