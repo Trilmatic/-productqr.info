@@ -1,6 +1,6 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { reactive, onMounted, ref } from "vue";
+import { reactive, onMounted, ref, nextTick } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 import { Link } from "@inertiajs/inertia-vue3";
 import TomSelect from "tom-select/dist/js/tom-select.complete.min";
@@ -10,30 +10,43 @@ const props = defineProps({
     languages: Array,
     info: Object,
 });
-const editor = ref(null);
+const editors = ref([]);
+const sections = ref(props.info.sections);
 async function initTextarea() {
-    let el = document.getElementById("editor");
-    editor.value = new Quill(el, {
-        modules: {
-            toolbar: [
-                ["bold", "italic", "underline", "strike"],
-                ["blockquote", "code-block"],
-                [{ list: "ordered" }, { list: "bullet" }],
-                [{ script: "sub" }, { script: "super" }],
-                [{ indent: "-1" }, { indent: "+1" }],
-                [{ direction: "rtl" }],
-                [{ size: ["small", false, "large", "huge"] }],
-                [{ header: [1, 2, 3, 4, 5, 6, false] }],
-                [{ color: [] }, { background: [] }],
-                [{ direction: "rtl" }],
-                [{ font: [] }],
-                [{ align: [] }],
-                ["link", "video", "formula"],
-                ["clean"],
-            ],
-        },
-        theme: "snow",
+    let elements = document.querySelectorAll(".editor");
+    elements.forEach((el, index) => {
+        if (!editors.value[index])
+            editors.value[index] = new Quill(el, {
+                modules: {
+                    toolbar: [
+                        ["bold", "italic", "underline", "strike"],
+                        ["blockquote", "code-block"],
+                        [{ list: "ordered" }, { list: "bullet" }],
+                        [{ script: "sub" }, { script: "super" }],
+                        [{ indent: "-1" }, { indent: "+1" }],
+                        [{ direction: "rtl" }],
+                        [{ size: ["small", false, "large", "huge"] }],
+                        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+                        [{ color: [] }, { background: [] }],
+                        [{ direction: "rtl" }],
+                        [{ font: [] }],
+                        [{ align: [] }],
+                        ["link", "video", "formula"],
+                        ["clean"],
+                    ],
+                },
+                theme: "snow",
+            });
     });
+}
+async function addSection() {
+    sections.value.push({
+        title: null,
+        content: "",
+        hash: Date.now(),
+    });
+    await nextTick();
+    initTextarea();
 }
 async function initSelects() {
     let perpage = document.getElementById("language");
@@ -41,9 +54,30 @@ async function initSelects() {
     let settings = {};
     new TomSelect(perpage, settings);
 }
+async function loadInputData() {
+    sections.value.forEach((el) => {
+        let input = document.getElementById("title-" + el.hash);
+        if (input) input.value = el.title;
+    });
+}
+function removeSection(section, index) {
+    if (section.id) {
+        Inertia.delete(
+            "/product/" +
+                props.product.hash +
+                "/info/section/" +
+                section.hash +
+                "/delete"
+        );
+    }
+    sections.value.splice(index, 1);
+    editors.value.splice(index, 1);
+}
 function submit() {
-    let content = editor.value.root.innerHTML;
     let language_id = document.getElementById("language").value;
+    editors.value.forEach((editor, index) => {
+        sections.value[index].content = editor.root.innerHTML;
+    });
     Inertia.put(
         "/product/" +
             props.product.hash +
@@ -52,13 +86,14 @@ function submit() {
             "/update",
         {
             language_id: language_id,
-            content: content,
+            sections: sections.value,
         }
     );
 }
 onMounted(() => {
     initSelects();
     initTextarea();
+    loadInputData();
 });
 </script>
 <template>
@@ -187,9 +222,116 @@ onMounted(() => {
                             >Language is required</label
                         >
                     </div>
-                    <div>
-                        <div id="editor" v-html="info.content"></div>
-                    </div>
+                    <section>
+                        <div
+                            class="py-4"
+                            v-for="(section, i) in sections"
+                            :key="section.hash"
+                        >
+                            <div class="flex justify-end">
+                                <button
+                                    class="btn bg-error hover:bg-error-focus text-white"
+                                    type="button"
+                                    @click="removeSection(section, i)"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="icon icon-tabler icon-tabler-trash"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="2"
+                                        stroke="currentColor"
+                                        fill="none"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path
+                                            stroke="none"
+                                            d="M0 0h24v24H0z"
+                                            fill="none"
+                                        ></path>
+                                        <line
+                                            x1="4"
+                                            y1="7"
+                                            x2="20"
+                                            y2="7"
+                                        ></line>
+                                        <line
+                                            x1="10"
+                                            y1="11"
+                                            x2="10"
+                                            y2="17"
+                                        ></line>
+                                        <line
+                                            x1="14"
+                                            y1="11"
+                                            x2="14"
+                                            y2="17"
+                                        ></line>
+                                        <path
+                                            d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"
+                                        ></path>
+                                        <path
+                                            d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"
+                                        ></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="mb-4">
+                                <label
+                                    class="block text-sm font-medium mb-1"
+                                    :for="'title-' + section.hash"
+                                    >Title</label
+                                >
+                                <input
+                                    :id="'title-' + section.hash"
+                                    type="text"
+                                    class="form-input w-full"
+                                    :class="{
+                                        error:
+                                            $page.props.errors &&
+                                            $page.props.errors[
+                                                'sections.' + i + '.title'
+                                            ],
+                                    }"
+                                    @change="
+                                        sections[i].title = $event.target.value
+                                    "
+                                />
+                            </div>
+                            <div class="editor" v-html="section.content"></div>
+                        </div>
+                        <div class="py-3 flex justify-center">
+                            <button
+                                class="btn bg-secondary hover:bg-secondary-focus"
+                                type="button"
+                                @click="addSection()"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="icon icon-tabler icon-tabler-circle-plus"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="2"
+                                    stroke="currentColor"
+                                    fill="none"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <path
+                                        stroke="none"
+                                        d="M0 0h24v24H0z"
+                                        fill="none"
+                                    ></path>
+                                    <circle cx="12" cy="12" r="9"></circle>
+                                    <line x1="9" y1="12" x2="15" y2="12"></line>
+                                    <line x1="12" y1="9" x2="12" y2="15"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </section>
                     <button
                         class="btn inline-flex items-center text-white bg-primary hover:bg-primary-focus group"
                         type="submit"

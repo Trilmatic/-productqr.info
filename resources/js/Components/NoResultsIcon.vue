@@ -2,7 +2,7 @@
     <svg
         xmlns="http://www.w3.org/2000/svg"
         data-name="Layer 1"
-        class="w-20 sm:w-40 md:w-80 lg:w-96"
+        class="w-20 sm:w-40 md:w-80 lg:w-80"
         viewBox="0 0 797.5 834.5"
         xmlns:xlink="http://www.w3.org/1999/xlink"
     >

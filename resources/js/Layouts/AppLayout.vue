@@ -650,7 +650,7 @@ const logout = () => {
                                     <a
                                         class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
                                         href="#0"
-                                        >Docs</a
+                                        >Documentation</a
                                     >
                                 </li>
                                 <li>

@@ -53,6 +53,7 @@ Route::middleware([
         Route::get('/{hash}/info/{hash2}/edit', 'edit')->name('edit');
         Route::put('/{hash}/info/{hash2}/update', 'update')->name('update');
         Route::delete('/{hash}/info/{hash2}/delete', 'destroy')->name('destroy');
+        Route::delete('/{hash}/info/section/{hash2}/delete', 'destroy_section')->name('destroy_section');
     });
 });
 

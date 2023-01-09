@@ -1,6 +1,6 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { reactive, onMounted, ref } from "vue";
+import { reactive, onMounted, ref, nextTick } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 import { Link } from "@inertiajs/inertia-vue3";
 import TomSelect from "tom-select/dist/js/tom-select.complete.min";
@@ -9,31 +9,57 @@ const props = defineProps({
     product: Object,
     languages: Array,
 });
-const editor = ref(null);
+const editors = ref([]);
 async function initTextarea() {
-    let el = document.getElementById("editor");
-    editor.value = new Quill(el, {
-        modules: {
-            toolbar: [
-                ["bold", "italic", "underline", "strike"],
-                ["blockquote", "code-block"],
-                [{ list: "ordered" }, { list: "bullet" }],
-                [{ script: "sub" }, { script: "super" }],
-                [{ indent: "-1" }, { indent: "+1" }],
-                [{ direction: "rtl" }],
-                [{ size: ["small", false, "large", "huge"] }],
-                [{ header: [1, 2, 3, 4, 5, 6, false] }],
-                [{ color: [] }, { background: [] }],
-                [{ direction: "rtl" }],
-                [{ font: [] }],
-                [{ align: [] }],
-                ["link", "video", "formula"],
-                ["clean"],
-            ],
-        },
-        theme: "snow",
+    let elements = document.querySelectorAll(".editor");
+    elements.forEach((el, index) => {
+        if (!editors.value[index])
+            editors.value[index] = new Quill(el, {
+                modules: {
+                    toolbar: [
+                        ["bold", "italic", "underline", "strike"],
+                        ["blockquote", "code-block"],
+                        [{ list: "ordered" }, { list: "bullet" }],
+                        [{ script: "sub" }, { script: "super" }],
+                        [{ indent: "-1" }, { indent: "+1" }],
+                        [{ direction: "rtl" }],
+                        [{ size: ["small", false, "large", "huge"] }],
+                        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+                        [{ color: [] }, { background: [] }],
+                        [{ direction: "rtl" }],
+                        [{ font: [] }],
+                        [{ align: [] }],
+                        ["link", "video", "formula"],
+                        ["clean"],
+                    ],
+                },
+                theme: "snow",
+            });
     });
 }
+
+const sections = ref([
+    {
+        title: null,
+        content: null,
+    },
+]);
+
+async function addSection() {
+    sections.value.push({
+        title: null,
+        content: null,
+        key: Date.now(),
+    });
+    await nextTick();
+    initTextarea();
+}
+
+function removeSection(index) {
+    sections.value.splice(index, 1);
+    editors.value.splice(index, 1);
+}
+
 async function initSelects() {
     let perpage = document.getElementById("language");
     if (perpage.tomselect) return;
@@ -41,11 +67,13 @@ async function initSelects() {
     new TomSelect(perpage, settings);
 }
 function submit() {
-    let content = editor.value.root.innerHTML;
+    editors.value.forEach((editor, index) => {
+        sections.value[index].content = editor.root.innerHTML;
+    });
     let language_id = document.getElementById("language").value;
     Inertia.post("/product/" + props.product.hash + "/info/store", {
         language_id: language_id,
-        content: content,
+        sections: sections.value,
     });
 }
 onMounted(() => {
@@ -164,7 +192,10 @@ onMounted(() => {
                     </ol>
                 </nav>
                 <form @submit.prevent="submit" class="space-y-2">
-                    <div>
+                    <div :class="{ error: $page.props.errors.language_id }">
+                        <label class="block text-sm font-medium mb-1" for="name"
+                            >Language</label
+                        >
                         <select id="language">
                             <option value=""></option>
                             <option
@@ -175,16 +206,117 @@ onMounted(() => {
                                 {{ lang.name }} ({{ lang.native_name }})
                             </option>
                         </select>
-                        <label
-                            v-show="$page.props.errors.language_id"
-                            class="block text-sm font-medium mb-1 text-error"
-                            for="name"
-                            >Language is required</label
+                    </div>
+                    <section>
+                        <div
+                            class="py-4"
+                            v-for="(section, i) in sections"
+                            :key="section.key"
                         >
-                    </div>
-                    <div>
-                        <div id="editor"></div>
-                    </div>
+                            <div class="flex justify-end">
+                                <button
+                                    class="btn bg-error hover:bg-error-focus text-white"
+                                    type="button"
+                                    @click="removeSection(i)"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="icon icon-tabler icon-tabler-trash"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="2"
+                                        stroke="currentColor"
+                                        fill="none"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path
+                                            stroke="none"
+                                            d="M0 0h24v24H0z"
+                                            fill="none"
+                                        ></path>
+                                        <line
+                                            x1="4"
+                                            y1="7"
+                                            x2="20"
+                                            y2="7"
+                                        ></line>
+                                        <line
+                                            x1="10"
+                                            y1="11"
+                                            x2="10"
+                                            y2="17"
+                                        ></line>
+                                        <line
+                                            x1="14"
+                                            y1="11"
+                                            x2="14"
+                                            y2="17"
+                                        ></line>
+                                        <path
+                                            d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"
+                                        ></path>
+                                        <path
+                                            d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"
+                                        ></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="mb-4">
+                                <label
+                                    class="block text-sm font-medium mb-1"
+                                    :for="'title-' + section.key"
+                                    >Title</label
+                                >
+                                <input
+                                    :id="'title-' + section.key"
+                                    type="text"
+                                    class="form-input w-full"
+                                    :class="{
+                                        error:
+                                            $page.props.errors &&
+                                            $page.props.errors[
+                                                'sections.' + i + '.title'
+                                            ],
+                                    }"
+                                    @change="
+                                        sections[i].title = $event.target.value
+                                    "
+                                />
+                            </div>
+                            <div class="editor"></div>
+                        </div>
+                        <div class="py-3 flex justify-center">
+                            <button
+                                class="btn bg-secondary hover:bg-secondary-focus"
+                                type="button"
+                                @click="addSection()"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="icon icon-tabler icon-tabler-circle-plus"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="2"
+                                    stroke="currentColor"
+                                    fill="none"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <path
+                                        stroke="none"
+                                        d="M0 0h24v24H0z"
+                                        fill="none"
+                                    ></path>
+                                    <circle cx="12" cy="12" r="9"></circle>
+                                    <line x1="9" y1="12" x2="15" y2="12"></line>
+                                    <line x1="12" y1="9" x2="12" y2="15"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </section>
                     <button
                         class="btn inline-flex items-center text-white bg-primary hover:bg-primary-focus group"
                         type="submit"

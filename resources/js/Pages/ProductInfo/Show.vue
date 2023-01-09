@@ -83,7 +83,7 @@ function deleteRecord(hash) {
                     >
                         <nav class="flex mb-2">
                             <ol
-                                class="inline-flex items-center space-x-1 md:space-x-3"
+                                class="inline-flex list-none items-center space-x-1 md:space-x-3"
                             >
                                 <li class="inline-flex items-center">
                                     <Link
@@ -320,7 +320,7 @@ function deleteRecord(hash) {
                                     ></Link>
                                 </div>
                                 <ul
-                                    class="text-sm font-medium text-gray-900 dark:text-white px-4 mt-4"
+                                    class="text-sm font-medium text-gray-900 dark:text-white px-4 mt-4 list-none"
                                 >
                                     <li
                                         v-for="i in product.product_infos"
@@ -443,11 +443,35 @@ function deleteRecord(hash) {
                         </div>
                     </header>
                     <!-- Main Content -->
-                    <article
-                        class="py-2"
-                        v-if="info"
-                        v-html="info.content"
-                    ></article>
+                    <div class="flex flex-wrap md:flex-nowrap mt-8">
+                        <aside class="w-full md:w-64 pb-8">
+                            <div
+                                class="px-3 py-4 overflow-y-auto rounded bg-gray-50 dark:bg-gray-800 md:sticky md:top-0"
+                            >
+                                <ul class="space-y-2 list-none pl-0">
+                                    <li v-for="s in info.sections" :key="s.id">
+                                        <a
+                                            :href="'#section-' + s.hash"
+                                            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                                        >
+                                            <span>{{ s.title }}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </aside>
+                        <article class="py-2 px-4 w-full" v-if="info">
+                            <section
+                                class="info-content mb-8 pb-4 border-b border-gray-200 dark:border-gray-800"
+                                :id="'section-' + s.hash"
+                                v-for="s in info.sections"
+                                :key="s.id"
+                            >
+                                <h2>{{ s.title }}</h2>
+                                <div v-html="s.content"></div>
+                            </section>
+                        </article>
+                    </div>
                     <!-- QR modal -->
                     <div
                         class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full backdrop-blur min-h-screen"

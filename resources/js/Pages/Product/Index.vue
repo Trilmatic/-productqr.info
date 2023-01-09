@@ -357,18 +357,16 @@ onMounted(() => {
                     <tr
                         v-if="products.total === 0 && !filters.where_any"
                         :colspan="fields.length + 1"
+                        class="h-[calc(100vh-28rem)] p-8 relative"
                     >
-                        <div class="p-8">
-                            <NoDataIcon />
-                        </div>
+                        <NoDataIcon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                     </tr>
                     <tr
                         v-else-if="products.total === 0 && filters.where_any"
                         :colspan="fields.length + 1"
+                        class="h-[calc(100vh-28rem)] p-8 relative"
                     >
-                        <div class="p-8">
-                            <NoResultsIcon />
-                        </div>
+                        <NoResultsIcon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                     </tr>
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-slate-800 group"

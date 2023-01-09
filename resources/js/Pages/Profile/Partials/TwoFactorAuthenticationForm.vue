@@ -42,7 +42,7 @@ const enableTwoFactorAuthentication = () => {
     enabling.value = true;
 
     Inertia.post('/user/two-factor-authentication', {}, {
-        preserveScroll: true,
+        croll: true,
         onSuccess: () => Promise.all([
             showQrCode(),
             showSetupKey(),

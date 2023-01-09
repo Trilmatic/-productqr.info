@@ -153,3 +153,14 @@ h3{
 h4{
     @apply h4
 }
+
+.info-content ul{
+    @apply list-disc pl-8
+}
+
+.info-content ol{
+    @apply list-decimal pl-6
+}
+.info-content ol li{
+    @apply pl-2
+}
