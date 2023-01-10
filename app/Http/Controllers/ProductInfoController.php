@@ -60,7 +60,6 @@ class ProductInfoController extends Controller
             'language_id' => $request->get('language_id'),
             'product_id' => $product->id,
             'user_id' => $user->id,
-            //'content' => $request->get('content'),
         ]);
         $info->save();
         foreach ($request->get('sections') as $section) {
@@ -151,6 +150,7 @@ class ProductInfoController extends Controller
                 if ($user->cannot('update', $sec_edit)) abort(403);
                 $sec_edit->title = $section['title'];
                 $sec_edit->content = $section['content'];
+                $sec_edit->sort = $section['sort'];
                 $sec_edit->save();
             } else {
                 $sec_new = new ProductInfoSection([

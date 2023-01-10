@@ -13,7 +13,7 @@ class ProductInfoSection extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['user_id', 'product_info_id', 'title', 'content'];
+    protected $fillable = ['user_id', 'product_info_id','sort', 'title', 'content'];
     protected $guarded = ['id', 'hash'];
 
     protected static function boot()

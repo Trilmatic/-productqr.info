@@ -359,14 +359,18 @@ onMounted(() => {
                         :colspan="fields.length + 1"
                         class="h-[calc(100vh-28rem)] p-8 relative"
                     >
-                        <NoDataIcon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                        <NoDataIcon
+                            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                        />
                     </tr>
                     <tr
                         v-else-if="products.total === 0 && filters.where_any"
                         :colspan="fields.length + 1"
                         class="h-[calc(100vh-28rem)] p-8 relative"
                     >
-                        <NoResultsIcon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                        <NoResultsIcon
+                            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                        />
                     </tr>
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-slate-800 group"
@@ -389,10 +393,13 @@ onMounted(() => {
                         </td>
                         <td>
                             <div class="flex space-x-2 items-center">
-                                <Link :href="'/product/' + p.hash + '/info'">
+                                <Link
+                                    class="hover:bg-primary rounded-full p-2 m-1 transition-all duration-100 hover:text-white"
+                                    :href="'/product/' + p.hash + '/info'"
+                                >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        class="icon icon-tabler icon-tabler-info-circle hover:stroke-primary"
+                                        class="icon icon-tabler icon-tabler-info-circle"
                                         width="24"
                                         height="24"
                                         viewBox="0 0 24 24"
@@ -419,14 +426,51 @@ onMounted(() => {
                                         ></polyline>
                                     </svg>
                                 </Link>
+                                <a
+                                    type="button"
+                                    class="hover:bg-secondary rounded-full p-2 m-1 transition-all duration-100 hover:text-white"
+                                    :href="p.qr_code"
+                                    download
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="icon icon-tabler icon-tabler-download"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="2"
+                                        stroke="currentColor"
+                                        fill="none"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path
+                                            stroke="none"
+                                            d="M0 0h24v24H0z"
+                                            fill="none"
+                                        ></path>
+                                        <path
+                                            d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"
+                                        ></path>
+                                        <polyline
+                                            points="7 11 12 16 17 11"
+                                        ></polyline>
+                                        <line
+                                            x1="12"
+                                            y1="4"
+                                            x2="12"
+                                            y2="16"
+                                        ></line>
+                                    </svg>
+                                </a>
                                 <button
-                                    class="btn-edit stroke-gray-700 dark:stroke-gray-400 hover:stroke-amber-600"
+                                    class="hover:bg-warning rounded-full p-2 m-1 transition-all duration-100 hover:text-white"
                                     type="button"
                                     @click.prevent="edit(p)"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        class="icon icon-tabler icon-tabler-pencil hover:stroke-warning"
+                                        class="icon icon-tabler icon-tabler-pencil"
                                         width="24"
                                         height="24"
                                         viewBox="0 0 24 24"
@@ -454,12 +498,12 @@ onMounted(() => {
                                 </button>
                                 <button
                                     type="button"
-                                    class=""
+                                    class="hover:bg-error rounded-full p-2 m-1 transition-all duration-100 hover:text-white"
                                     @click="deleteRecord(p.hash)"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        class="icon icon-tabler icon-tabler-trash hover:stroke-error"
+                                        class="icon icon-tabler icon-tabler-trash"
                                         width="24"
                                         height="24"
                                         viewBox="0 0 24 24"

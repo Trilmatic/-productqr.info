@@ -393,6 +393,11 @@ function deleteRecord(hash) {
                                             type="button"
                                             @click="deleteRecord(i.hash)"
                                             class="hover:bg-error p-2 rounded-lg py-2 mr-2"
+                                            v-if="
+                                                $page.props.user &&
+                                                i.user_id ===
+                                                    $page.props.user.id
+                                            "
                                         >
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"

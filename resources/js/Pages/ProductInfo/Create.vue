@@ -42,6 +42,7 @@ const sections = ref([
     {
         title: null,
         content: null,
+        key: Date.now(),
     },
 ]);
 

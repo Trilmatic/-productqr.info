@@ -26,6 +26,10 @@ class ProductInfo extends Model
             $record->hash = $hashids->encode($record->id);
             $record->save();
         });
+        static::deleting(function($record)
+        {
+            if($record->sections()) $record->sections()->delete();
+        });
     }
 
     public function language()
@@ -40,6 +44,6 @@ class ProductInfo extends Model
 
     public function sections()
     {
-        return $this->hasMany(ProductInfoSection::class, 'product_info_id', 'id');
+        return $this->hasMany(ProductInfoSection::class, 'product_info_id', 'id')->orderBy('sort');
     }
 }

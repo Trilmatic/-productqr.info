@@ -16,7 +16,7 @@ class ProductApiController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        if(!$user->tokenCan('read')) abort(403);
+        if(!$user->tokenCan('read')) return response('Forbidden', 403);
         $products = Product::where('user_id', $user->id)->filter();
         if($request->input('limit')) $products = $products->limit($request->input('limit'));
         $products = $products->get();
@@ -32,7 +32,7 @@ class ProductApiController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        if(!$user->tokenCan('create')) abort(403);
+        if(!$user->tokenCan('create')) return response('Forbidden', 403);
         $request->validate([
             'name' => 'required',
         ]);
@@ -55,8 +55,8 @@ class ProductApiController extends Controller
     {
         $user = Auth::user();
         $product = Product::where('hash', $hash)->first();
-        if (!$product) abort(404);
-        if($user->cannot('read', $product)) abort(403);
+        if (!$product) return response('Not Found', 404);
+        if($user->cannot('read', $product)) return response('Forbidden', 403);
         return response()->json($product);
     }
 
@@ -71,8 +71,8 @@ class ProductApiController extends Controller
     {
         $user = Auth::user();
         $product = Product::where('hash', $hash)->first();
-        if (!$product) abort(404);
-        if($user->cannot('update', $product)) abort(403);
+        if (!$product) return response('Not Found', 404);
+        if($user->cannot('update', $product)) return response('Forbidden', 403);
         $product->name = $request->get('name');
         $product->identification_code = $request->get('identification_code');
         $product->save();
@@ -89,9 +89,9 @@ class ProductApiController extends Controller
     {
         $user = Auth::user();
         $product = Product::where('hash', $hash)->first();
-        if (!$product) abort(404);
-        if($user->cannot('delete', $product)) abort(403);
+        if (!$product) return response('Not Found', 404);
+        if($user->cannot('delete', $product)) return response('Forbidden', 403);
         $product->delete();
-        return response('success');
+        return response('Success');
     }
 }

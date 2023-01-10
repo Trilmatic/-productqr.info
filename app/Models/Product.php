@@ -61,6 +61,11 @@ class Product extends Model
             $record->qr_code = $path;
             $record->save();
         });
+
+        static::deleting(function($record)
+        {
+           if( $record->product_infos()) $record->product_infos()->delete();
+        });
     }
 
     public function where_any($query, $value)

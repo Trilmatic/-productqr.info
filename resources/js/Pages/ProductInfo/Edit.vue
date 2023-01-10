@@ -1,6 +1,6 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { reactive, onMounted, ref, nextTick } from "vue";
+import { reactive, onMounted, ref, nextTick, computed } from "vue";
 import { Inertia } from "@inertiajs/inertia";
 import { Link } from "@inertiajs/inertia-vue3";
 import TomSelect from "tom-select/dist/js/tom-select.complete.min";
@@ -12,6 +12,11 @@ const props = defineProps({
 });
 const editors = ref([]);
 const sections = ref(props.info.sections);
+const sections_sort = computed(() => {
+    return sections.value.sort(function (a, b) {
+        return a.sort - b.sort;
+    });
+});
 async function initTextarea() {
     let elements = document.querySelectorAll(".editor");
     elements.forEach((el, index) => {
@@ -75,10 +80,14 @@ function removeSection(section, index) {
     editors.value.splice(index, 1);
 }
 function moveUp(section, index) {
-    
+    if (index === 0) return;
+    sections.value[index - 1].sort = section.sort;
+    section.sort--;
 }
 function moveDown(section, index) {
-
+    if (index === sections.length - 1) return;
+    sections.value[index + 1].sort = section.sort;
+    section.sort++;
 }
 function submit() {
     let language_id = document.getElementById("language").value;
@@ -211,6 +220,9 @@ onMounted(() => {
                 </nav>
                 <form @submit.prevent="submit" class="space-y-2">
                     <div>
+                        <label class="block text-sm font-medium mb-1" for="name"
+                            >Language</label
+                        >
                         <select id="language">
                             <option value=""></option>
                             <option
@@ -230,173 +242,151 @@ onMounted(() => {
                         >
                     </div>
                     <section>
-                        <div
-                            class="py-4"
-                            v-for="(section, i) in sections"
-                            :key="section.hash"
-                        >
-                            <div class="flex justify-end space-x-2">
-                                <button
-                                    class="btn bg-primary hover:bg-primary-focus text-white"
-                                    type="button"
-                                    @click="moveUp(section, i)"
-                                    v-if="section.sort != 0"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="icon icon-tabler icon-tabler-arrow-up-circle"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="2"
-                                        stroke="currentColor"
-                                        fill="none"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                        <TransitionGroup name="list" tag="ul" class="relative">
+                            <li
+                                class="py-4 box-border w-full"
+                                v-for="(section, i) in sections_sort"
+                                :key="section.hash"
+                            >
+                                <div class="flex justify-end space-x-2">
+                                    <button
+                                        class="btn bg-warning hover:bg-warning-focus text-white"
+                                        type="button"
+                                        @click="moveUp(section, i)"
+                                        v-if="section.sort != 0"
                                     >
-                                        <path
-                                            stroke="none"
-                                            d="M0 0h24v24H0z"
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="icon icon-tabler icon-tabler-arrow-big-up-line"
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                            stroke-width="2"
+                                            stroke="currentColor"
                                             fill="none"
-                                        ></path>
-                                        <circle cx="12" cy="12" r="9"></circle>
-                                        <line
-                                            x1="12"
-                                            y1="8"
-                                            x2="8"
-                                            y2="12"
-                                        ></line>
-                                        <line
-                                            x1="12"
-                                            y1="8"
-                                            x2="12"
-                                            y2="16"
-                                        ></line>
-                                        <line
-                                            x1="16"
-                                            y1="12"
-                                            x2="12"
-                                            y2="8"
-                                        ></line>
-                                    </svg>
-                                </button>
-                                <button
-                                    class="btn bg-primary hover:bg-primary-focus text-white"
-                                    type="button"
-                                    @click="moveDown(section, i)"
-                                    v-if="sections.sort < sections.length"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="icon icon-tabler icon-tabler-arrow-down-circle"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="2"
-                                        stroke="currentColor"
-                                        fill="none"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        >
+                                            <path
+                                                stroke="none"
+                                                d="M0 0h24v24H0z"
+                                                fill="none"
+                                            ></path>
+                                            <path
+                                                d="M9 12h-3.586a1 1 0 0 1 -.707 -1.707l6.586 -6.586a1 1 0 0 1 1.414 0l6.586 6.586a1 1 0 0 1 -.707 1.707h-3.586v6h-6v-6z"
+                                            ></path>
+                                            <path d="M9 21h6"></path>
+                                        </svg>
+                                    </button>
+                                    <button
+                                        class="btn bg-warning hover:bg-warning-focus text-white"
+                                        type="button"
+                                        @click="moveDown(section, i)"
+                                        v-if="
+                                            section.sort < sections.length - 1
+                                        "
                                     >
-                                        <path
-                                            stroke="none"
-                                            d="M0 0h24v24H0z"
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="icon icon-tabler icon-tabler-arrow-big-down-line"
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                            stroke-width="2"
+                                            stroke="currentColor"
                                             fill="none"
-                                        ></path>
-                                        <circle cx="12" cy="12" r="9"></circle>
-                                        <line
-                                            x1="8"
-                                            y1="12"
-                                            x2="12"
-                                            y2="16"
-                                        ></line>
-                                        <line
-                                            x1="12"
-                                            y1="8"
-                                            x2="12"
-                                            y2="16"
-                                        ></line>
-                                        <line
-                                            x1="16"
-                                            y1="12"
-                                            x2="12"
-                                            y2="16"
-                                        ></line>
-                                    </svg>
-                                </button>
-                                <button
-                                    class="btn bg-error hover:bg-error-focus text-white"
-                                    type="button"
-                                    @click="removeSection(section, i)"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="icon icon-tabler icon-tabler-trash"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        stroke-width="2"
-                                        stroke="currentColor"
-                                        fill="none"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        >
+                                            <path
+                                                stroke="none"
+                                                d="M0 0h24v24H0z"
+                                                fill="none"
+                                            ></path>
+                                            <path
+                                                d="M15 12h3.586a1 1 0 0 1 .707 1.707l-6.586 6.586a1 1 0 0 1 -1.414 0l-6.586 -6.586a1 1 0 0 1 .707 -1.707h3.586v-6h6v6z"
+                                            ></path>
+                                            <path d="M15 3h-6"></path>
+                                        </svg>
+                                    </button>
+                                    <button
+                                        class="btn bg-error hover:bg-error-focus text-white"
+                                        type="button"
+                                        @click="removeSection(section, i)"
                                     >
-                                        <path
-                                            stroke="none"
-                                            d="M0 0h24v24H0z"
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="icon icon-tabler icon-tabler-trash"
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                            stroke-width="2"
+                                            stroke="currentColor"
                                             fill="none"
-                                        ></path>
-                                        <line
-                                            x1="4"
-                                            y1="7"
-                                            x2="20"
-                                            y2="7"
-                                        ></line>
-                                        <line
-                                            x1="10"
-                                            y1="11"
-                                            x2="10"
-                                            y2="17"
-                                        ></line>
-                                        <line
-                                            x1="14"
-                                            y1="11"
-                                            x2="14"
-                                            y2="17"
-                                        ></line>
-                                        <path
-                                            d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"
-                                        ></path>
-                                        <path
-                                            d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"
-                                        ></path>
-                                    </svg>
-                                </button>
-                            </div>
-                            <div class="mb-4">
-                                <label
-                                    class="block text-sm font-medium mb-1"
-                                    :for="'title-' + section.hash"
-                                    >Title</label
-                                >
-                                <input
-                                    :id="'title-' + section.hash"
-                                    type="text"
-                                    class="form-input w-full"
-                                    :class="{
-                                        error:
-                                            $page.props.errors &&
-                                            $page.props.errors[
-                                                'sections.' + i + '.title'
-                                            ],
-                                    }"
-                                    @change="
-                                        sections[i].title = $event.target.value
-                                    "
-                                />
-                            </div>
-                            <div class="editor" v-html="section.content"></div>
-                        </div>
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        >
+                                            <path
+                                                stroke="none"
+                                                d="M0 0h24v24H0z"
+                                                fill="none"
+                                            ></path>
+                                            <line
+                                                x1="4"
+                                                y1="7"
+                                                x2="20"
+                                                y2="7"
+                                            ></line>
+                                            <line
+                                                x1="10"
+                                                y1="11"
+                                                x2="10"
+                                                y2="17"
+                                            ></line>
+                                            <line
+                                                x1="14"
+                                                y1="11"
+                                                x2="14"
+                                                y2="17"
+                                            ></line>
+                                            <path
+                                                d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"
+                                            ></path>
+                                            <path
+                                                d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"
+                                            ></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="mb-4">
+                                    <label
+                                        class="block text-sm font-medium mb-1"
+                                        :for="'title-' + section.hash"
+                                        >Title</label
+                                    >
+                                    <input
+                                        :id="'title-' + section.hash"
+                                        type="text"
+                                        class="form-input w-full"
+                                        :class="{
+                                            error:
+                                                $page.props.errors &&
+                                                $page.props.errors[
+                                                    'sections.' + i + '.title'
+                                                ],
+                                        }"
+                                        @change="
+                                            sections[i].title =
+                                                $event.target.value
+                                        "
+                                    />
+                                </div>
+                                <div
+                                    class="editor"
+                                    v-html="section.content"
+                                ></div>
+                            </li>
+                        </TransitionGroup>
                         <div class="py-3 flex justify-center">
                             <button
                                 class="btn bg-secondary hover:bg-secondary-focus"
