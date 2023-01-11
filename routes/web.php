@@ -63,4 +63,13 @@ Route::controller(ProductController::class)->group(function () {
 
 Route::controller(ProductInfoController::class)->prefix('product')->name('product.info.')->group(function () {
     Route::get('/{hash}/info', 'show')->name('show');
+
 });
+
+Route::get('/about-us', function () {
+    return Inertia::render('AboutUs');
+})->name('about');
+
+Route::get('/contact', function () {
+    return Inertia::render('Contact');
+})->name('contact');
