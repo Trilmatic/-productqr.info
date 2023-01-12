@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductInfoController;
+use App\Http\Controllers\SitemapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,3 +78,5 @@ Route::get('/privacy-policy', function () {
 Route::get('/terms-of-service', function () {
     return Inertia::render('TermsOfService');
 })->name('terms');
+
+Route::get('sitemap.xml', [SitemapController::class, 'index']);

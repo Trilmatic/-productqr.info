@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /login/
+Disallow: /register/
+Disallow: /images/
+Disallow: /qrcodes/
+Disallow: /*.png$
+Disallow: /*.svg$
+
+Sitemap: https://www.example.com/sitemap.xml
