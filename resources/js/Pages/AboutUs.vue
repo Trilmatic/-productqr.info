@@ -32,7 +32,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
                     <!-- Hero content -->
                     <div class="max-w-3xl mx-auto text-center">
                         <h1
-                            class="h1 font-cabinet-grotesk text-white mb-2"
+                            class="h1 font-cabinet-grotesk text-black dark:text-white mb-2"
                             data-aos="fade-up"
                         >
                             About us
@@ -58,7 +58,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
                         </h2>
                     </div>
                     <p
-                        class="text-lg md:text-xl text-white text-left text-opacity-80 mb-8"
+                        class="text-lg md:text-xl text-black dark:text-white text-left text-opacity-80 mb-8"
                     >
                         We want to make products more accessible and
                         understandable for customers all around the world. The

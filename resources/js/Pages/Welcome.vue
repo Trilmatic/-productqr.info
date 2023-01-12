@@ -725,9 +725,15 @@ defineProps({
                                 You can send us a question at
                                 <a
                                     class="text-primary hover:text-primary-focus"
-                                    href="mailto:ask@productqr.info"
-                                    >ask@productqr.info</a
+                                    href="mailto:hello@productqr.info"
+                                    >hello@productqr.info</a
                                 >
+                                or join our
+                                <a
+                                    class="text-primary hover:text-primary-focus"
+                                    href="/"
+                                    >discord</a
+                                >.
                             </p>
                         </div>
                     </div>

@@ -596,10 +596,10 @@ const logout = () => {
                                     >
                                 </li>
                                 <li>
-                                    <a
+                                    <Link
                                         class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
                                         href="/#subscriptions"
-                                        >Subscriptions</a
+                                        >Subscriptions</Link
                                     >
                                 </li>
                             </ul>
@@ -614,17 +614,17 @@ const logout = () => {
                             </h6>
                             <ul class="text-sm space-y-2">
                                 <li>
-                                    <a
+                                    <Link
                                         class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
                                         href="/about-us"
-                                        >About us</a
+                                        >About us</Link
                                     >
                                 </li>
                                 <li>
                                     <a
-                                        class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
-                                        href="#0"
-                                        >Contact</a
+                                        href="mailto:hello@productqr.info"
+                                        class="text-warning hover:text-warning-focus"
+                                        >hello@productqr.info</a
                                     >
                                 </li>
                             </ul>
@@ -666,17 +666,17 @@ const logout = () => {
                                     >
                                 </li>
                                 <li>
-                                    <a
+                                    <Link
                                         class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
-                                        href="#0"
-                                        >Terms of service</a
+                                        href="/terms-of-service"
+                                        >Terms of service</Link
                                     >
                                 </li>
                                 <li>
-                                    <a
+                                    <Link
                                         class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
-                                        href="#0"
-                                        >Privacy policy</a
+                                        href="/privacy-policy"
+                                        >Privacy policy</Link
                                     >
                                 </li>
                             </ul>
@@ -720,6 +720,44 @@ const logout = () => {
                                         <path
                                             d="M16 8.2c-4.4 0-8 3.6-8 8 0 3.5 2.3 6.5 5.5 7.6.4.1.5-.2.5-.4V22c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.3 1.9.9 2.3.7.1-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8.6-.2 1.3-.3 2-.3s1.4.1 2 .3c1.5-1 2.2-.8 2.2-.8.4 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.9 3.7-3.7 3.9.3.4.6.9.6 1.6v2.2c0 .2.1.5.6.4 3.2-1.1 5.5-4.1 5.5-7.6-.1-4.4-3.7-8-8.1-8z"
                                         />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="ml-2 w-8 h-8 flex justify-center items-center">
+                                <a
+                                    class="block text-blue-300 hover:text-white transition duration-150 ease-in-out"
+                                    href="#0"
+                                    aria-label="Discord"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="w-5 h-5 fill-current"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="2"
+                                        stroke="currentColor"
+                                        fill="none"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <path
+                                            stroke="none"
+                                            d="M0 0h24v24H0z"
+                                            fill="none"
+                                        ></path>
+                                        <circle cx="9" cy="12" r="1"></circle>
+                                        <circle cx="15" cy="12" r="1"></circle>
+                                        <path
+                                            d="M7.5 7.5c3.5 -1 5.5 -1 9 0"
+                                        ></path>
+                                        <path
+                                            d="M7 16.5c3.5 1 6.5 1 10 0"
+                                        ></path>
+                                        <path
+                                            d="M15.5 17c0 1 1.5 3 2 3c1.5 0 2.833 -1.667 3.5 -3c.667 -1.667 .5 -5.833 -1.5 -11.5c-1.457 -1.015 -3 -1.34 -4.5 -1.5l-1 2.5"
+                                        ></path>
+                                        <path
+                                            d="M8.5 17c0 1 -1.356 3 -1.832 3c-1.429 0 -2.698 -1.667 -3.333 -3c-.635 -1.667 -.476 -5.833 1.428 -11.5c1.388 -1.015 2.782 -1.34 4.237 -1.5l1 2.5"
+                                        ></path>
                                     </svg>
                                 </a>
                             </li>
