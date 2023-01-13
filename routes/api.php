@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:sanctum')->controller(ProductApiController::class)->prefix('product')->group(function () {
+Route::middleware('auth:sanctum')->controller(ProductApiController::class)->prefix('v1/product')->group(function () {
     Route::get('/', 'index')->name('api.product.index');
     Route::post('/store', 'store')->name('api.product.store');
     Route::get('/{hash}', 'show')->name('api.product.show');
@@ -29,7 +29,7 @@ Route::middleware('auth:sanctum')->controller(ProductApiController::class)->pref
     Route::delete('/{hash}/delete', 'destroy')->name('api.product.destroy');
 });
 
-Route::middleware('auth:sanctum')->controller(ProductInfoApiController::class)->prefix('product')->group(function () {
+Route::middleware('auth:sanctum')->controller(ProductInfoApiController::class)->prefix('v1/product')->group(function () {
     Route::get('/{hash}/info', 'index')->name('api.info.index');
     Route::post('/{hash}/info/store', 'store')->name('api.info.store');
     Route::get('/info/{hash2}', 'show')->name('api.info.show');

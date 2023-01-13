@@ -5,6 +5,7 @@ const sidebar = ref(null);
 const props = defineProps({
     handleClickOutside: Boolean,
     btn: { type: Boolean, default: true },
+    wide: { type: Boolean, default: false },
 });
 function clickHandler({ target }) {
     if (
@@ -51,7 +52,8 @@ defineExpose({
         </button>
         <Transition name="slide-sidebar">
             <div
-                class="fixed top-0 z-50 right-0 h-full w-80 shadow bg-white dark:bg-gray-800 pt-2"
+                class="fixed top-0 z-50 right-0 h-full shadow bg-white dark:bg-gray-800 pt-2"
+                :class="wide ? 'w-96' : 'w-80'"
                 v-show="opened"
             >
                 <div class="p-2 flex justify-between items-center">

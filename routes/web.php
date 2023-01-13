@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\PlanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +57,11 @@ Route::middleware([
         Route::delete('/{hash}/info/{hash2}/delete', 'destroy')->name('destroy');
         Route::delete('/{hash}/info/section/{hash2}/delete', 'destroy_section')->name('destroy_section');
     });
+    Route::controller(PlanController::class)->group(function () {
+        Route::get('/user/subscribe/{slug}', 'show')->name('plan.show');
+        Route::post('/subscription', 'subscribe')->name('subscription.create');
+        Route::get('/subscription/success', 'subscibed')->name('subscription.success');
+    });
 });
 
 Route::controller(ProductController::class)->group(function () {
@@ -64,7 +70,10 @@ Route::controller(ProductController::class)->group(function () {
 
 Route::controller(ProductInfoController::class)->prefix('product')->name('product.info.')->group(function () {
     Route::get('/{hash}/info', 'show')->name('show');
+});
 
+Route::controller(PlanController::class)->group(function () {
+    Route::get('/plan', 'index')->name('plan.index');
 });
 
 Route::get('/about-us', function () {
@@ -73,10 +82,10 @@ Route::get('/about-us', function () {
 
 Route::get('/privacy-policy', function () {
     return Inertia::render('PrivacyPolicy');
-})->name('privacy');
+})->name('policy.show');
 
 Route::get('/terms-of-service', function () {
     return Inertia::render('TermsOfService');
-})->name('terms');
+})->name('terms.show');
 
 Route::get('sitemap.xml', [SitemapController::class, 'index']);
