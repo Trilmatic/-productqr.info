@@ -181,7 +181,7 @@ function selectPlan(plan) {
                     <div
                         class="font-cabinet-grotesk text-gray-900 font-bold inline-flex items-baseline mb-2"
                     >
-                        <span class="text-3xl">$</span>
+                        <span class="text-3xl">€</span>
                         <span class="text-5xl" v-if="annual">110</span>
                         <span class="text-5xl" v-else>10</span>
                         <span v-if="annual">/year</span>
@@ -303,7 +303,7 @@ function selectPlan(plan) {
                     <div
                         class="font-cabinet-grotesk text-gray-900 font-bold inline-flex items-baseline mb-2"
                     >
-                        <span class="text-3xl">$</span>
+                        <span class="text-3xl">€</span>
                         <span class="text-5xl" v-if="annual">330</span>
                         <span class="text-5xl" v-else>30</span>
                         <span v-if="annual">/year</span>

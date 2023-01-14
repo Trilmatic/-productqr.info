@@ -10,8 +10,8 @@ const customColors = {
     "info-focus": colors.emerald[500],
     warning: colors.amber[400],
     "warning-focus": colors.amber[300],
-    error: colors.red[600],
-    "error-focus": colors.red[500],
+    error: colors.red[500],
+    "error-focus": colors.red[400],
     success: colors.green[600],
     "success-focus": colors.green[500],
 };

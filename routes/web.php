@@ -59,8 +59,8 @@ Route::middleware([
     });
     Route::controller(PlanController::class)->group(function () {
         Route::get('/user/subscribe/{slug}', 'show')->name('plan.show');
-        Route::post('/subscription', 'subscribe')->name('subscription.create');
-        Route::get('/subscription/success', 'subscibed')->name('subscription.success');
+        Route::post('/user/subscribe', 'subscribe')->name('subscription.create');
+        Route::get('/user/subscribe/success', 'subscibed')->name('subscription.success');
     });
 });
 
@@ -73,7 +73,7 @@ Route::controller(ProductInfoController::class)->prefix('product')->name('produc
 });
 
 Route::controller(PlanController::class)->group(function () {
-    Route::get('/plan', 'index')->name('plan.index');
+    Route::get('/plans', 'index')->name('plan.index');
 });
 
 Route::get('/about-us', function () {
