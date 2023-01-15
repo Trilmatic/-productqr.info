@@ -1,6 +1,7 @@
 <script setup>
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import { onMounted, ref, computed } from "vue";
+import { Inertia } from "@inertiajs/inertia";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import PricingTables from "@/Components/PricingTables.vue";
 import "@stripe/stripe-js";
@@ -10,11 +11,12 @@ const props = defineProps({
     intent: Object,
     stripe_key: String,
     locale: String,
+    billing_details: Object,
 });
 
 const stripe = ref(null);
 const elements = ref(null);
-const billing_details = ref(null);
+const billing_details_new = ref(null);
 
 const annual = computed(() => {
     return props.plan.slug.includes("yearly");
@@ -37,45 +39,30 @@ async function initStripe() {
             colorDanger: "#ef4444",
         },
     };
-    var style = {
-        base: {
-            iconColor: "#c4f0ff",
-            color: dark ? "#fff" : "#000",
-            fontSize: "1.25rem",
-            fontSmoothing: "antialiased",
-            borderRadius: "0.25rem",
-            backgroundColor: dark ? "#374151" : "#f9fafb",
-            "::placeholder": {
-                color: dark ? "#fff" : "#000",
-            },
-        },
-        invalid: {
-            iconColor: "#ef4444",
-            color: "#ef4444",
-        },
-    };
     const locale = props.locale;
-    stripe.value = await loadStripe(props.stripe_key);
+    stripe.value = await loadStripe(props.stripe_key, { locale: locale });
     const secret = props.intent.client_secret;
     elements.value = stripe.value.elements({
         secret,
         appearance,
-        locale,
     });
-    const cardElement = elements.value.create("card", { style: style });
+    const cardElement = elements.value.create("card");
+    var defaultValues = {};
+    if (props.billing_details)
+        defaultValues = {
+            name: props.billing_details.name,
+            address: {
+                line1: props.billing_details.line1,
+                line2: props.billing_details.line2,
+                city: props.billing_details.city,
+                state: props.billing_details.state,
+                postal_code: props.billing_details.postal_code,
+                country: props.billing_details.country,
+            },
+        };
     const addressElement = elements.value.create("address", {
         mode: "billing",
-        defaultValues: {
-            name: "Jane Doe",
-            address: {
-                line1: "354 Oyster Point Blvd",
-                line2: "",
-                city: "South San Francisco",
-                state: "CA",
-                postal_code: "94080",
-                country: "US",
-            },
-        },
+        defaultValues: defaultValues,
     });
     const cardButton = document.getElementById("card-button");
     const clientSecret = cardButton.dataset.secret;
@@ -137,10 +124,23 @@ const handleNextStep = async () => {
 
     const { complete, value } = await addressElement.getValue();
 
-    billing_details.value = value;
+    billing_details_new.value = value;
 
     if (complete) {
-        step.value = 2;
+        loadningAdress.value = true;
+        Inertia.post(
+            "/user/billing-details",
+            {
+                ...billing_details_new.value.address,
+                name: billing_details_new.value.name,
+            },
+            {
+                onSuccess: () => {
+                    step.value = 2;
+                    loadningAdress.value = false;
+                },
+            }
+        );
     }
 };
 
@@ -274,6 +274,7 @@ onMounted(() => {
                         </div>
                         <div
                             class="bg-gray-300 dark:bg-gray-600 p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center"
+                            :class="step === 1 ? 'rounded-b-lg' : ''"
                         >
                             <p class="text-3xl">Payment</p>
                         </div>
@@ -284,12 +285,21 @@ onMounted(() => {
                                 class="w-full"
                             >
                                 <div class="space-y-6">
-                                    <label for="font-medium">
-                                        Enter your credit card information
-                                    </label>
-                                    <div class="card-body">
-                                        <div id="card-element">
-                                            <!-- A Stripe Element will be inserted here. -->
+                                    <div class="mb-8">
+                                        <div
+                                            class="bg-gray-50 dark:bg-gray-700 rounded-lg shadow-lg p-4"
+                                        >
+                                            <label for="font-medium">
+                                                Enter your credit card
+                                                information
+                                            </label>
+                                            <div
+                                                class="p-4 h-12 bg-gray-50 rounded-lg mt-4"
+                                            >
+                                                <div id="card-element">
+                                                    <!-- A Stripe Element will be inserted here. -->
+                                                </div>
+                                            </div>
                                         </div>
                                         <!-- Used to display form errors. -->
                                         <div
@@ -311,7 +321,7 @@ onMounted(() => {
                                         type="submit"
                                         :data-secret="intent.client_secret"
                                     >
-                                        Pay
+                                        Subscribe
                                     </button>
                                 </div>
                             </form>

@@ -60,7 +60,9 @@ Route::middleware([
     Route::controller(PlanController::class)->group(function () {
         Route::get('/user/subscribe/{slug}', 'show')->name('plan.show');
         Route::post('/user/subscribe', 'subscribe')->name('subscription.create');
-        Route::get('/user/subscribe/success', 'subscibed')->name('subscription.success');
+        Route::post('/user/billing-details', 'billing_details')->name('details.save');
+        Route::get('/user/subscribe/success', 'success')->name('subscription.success');
+        Route::get('/user/subscribe/cancel', 'cancel')->name('subscription.cancel');
     });
 });
 

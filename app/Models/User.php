@@ -11,6 +11,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Cashier\Billable;
+use App\Models\BillingDetail;
 
 class User extends Authenticatable
 {
@@ -70,5 +71,9 @@ class User extends Authenticatable
             $record->hash = $hashids->encode($record->id);
             $record->save();
         });
+    }
+
+    public function billing_details(){
+        return $this->hasOne(BillingDetail::class, 'user_id', 'id');
     }
 }
