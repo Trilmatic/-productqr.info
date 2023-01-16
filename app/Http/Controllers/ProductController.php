@@ -56,6 +56,7 @@ class ProductController extends Controller
         $count = $user->products()->count();
         if ($count === $threshold->basic_threshold_limit) $threshold->basic_threshold_id = $product->id;
         if ($count === $threshold->pro_threshold_limit) $threshold->pro_threshold_id = $product->id;
+        $threshold->save();
 
         return redirect()->route('product.info.show', $product->hash);
     }

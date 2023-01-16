@@ -111,8 +111,8 @@ class User extends Authenticatable
     {
         $subscription = $this->subscriptions()->select('name')->first();
         $threshold = $this->threshold()->first();
-        if (!$subscription) return $threshold->basic_threshold_id <= $id;
-        if (str_starts_with($subscription->name, 'basic')) return $threshold->pro_threshold_id <= $id;
+        if (!$subscription && $threshold->basic_threshold_id) return $id > $threshold->basic_threshold_id;
+        if ($subscription && str_starts_with($subscription->name, 'basic') && $threshold->pro_threshold_id) return $id > $threshold->pro_threshold_id;
         return false;
     }
 
