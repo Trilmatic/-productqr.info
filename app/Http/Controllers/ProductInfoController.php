@@ -6,6 +6,7 @@ use App\Models\ProductInfo;
 use App\Models\ProductInfoSection;
 use App\Models\Product;
 use App\Models\Language;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
@@ -85,6 +86,11 @@ class ProductInfoController extends Controller
     {
         $product = Product::with("product_infos", "product_infos.language", "owner")->where('hash', $hash)->first();
         if (!$product) abort(404);
+        $user = User::where('id', $product->user_id)->first();
+        if ($user->is_over_product_limit($product->id)) {
+            if (Auth::user() && Auth::user()->id === $user->id) return redirect()->route('subscription.upgrade');
+            abort(404);
+        }
         if ($request->input('hash')) {
             $info = $product->request_info($request->input('hash'))->with("sections")->first();
             if (!$info) abort(404);
