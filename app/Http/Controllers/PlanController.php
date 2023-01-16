@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Cashier\Exceptions\IncompletePayment;
 use App\Models\User;
 use App\Models\BillingDetail;
 use App\Models\Plan;
@@ -20,24 +21,31 @@ class PlanController extends Controller
 
     public function welcome()
     {
-        $plans = Plan::all();
+        $plans = Plan::select('id', 'name', 'slug', 'price')->get();
+        $user = Auth::user();
+        if ($user) $subscription = $user->subscriptions()->select('name')->first();
+        else $subscription = null;
         return Inertia::render('Welcome', [
-            'plans' => $plans
+            'plans' => $plans,
+            'subscription' => $subscription
         ]);
     }
 
     public function index()
     {
-        $plans = Plan::all();
+        $plans = Plan::select('id', 'name', 'slug', 'price')->get();
         $user = Auth::user();
+        if ($user) $subscription = $user->subscriptions()->first();
+        else $subscription = null;
         return Inertia::render('Plan/Index', [
-            'plans' => $plans
+            'plans' => $plans,
+            'subscription' => $subscription
         ]);
     }
 
     public function show(Request $request, $slug)
     {
-        $plan = Plan::where('slug', $slug)->first();
+        $plan = Plan::select('id', 'name', 'slug', 'price')->where('slug', $slug)->first();
         if (!$plan) abort(404);
         $user = Auth::user();
         //$paymentMethods = $request->user()->paymentMethods();
@@ -96,19 +104,43 @@ class PlanController extends Controller
         redirect()->back()->with('success', 'saved');
     }
 
-    public function subscribe(Request $request, $slug)
+    public function subscribe(Request $request)
     {
-        $plan = Plan::where('slug', $slug)->first();
+        $plan = Plan::findOrFail($request->get('plan'));
         if (!$plan) abort(404);
         $user = Auth::user();
-        $paymentMethod = $request->paymentMethod;
+        $payment_method = $request->get('payment_method');
         $user->createOrGetStripeCustomer();
-        $user->updateDefaultPaymentMethod($paymentMethod);
-        $user->newSubscription($plan->name, $plan->stripe_plan)
-            ->create($paymentMethod, [
-                'email' => $user->email,
-            ]);
+        $user->updateDefaultPaymentMethod($payment_method);
+        try {
+            $user->newSubscription($plan->slug, $plan->stripe_plan)
+                ->create($payment_method, [
+                    'email' => $user->email,
+                ]);
+        } catch (IncompletePayment $exception) {
+            return redirect()->route('subscription.cancel')->with('error', 'Payment failed');
+        }
 
-        return redirect()->back()->with('success', 'Your plan subscribed successfully');
+        return redirect()->route('subscription.success')->with('success', 'Your plan subscribed successfully');
+    }
+
+    public function success_page()
+    {
+        return Inertia::render('Plan/Success');
+    }
+
+    public function cancel_page()
+    {
+        return Inertia::render('Plan/Cancel');
+    }
+
+    public function upgrade_page()
+    {
+        return Inertia::render('Plan/Upgrade');
+    }
+
+    public function change()
+    {
+        return Inertia::render('Plan/Change');
     }
 }

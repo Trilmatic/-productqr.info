@@ -3,10 +3,8 @@ import { Head, Link } from "@inertiajs/inertia-vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import PricingTables from "@/Components/PricingTables.vue";
 defineProps({
-    canLogin: Boolean,
-    canRegister: Boolean,
-    laravelVersion: String,
-    phpVersion: String,
+    subscription: Object,
+    plans: Array,
 });
 </script>
 
@@ -596,7 +594,7 @@ defineProps({
                     </div>
 
                     <!-- Pricing tables -->
-                    <PricingTables />
+                    <PricingTables :subscription="subscription" />
                 </div>
             </div>
         </section>

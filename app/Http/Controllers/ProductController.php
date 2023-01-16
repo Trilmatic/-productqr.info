@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Threshold;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
@@ -42,13 +44,19 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
-       
+
         $product = new Product([
             'name' => $request->get('name'),
             'identification_code' => $request->get('identification_code'),
             'user_id' => $user->id,
         ]);
         $product->save();
+
+        $threshold = $user->threshold()->first();
+        $count = $user->products()->count();
+        if ($count === $threshold->basic_threshold_limit) $threshold->basic_threshold_id = $product->id;
+        if ($count === $threshold->pro_threshold_limit) $threshold->pro_threshold_id = $product->id;
+
         return redirect()->route('product.info.show', $product->hash);
     }
 
@@ -61,6 +69,11 @@ class ProductController extends Controller
     public function show($hash)
     {
         $product = Product::where('hash', $hash)->first();
+        $user = User::where('user_id', $product->user_id)->first();
+        if ($user->is_over_product_limit($product->id)) {
+            if (Auth::user() && Auth::user()->id === $user->id) return redirect()->route('subscription.upgrade');
+            abort(404);
+        }
         if (!$product) abort(404);
         return Inertia::render('Product/Show', [
             'product' => $product,

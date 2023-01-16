@@ -4,6 +4,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import PricingTables from "@/Components/PricingTables.vue";
 const props = defineProps({
     plans: Array,
+    subscription: Object,
 });
 </script>
 
@@ -47,7 +48,10 @@ const props = defineProps({
                                 </div>
 
                                 <!-- Pricing tables -->
-                                <PricingTables :plans="plans" />
+                                <PricingTables
+                                    :plans="plans"
+                                    :subscription="subscription"
+                                />
                             </div>
                         </div>
                     </section>

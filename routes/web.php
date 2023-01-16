@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\SitemapController;
@@ -41,7 +42,6 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
-
     Route::controller(ProductController::class)->prefix('product')->name('product.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
@@ -58,11 +58,14 @@ Route::middleware([
         Route::delete('/{hash}/info/section/{hash2}/delete', 'destroy_section')->name('destroy_section');
     });
     Route::controller(PlanController::class)->group(function () {
+        Route::get('/', 'welcome')->name('plan.show');
         Route::get('/user/subscribe/{slug}', 'show')->name('plan.show');
         Route::post('/user/subscribe', 'subscribe')->name('subscription.create');
         Route::post('/user/billing-details', 'billing_details')->name('details.save');
-        Route::get('/user/subscribe/success', 'success')->name('subscription.success');
-        Route::get('/user/subscribe/cancel', 'cancel')->name('subscription.cancel');
+        Route::get('/user/subscribtion/change', 'change')->name('subscription.change');
+        Route::get('/user/subscribtion/success', 'success_page')->name('subscription.success');
+        Route::get('/user/subscribtion/cancel', 'cancel_page')->name('subscription.cancel');
+        Route::get('/user/subscribtion/upgrade', 'upgrade_page')->name('subscription.upgrade');
     });
 });
 

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductApiController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -16,10 +17,11 @@ class ProductApiController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        if(!$user->tokenCan('read')) return response('Forbidden', 403);
+        if(!$user->tokenCan('read') || !$user->has_pro_plan() || $user->is_over_api_limit()) return response('Forbidden', 403);
         $products = Product::where('user_id', $user->id)->filter();
         if($request->input('limit')) $products = $products->limit($request->input('limit'));
         $products = $products->get();
+        $user->call_api();
         return response()->json($products);
     }
 
@@ -32,7 +34,7 @@ class ProductApiController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        if(!$user->tokenCan('create')) return response('Forbidden', 403);
+        if(!$user->tokenCan('create') || !$user->has_pro_plan() || $user->is_over_api_limit()) return response('Forbidden', 403);
         $request->validate([
             'name' => 'required',
         ]);
@@ -42,6 +44,7 @@ class ProductApiController extends Controller
             'user_id' => $user->id,
         ]);
         $product->save();
+        $user->call_api();
         return response()->json($product);
     }
 
@@ -54,9 +57,11 @@ class ProductApiController extends Controller
     public function show($hash)
     {
         $user = Auth::user();
+        if(!$user->has_pro_plan() || $user->is_over_api_limit()) return response('Forbidden', 403);
         $product = Product::where('hash', $hash)->first();
         if (!$product) return response('Not Found', 404);
         if($user->cannot('read', $product)) return response('Forbidden', 403);
+        $user->call_api();
         return response()->json($product);
     }
 
@@ -70,12 +75,14 @@ class ProductApiController extends Controller
     public function update(Request $request, $hash)
     {
         $user = Auth::user();
+        if(!$user->has_pro_plan() || $user->is_over_api_limit()) return response('Forbidden', 403);
         $product = Product::where('hash', $hash)->first();
         if (!$product) return response('Not Found', 404);
         if($user->cannot('update', $product)) return response('Forbidden', 403);
         $product->name = $request->get('name');
         $product->identification_code = $request->get('identification_code');
         $product->save();
+        $user->call_api();
         return response()->json($product);
     }
 
@@ -88,10 +95,12 @@ class ProductApiController extends Controller
     public function destroy($hash)
     {
         $user = Auth::user();
+        if(!$user->has_pro_plan() || $user->is_over_api_limit()) return response('Forbidden', 403);
         $product = Product::where('hash', $hash)->first();
         if (!$product) return response('Not Found', 404);
         if($user->cannot('delete', $product)) return response('Forbidden', 403);
         $product->delete();
+        $user->call_api();
         return response('Success');
     }
 }

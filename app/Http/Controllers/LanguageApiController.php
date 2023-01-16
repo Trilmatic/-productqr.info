@@ -11,9 +11,10 @@ class LanguageApiController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if (!$user->tokenCan('read')) response()->json(['message' => 'Forbidden!'], 403);
+        if(!$user->tokenCan('read') || !$user->has_pro_plan() || $user->is_over_api_limit()) return response('Forbidden', 403);
         $lang = Language::all();
         if (!$lang) abort(404);
+        $user->call_api();
         return response()->json($lang);
     }
 }
