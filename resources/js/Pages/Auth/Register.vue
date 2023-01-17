@@ -58,13 +58,6 @@ const submit = () => {
                         </div>
 
                         <!-- Form -->
-                        <div
-                            v-if="status"
-                            class="mb-4 font-medium text-sm text-success"
-                        >
-                            {{ status }}
-                        </div>
-
                         <form @submit.prevent="submit">
                             <div>
                                 <InputLabel for="name" value="Name" />

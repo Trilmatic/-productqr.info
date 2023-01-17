@@ -90,6 +90,7 @@ class PlanController extends Controller
         }
         $options = [
             "name" => $details->name,
+            "email" => $user->email,
             "address" => [
                 "line1" => $details->line1,
                 "line2" => $details->line2,
@@ -101,11 +102,15 @@ class PlanController extends Controller
         ];
         $user->createOrGetStripeCustomer();
         $user->updateStripeCustomer($options);
-        redirect()->back()->with('success', 'saved');
+        redirect()->back()->with('success', 'updated');
     }
 
     public function subscribe(Request $request)
     {
+        $request->validate([
+            'plan' => 'required',
+            'payment_method' => 'required',
+        ]);
         $plan = Plan::findOrFail($request->get('plan'));
         if (!$plan) abort(404);
         $user = Auth::user();
@@ -114,14 +119,36 @@ class PlanController extends Controller
         $user->updateDefaultPaymentMethod($payment_method);
         try {
             $user->newSubscription($plan->slug, $plan->stripe_plan)
-                ->create($payment_method, [
-                    'email' => $user->email,
-                ]);
+                ->create($payment_method);
         } catch (IncompletePayment $exception) {
             return redirect()->route('subscription.cancel')->with('error', 'Payment failed');
         }
 
         return redirect()->route('subscription.success')->with('success', 'Your plan subscribed successfully');
+    }
+
+    public function payment_method_delete(Request $request)
+    {
+        $request->validate([
+            'payment_method' => 'required',
+        ]);
+        $user = Auth::user();
+        $user->createOrGetStripeCustomer();
+        $payment_method = $request->get('payment_method');
+        $user->deletePaymentMethod($payment_method);
+        redirect()->back()->with('success', 'updated');
+    }
+
+    public function payment_method_update(Request $request)
+    {
+        $request->validate([
+            'payment_method' => 'required',
+        ]);
+        $user = Auth::user();
+        $user->createOrGetStripeCustomer();
+        $payment_method = $request->get('payment_method');
+        $user->updateDefaultPaymentMethod($payment_method);
+        redirect()->back()->with('success', 'deleted');
     }
 
     public function success_page()

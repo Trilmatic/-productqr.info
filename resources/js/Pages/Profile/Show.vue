@@ -12,12 +12,16 @@ import UpdateProfileInformationForm from "@/Pages/Profile/Partials/UpdateProfile
 defineProps({
     confirmsTwoFactorAuthentication: Boolean,
     sessions: Array,
+    subscription: Object,
+    payment_method: Object,
+    billing_details: Object,
+    stripe_key: String,
+    intent: Object,
 });
 
 const tab = ref("profile");
 
 onMounted(() => {
-    console.log(window.location.hash);
     if (window.location.hash) tab.value = window.location.hash.substring(1);
 });
 </script>
@@ -73,6 +77,7 @@ onMounted(() => {
                                                 ? 'bg-gray-100 dark:bg-gray-700'
                                                 : ''
                                         "
+                                        href="#billing"
                                         @click="tab = 'billing'"
                                     >
                                         <span>Billing</span>
@@ -86,6 +91,7 @@ onMounted(() => {
                                                 ? 'bg-gray-100 dark:bg-gray-700'
                                                 : ''
                                         "
+                                        href="#password"
                                         @click="tab = 'password'"
                                     >
                                         <span>Update password</span>
@@ -100,6 +106,7 @@ onMounted(() => {
                                                 : ''
                                         "
                                         @click="tab = 'twofactor'"
+                                        href="#twofactor"
                                     >
                                         <span>Two Factor Authentication</span>
                                     </a>
@@ -113,6 +120,7 @@ onMounted(() => {
                                                 : ''
                                         "
                                         @click="tab = 'browser'"
+                                        href="#browser"
                                     >
                                         <span>Browser Sessions</span>
                                     </a>
@@ -126,6 +134,7 @@ onMounted(() => {
                                                 : ''
                                         "
                                         @click="tab = 'delete'"
+                                        href="#delete"
                                     >
                                         <span>Delete Account</span>
                                     </a>
@@ -147,7 +156,14 @@ onMounted(() => {
                         </div>
 
                         <div v-show="tab === 'billing'">
-                            <Billing />
+                            <Billing
+                                :billing_details="billing_details"
+                                :subscription="subscription"
+                                :payment_method="payment_method"
+                                :locale="$page.props.locale"
+                                :stripe_key="stripe_key"
+                                :intent="intent"
+                            />
                         </div>
 
                         <div
