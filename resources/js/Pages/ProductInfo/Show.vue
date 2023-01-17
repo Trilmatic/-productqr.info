@@ -465,7 +465,7 @@ function deleteRecord(hash) {
                                 </ul>
                             </div>
                         </aside>
-                        <article class="py-2 px-4 w-full" v-if="info">
+                        <article class="py-2 pl-4 w-full" v-if="info">
                             <section
                                 class="info-content mb-8 pb-4 border-b border-gray-200 dark:border-gray-800"
                                 :id="'section-' + s.hash"
@@ -535,7 +535,7 @@ function deleteRecord(hash) {
                                     <a
                                         @click="qropened = false"
                                         type="button"
-                                        class="text-white bg-primary hover:bg-primary-focus focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                        class="btn text-white bg-primary hover:bg-primary-focus font-medium text-sm"
                                         :href="product.qr_code"
                                         download
                                     >
@@ -543,7 +543,7 @@ function deleteRecord(hash) {
                                     </a>
                                     <button
                                         type="button"
-                                        class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                                        class="btn text-gray-500 bg-white hover:bg-gray-100 border border-gray-200 text-sm font-medium hover:text-gray-900 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600"
                                         @click="qropened = false"
                                     >
                                         Close

@@ -1,20 +1,26 @@
 <script setup>
-import SectionTitle from './SectionTitle.vue';
+import SectionTitle from "./SectionTitle.vue";
 </script>
 
 <template>
-    <div class="bg-white dark:bg-slate-700 rounded-lg p-4 sm:p-6">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-6">
         <SectionTitle>
             <template #title>
-                <slot name="title" />
+                <div
+                    class="mb-4 pb-4 border-b border-gray-300 dark:border-gray-700 w-full"
+                >
+                    <slot name="title" />
+                </div>
             </template>
             <template #description>
-                <slot name="description" />
+                <div class="text-gray-700 dark:text-gray-300">
+                    <slot name="description" />
+                </div>
             </template>
         </SectionTitle>
 
         <div class="">
-            <div class="pt-5 bg-white dark:bg-slate-700 sm:rounded-lg">
+            <div class="sm:rounded-lg">
                 <slot name="content" />
             </div>
         </div>

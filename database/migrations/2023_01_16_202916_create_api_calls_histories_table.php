@@ -16,9 +16,8 @@ return new class extends Migration
         Schema::create('api_calls_histories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->date('date');
-            $table->integer('api_calls_count')->default(0);
-            $table->integer('api_calls_limit')->default(5000);
+            $table->integer('api_calls_count');
+            $table->integer('api_calls_limit');
             $table->timestamps();
         });
     }

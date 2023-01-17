@@ -103,7 +103,7 @@ function copyToken(token) {
 
             <template #form>
                 <!-- Token Name -->
-                <div class="col-span-6 sm:col-span-4">
+                <div class="col-span-6 sm:col-span-4 mb-4">
                     <InputLabel for="name" value="Name" />
                     <TextInput
                         id="name"
@@ -161,9 +161,7 @@ function copyToken(token) {
             </template>
         </FormSection>
 
-        <div v-if="tokens.length > 0">
-            <SectionBorder />
-
+        <div class="mt-8" v-if="tokens.length > 0">
             <!-- Manage API Tokens -->
             <div class="mt-10 sm:mt-0">
                 <ActionSection>
@@ -176,11 +174,11 @@ function copyToken(token) {
 
                     <!-- API Token List -->
                     <template #content>
-                        <div class="space-y-6">
+                        <div class="space-y-4">
                             <div
                                 v-for="token in tokens"
                                 :key="token.id"
-                                class="flex items-center justify-between"
+                                class="flex items-center justify-between border-b border-gray-300 dark:border-gray-700 pb-2"
                             >
                                 <div class="break-all">
                                     {{ token.name }}
@@ -205,7 +203,7 @@ function copyToken(token) {
                                     </button>
 
                                     <button
-                                        class="cursor-pointer ml-6 text-sm text-red-500"
+                                        class="btn cursor-pointer ml-6 text-sm text-white bg-error hover:bg-error-focus"
                                         @click="confirmApiTokenDeletion(token)"
                                     >
                                         Delete
@@ -230,7 +228,7 @@ function copyToken(token) {
 
                 <div
                     v-if="$page.props.jetstream.flash.token"
-                    class="flex items-center mt-4 bg-gray-100 dark:bg-gray-800 dark:text-white px-4 py-2 rounded font-mono text-sm text-gray-500 break-all"
+                    class="flex items-center mt-4 border-t border-gray-200 dark:border-gray-600 dark:text-white px-4 py-2 rounded font-mono text-sm text-gray-500 break-all"
                 >
                     <div class="w-full">
                         {{ $page.props.jetstream.flash.token }}

@@ -311,7 +311,7 @@ const logout = () => {
                                             API Tokens
                                         </DropdownLink>
 
-                                        <div class="border-t border-gray-100" />
+                                        <div class="border-t border-gray-100 dark:border-gray-600" />
 
                                         <!-- Authentication -->
                                         <form @submit.prevent="logout">
@@ -598,7 +598,7 @@ const logout = () => {
                                 <li>
                                     <Link
                                         class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
-                                        href="/#subscriptions"
+                                        href="/subscriptions"
                                         >Subscriptions</Link
                                     >
                                 </li>

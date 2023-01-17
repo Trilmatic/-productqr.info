@@ -14,7 +14,8 @@ class ProductInfoApiController extends Controller
     public function index($hash)
     {
         $user = Auth::user();
-        if (!$user->tokenCan('read') || !$user->has_pro_plan() || $user->is_over_api_limit()) return response('Forbidden', 403);
+        if (!$user->tokenCan('read') || !$user->has_pro_plan()) return response('Forbidden', 403);
+        if($user->is_over_api_limit()) return response('You are over monthly request limit ', 429);
         $product = Product::with("product_infos", "product_infos.language", "owner")->where('hash', $hash)->first();
         if (!$product) return response('Not Found', 404);
         if ($user->id != $product->user_id) return response('Forbidden', 403);
@@ -25,7 +26,8 @@ class ProductInfoApiController extends Controller
     public function show($hash)
     {
         $user = Auth::user();
-        if (!$user->tokenCan('read') || !$user->has_pro_plan() || $user->is_over_api_limit()) return response('Forbidden', 403);
+        if (!$user->tokenCan('read') || !$user->has_pro_plan()) return response('Forbidden', 403);
+        if($user->is_over_api_limit()) return response('You are over monthly request limit ', 429);
         $info = ProductInfo::with("language", "owner")->where('hash', $hash)->first();
         if (!$info) return response('Not Found', 404);
         if ($user->id != $info->user_id) return response('Forbidden', 403);
@@ -36,7 +38,8 @@ class ProductInfoApiController extends Controller
     public function store(Request $request, $hash)
     {
         $user = Auth::user();
-        if (!$user->tokenCan('create') || !$user->has_pro_plan() || $user->is_over_api_limit()) return response('Forbidden', 403);
+        if (!$user->tokenCan('create') || !$user->has_pro_plan()) return response('Forbidden', 403);
+        if($user->is_over_api_limit()) return response('You are over monthly request limit ', 429);
         $product = Product::where('hash', $hash)->first();
         if (!$product) return response('Not Found', 404);
         if ($user->id != $product->user_id) return response('Forbidden', 403);
@@ -70,7 +73,8 @@ class ProductInfoApiController extends Controller
     public function update(Request $request, $hash, $hash2)
     {
         $user = Auth::user();
-        if(!$user->has_pro_plan() || $user->is_over_api_limit()) return response('Forbidden', 403);
+        if(!$user->has_pro_plan()) return response('Forbidden', 403);
+        if($user->is_over_api_limit()) return response('You are over monthly request limit ', 429);
         $product = Product::where('hash', $hash)->first();
         if (!$product) return response('Not Found', 404);
         if ($user->cannot('update', $product)) return response('Forbidden', 403);
@@ -87,6 +91,7 @@ class ProductInfoApiController extends Controller
             if (isset($section['id'])) {
                 $sec_edit = ProductInfoSection::findOrFail($section['id']);
                 if ($user->cannot('update', $sec_edit)) return response('Forbidden', 403);
+                if($user->is_over_api_limit()) return response('You are over monthly request limit ', 429);
                 $sec_edit->title = $section['title'];
                 $sec_edit->content = $section['content'];
                 $sec_edit->sort = $section['sort'];
@@ -109,7 +114,8 @@ class ProductInfoApiController extends Controller
     public function destroy($hash)
     {
         $user = Auth::user();
-        if(!$user->has_pro_plan() || $user->is_over_api_limit()) return response('Forbidden', 403);
+        if(!$user->has_pro_plan()) return response('Forbidden', 403);
+        if($user->is_over_api_limit()) return response('You are over monthly request limit ', 429);
         $info = ProductInfo::where('hash', $hash)->first();
         if (empty($info)) return response('Not Found', 404);
         if ($user->cannot('delete', $info)) return response('Forbidden', 403);
@@ -120,7 +126,8 @@ class ProductInfoApiController extends Controller
     public function destroy_section($hash)
     {
         $user = Auth::user();
-        if(!$user->has_pro_plan() || $user->is_over_api_limit()) return response('Forbidden', 403);
+        if(!$user->has_pro_plan()) return response('Forbidden', 403);
+        if($user->is_over_api_limit()) return response('You are over monthly request limit ', 429);
         $section = ProductInfoSection::where('hash', $hash)->first();
         if ($section->isEmpty()) return response('Not Found', 404);
         if ($user->cannot('delete', $section)) return response('Forbidden', 403);
