@@ -22,6 +22,8 @@ const form = reactive({
 const stripe = ref(null);
 const elements = ref(null);
 const billing_details_new = ref(null);
+const name_on_card = ref(null);
+const name_on_card_error = ref(false);
 
 const annual = computed(() => {
     return props.plan.slug.includes("yearly");
@@ -30,6 +32,13 @@ const annual = computed(() => {
 const step = ref(1);
 const loadningAdress = ref(true);
 const loadningPayment = ref(false);
+
+function updateNameOnCard(event) {
+    name_on_card.value = event.target.value;
+    if (!name_on_card.value) {
+        name_on_card_error.value = true;
+    } else name_on_card_error.value = false;
+}
 
 async function initStripe() {
     const dark =
@@ -86,6 +95,7 @@ async function initStripe() {
     var form = document.getElementById("payment-form");
 
     form.addEventListener("submit", function (event) {
+        if (!name_on_card.value) return;
         event.preventDefault();
         loadningPayment.value = true;
 
@@ -306,10 +316,22 @@ onMounted(() => {
                             >
                                 <div class="space-y-6">
                                     <div class="mb-8">
-                                        <div
-                                            class="bg-gray-50 dark:bg-gray-700 rounded-lg shadow-lg p-4"
-                                        >
-                                            <label for="font-medium">
+                                        <div>
+                                            <div class="mb-2">
+                                                <label> Name on card </label>
+                                                <input
+                                                    class="bg-white text-gray-700 rounded-lg w-full p-3 focus:outline-0 focus:ring-0"
+                                                    type="text"
+                                                    id="name-on-card"
+                                                    @change="updateNameOnCard"
+                                                    :class="
+                                                        name_on_card_error
+                                                            ? 'border-error focus:border-error'
+                                                            : 'focus:border-transparent'
+                                                    "
+                                                />
+                                            </div>
+                                            <label>
                                                 Enter your credit card
                                                 information
                                             </label>

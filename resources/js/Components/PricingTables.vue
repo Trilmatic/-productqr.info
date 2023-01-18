@@ -225,6 +225,7 @@ function selectPlan(plan) {
                     <Link
                         class="btn w-full inline-flex items-center text-white bg-gray-900 hover:bg-gray-800 group"
                         v-else-if="$page.props.user && subscription"
+                        href="/user/subscribtion/change"
                     >
                         Change plans
                         <span
@@ -382,6 +383,7 @@ function selectPlan(plan) {
                     <Link
                         class="btn w-full inline-flex items-center text-white bg-gray-900 hover:bg-gray-800 group"
                         v-else-if="$page.props.user && subscription"
+                        href="/user/subscribtion/change"
                     >
                         Change plans
                         <span

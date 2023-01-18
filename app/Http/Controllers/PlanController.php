@@ -111,7 +111,7 @@ class PlanController extends Controller
             'plan' => 'required',
             'payment_method' => 'required',
         ]);
-        $plan = Plan::findOrFail($request->get('plan'));
+        $plan = Plan::where('id', $request->get('plan'))->first();
         if (!$plan) abort(404);
         $user = Auth::user();
         $payment_method = $request->get('payment_method');
@@ -121,10 +121,10 @@ class PlanController extends Controller
             $user->newSubscription($plan->slug, $plan->stripe_plan)
                 ->create($payment_method);
         } catch (IncompletePayment $exception) {
-            return redirect()->route('subscription.cancel')->with('error', 'Payment failed');
+            return redirect()->route('subscription.cancel-page')->with('error', 'Payment failed');
         }
 
-        return redirect()->route('subscription.success')->with('success', 'Your plan subscribed successfully');
+        return redirect()->route('subscription.success-page')->with('success', 'Your plan subscribed successfully');
     }
 
     public function payment_method_delete(Request $request)
@@ -151,6 +151,34 @@ class PlanController extends Controller
         redirect()->back()->with('success', 'deleted');
     }
 
+    public function cancel(Request $request)
+    {
+        $user = Auth::user();
+        $subscriptions = $user->subscriptions()->active()->get();
+        foreach ($subscriptions as $subscription) {
+            //dd($user->subscription($subscription->name));
+            $subscription->cancel();
+        }
+        redirect()->back()->with('success', 'canceled');
+    }
+
+    public function change(Request $request)
+    {
+        $request->validate([
+            'plan' => 'required',
+        ]);
+        $plan = Plan::where('id', $request->get('plan'))->first();
+        if (!$plan) abort(404);
+        $user = Auth::user();
+        $subscription = $user->subscriptions()->first();
+        try {
+            $user->subscription($subscription->name)->swap($plan->stripe_plan)->update(['name' => $plan->slug]);
+        } catch (IncompletePayment $exception) {
+            return redirect()->route('subscription.cancel-page')->with('error', 'Payment failed');
+        }
+        return redirect()->route('subscription.success-page')->with('success', 'Your plan subscription changed successfully');
+    }
+
     public function success_page()
     {
         return Inertia::render('Plan/Success');
@@ -166,8 +194,14 @@ class PlanController extends Controller
         return Inertia::render('Plan/Upgrade');
     }
 
-    public function change()
+    public function change_page()
     {
-        return Inertia::render('Plan/Change');
+        $plans = Plan::select('id', 'name', 'slug', 'price')->get();
+        $user = Auth::user();
+        $subscription = $user->subscriptions()->select('name')->first();
+        return Inertia::render('Plan/Change', [
+            'plans' => $plans,
+            'subscription' => $subscription
+        ]);
     }
 }

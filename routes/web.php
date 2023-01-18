@@ -62,12 +62,14 @@ Route::middleware([
         Route::get('/user/subscribe/{slug}', 'show')->name('plan.show');
         Route::post('/user/subscribe', 'subscribe')->name('subscription.create');
         Route::post('/user/billing-details', 'billing_details')->name('details.save');
-        Route::delete('/user/payment-method/delete', 'payment_method_delete')->name('payment.delete');
+        Route::post('/user/payment-method/delete', 'payment_method_delete')->name('payment.delete');
         Route::post('/user/payment-method/update', 'payment_method_update')->name('payment.update');
-        Route::get('/user/subscribtion/change', 'change')->name('subscription.change');
-        Route::get('/user/subscribtion/success', 'success_page')->name('subscription.success');
-        Route::get('/user/subscribtion/cancel', 'cancel_page')->name('subscription.cancel');
+        Route::post('/user/subscribtion/change', 'change')->name('subscription.change');
+        Route::get('/user/subscribtion/success', 'success_page')->name('subscription.success-page');
+        Route::get('/user/subscribtion/cancel', 'cancel_page')->name('subscription.cancel-page');
+        Route::delete('/user/subscribtion/cancel-subscription', 'cancel')->name('subscription.cancel');
         Route::get('/user/subscribtion/upgrade', 'upgrade_page')->name('subscription.upgrade');
+        Route::get('/user/subscribtion/change', 'change_page')->name('subscription.change-page');
     });
 });
 
