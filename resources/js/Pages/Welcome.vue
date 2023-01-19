@@ -673,11 +673,11 @@ defineProps({
                                 It depends on your requirements, if 100 products
                                 is enough, you can user our services for free.
                                 If you have more products, you can user our
-                                BASIC paid plan that costs 10$ per month and you
+                                BASIC paid plan that costs 15€ per month and you
                                 will be able to have up to 1000 products. If you
                                 need even more products or if you need API
                                 access for some integrations, you can use our
-                                PRO plan which will cost you 30$ per month.
+                                PRO plan which will cost you 40€ per month.
                             </p>
                         </div>
                         <!-- Item -->

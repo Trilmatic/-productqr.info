@@ -311,7 +311,9 @@ const logout = () => {
                                             API Tokens
                                         </DropdownLink>
 
-                                        <div class="border-t border-gray-100 dark:border-gray-600" />
+                                        <div
+                                            class="border-t border-gray-100 dark:border-gray-600"
+                                        />
 
                                         <!-- Authentication -->
                                         <form @submit.prevent="logout">
@@ -373,7 +375,7 @@ const logout = () => {
                         block: showingNavigationDropdown,
                         hidden: !showingNavigationDropdown,
                     }"
-                    class="sm:hidden bg-gray-100 dark:bg-gray-800"
+                    class="sm:hidden bg-gray-100 dark:bg-gray-800 shadow-lg"
                 >
                     <div class="pt-2 pb-3 space-y-1" v-if="$page.props.user">
                         <ResponsiveNavLink
@@ -589,17 +591,24 @@ const logout = () => {
                             </h6>
                             <ul class="text-sm space-y-2">
                                 <li>
-                                    <a
-                                        class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
-                                        href="#0"
-                                        >Payments</a
-                                    >
-                                </li>
-                                <li>
                                     <Link
                                         class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
                                         href="/subscriptions"
                                         >Subscriptions</Link
+                                    >
+                                </li>
+                                <li v-if="$page.props.user">
+                                    <Link
+                                        class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
+                                        href="/user/payments"
+                                        >Payments</Link
+                                    >
+                                </li>
+                                <li v-if="$page.props.user">
+                                    <Link
+                                        class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
+                                        href="/user/profile"
+                                        >Settings</Link
                                     >
                                 </li>
                             </ul>
@@ -625,26 +634,6 @@ const logout = () => {
                                         href="mailto:hello@productqr.info"
                                         class="text-warning hover:text-warning-focus"
                                         >hello@productqr.info</a
-                                    >
-                                </li>
-                            </ul>
-                        </div>
-
-                        <!-- 4th block -->
-                        <div
-                            class="sm:col-span-6 md:col-span-3 lg:col-span-2 hidden"
-                        >
-                            <h6
-                                class="text-xs text-gray-100 font-bold uppercase mb-3"
-                            >
-                                Lifestyle
-                            </h6>
-                            <ul class="text-sm space-y-2">
-                                <li>
-                                    <a
-                                        class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
-                                        href="#0"
-                                        >Our customers</a
                                     >
                                 </li>
                             </ul>
@@ -723,7 +712,9 @@ const logout = () => {
                                     </svg>
                                 </a>
                             </li>
-                            <li class="ml-2 w-8 h-8 flex justify-center items-center">
+                            <li
+                                class="ml-2 w-8 h-8 flex justify-center items-center"
+                            >
                                 <a
                                     class="block text-blue-300 hover:text-white transition duration-150 ease-in-out"
                                     href="#0"

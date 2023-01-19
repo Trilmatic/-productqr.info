@@ -13,6 +13,9 @@ use Laravel\Sanctum\HasApiTokens;
 use Laravel\Cashier\Billable;
 use App\Models\BillingDetail;
 use App\Models\Product;
+use App\Models\ProductInfo;
+use App\Models\ProductInfoSection;
+use App\Models\ApiCallsHistory;
 use App\Models\Threshold;
 
 class User extends Authenticatable
@@ -77,6 +80,21 @@ class User extends Authenticatable
             ]);
             $threshold->save();
         });
+        static::deleting(function ($user) {
+            $subscriptions = $user->subscriptions()->active()->get();
+            foreach ($subscriptions as $subscription) {
+                $subscription->cancel();
+            }
+            $user->threshold()->delete();
+            $user->billing_details()->delete();
+            $user->api_calls_history()->delete();
+            $products = Product::where('user_id', $user->id)->withTrashed();
+            $infos = ProductInfo::where('user_id', $user->id)->withTrashed();
+            $sections = ProductInfoSection::where('user_id', $user->id)->withTrashed();
+            $sections->forceDelete();
+            $infos->forceDelete();
+            $products->forceDelete();
+        });
     }
 
     public function billing_details()
@@ -92,6 +110,11 @@ class User extends Authenticatable
     public function threshold()
     {
         return $this->hasOne(Threshold::class, 'user_id', 'id');
+    }
+
+    public function api_calls_history()
+    {
+        return $this->hasMany(ApiCallsHistory::class, 'user_id', 'id');
     }
 
     public function has_pro_plan()

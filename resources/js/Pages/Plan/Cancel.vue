@@ -1,7 +1,6 @@
 <script setup>
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
-import PricingTables from "@/Components/PricingTables.vue";
 const props = defineProps({
     plans: Array,
 });
@@ -48,9 +47,9 @@ const props = defineProps({
                         <div class="max-w-3xl mx-auto text-center mt-6">
                             <Link
                                 class="btn inline-flex items-center text-white bg-primary hover:bg-primary-focus group"
-                                href="/plans"
+                                href="/subscritions"
                             >
-                                Plans
+                                Subscriptions
                                 <span
                                     class="tracking-normal text-gray-900 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-2"
                                 >

@@ -26,9 +26,12 @@ class ProductInfo extends Model
             $record->hash = $hashids->encode($record->id);
             $record->save();
         });
-        static::deleting(function($record)
-        {
-            if($record->sections()) $record->sections()->delete();
+        static::deleting(function ($record) {
+            if ($record->isForceDeleting()) {
+                if ($record->sections()) $record->sections()->forceDelete();
+            } else {
+                if ($record->sections()) $record->sections()->delete();
+            }
         });
     }
 

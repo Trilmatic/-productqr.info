@@ -156,7 +156,6 @@ class PlanController extends Controller
         $user = Auth::user();
         $subscriptions = $user->subscriptions()->active()->get();
         foreach ($subscriptions as $subscription) {
-            //dd($user->subscription($subscription->name));
             $subscription->cancel();
         }
         redirect()->back()->with('success', 'canceled');
@@ -192,6 +191,15 @@ class PlanController extends Controller
     public function upgrade_page()
     {
         return Inertia::render('Plan/Upgrade');
+    }
+
+    public function payments_page()
+    {
+        $user = Auth::user();
+        $invoices = $user->invoices();
+        return Inertia::render('Plan/Payments', [
+            'invoices' => $invoices
+        ]);
     }
 
     public function change_page()

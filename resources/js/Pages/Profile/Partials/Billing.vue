@@ -186,34 +186,148 @@ onMounted(() => {
                     <p class="mb-2">
                         Switch you subscription to any other plan or cancel it
                         at any time.
-                        <span class="text-warning"
+                        <span
                             >The changes for new subscription will be charged
                             immediately regardless of your previous
                             subscription.</span
                         >
                     </p>
-                    <p class="font-bold text-error" v-if="subscription.ends_at">
-                        <span>Ends at - </span>
-                        <span>{{
-                            new Date(subscription.ends_at).toLocaleDateString(
-                                "en-GB"
-                            )
-                        }}</span>
-                    </p>
+                    <div v-if="subscription.ends_at">
+                        <p class="font-bold text-error">
+                            <span>Ends at - </span>
+                            <span>{{
+                                new Date(
+                                    subscription.ends_at
+                                ).toLocaleDateString("en-GB")
+                            }}</span>
+                        </p>
+                        <div class="mt-4">
+                            <Link
+                                class="btn bg-secondary hover:bg-secondary-focus"
+                                href="/user/payments"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="icon icon-tabler icon-tabler-file-invoice"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="2"
+                                    stroke="currentColor"
+                                    fill="none"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <path
+                                        stroke="none"
+                                        d="M0 0h24v24H0z"
+                                        fill="none"
+                                    ></path>
+                                    <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                                    <path
+                                        d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"
+                                    ></path>
+                                    <line x1="9" y1="7" x2="10" y2="7"></line>
+                                    <line x1="9" y1="13" x2="15" y2="13"></line>
+                                    <line
+                                        x1="13"
+                                        y1="17"
+                                        x2="15"
+                                        y2="17"
+                                    ></line>
+                                </svg>
+                                Payments
+                            </Link>
+                        </div>
+                    </div>
                 </div>
                 <div class="flex space-x-4" v-if="!subscription.ends_at">
                     <Link
-                        type="button"
                         class="btn bg-primary hover:bg-primary-focus"
                         href="/user/subscribtion/change"
                     >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="icon icon-tabler icon-tabler-arrows-exchange"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            stroke-width="2"
+                            stroke="currentColor"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path
+                                stroke="none"
+                                d="M0 0h24v24H0z"
+                                fill="none"
+                            ></path>
+                            <path d="M7 10h14l-4 -4"></path>
+                            <path d="M17 14h-14l4 4"></path>
+                        </svg>
                         Change plan
+                    </Link>
+                    <Link
+                        class="btn bg-secondary hover:bg-secondary-focus"
+                        href="/user/payments"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="icon icon-tabler icon-tabler-file-invoice"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            stroke-width="2"
+                            stroke="currentColor"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path
+                                stroke="none"
+                                d="M0 0h24v24H0z"
+                                fill="none"
+                            ></path>
+                            <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                            <path
+                                d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"
+                            ></path>
+                            <line x1="9" y1="7" x2="10" y2="7"></line>
+                            <line x1="9" y1="13" x2="15" y2="13"></line>
+                            <line x1="13" y1="17" x2="15" y2="17"></line>
+                        </svg>
+                        Payments
                     </Link>
                     <button
                         type="button"
                         class="btn text-gray-500 hover:bg-gray-100 border border-gray-200 over:text-gray-900 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600"
                         @click="cancelSubscription"
                     >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="icon icon-tabler icon-tabler-clock-cancel"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            stroke-width="2"
+                            stroke="currentColor"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path
+                                stroke="none"
+                                d="M0 0h24v24H0z"
+                                fill="none"
+                            ></path>
+                            <circle cx="19" cy="19" r="3"></circle>
+                            <path d="M17 21l4 -4"></path>
+                            <path
+                                d="M20.995 12.3a9 9 0 1 0 -8.683 8.694"
+                            ></path>
+                            <path d="M12 7v5l2 2"></path>
+                        </svg>
                         Cancel subscription
                     </button>
                 </div>
@@ -418,7 +532,10 @@ onMounted(() => {
                         Subscribe
                     </a>
                 </div>
-                <div class="text-gray-700 dark:text-gray-300 mb-6" v-else>
+                <div
+                    class="text-gray-700 dark:text-gray-300 mb-6"
+                    v-else-if="subscription && !subscription.ends_at"
+                >
                     <div
                         class="rounded-lg bg-error-focus text-white p-4 mb-4 font-bold"
                     >
@@ -459,6 +576,11 @@ onMounted(() => {
                         </svg>
                         Add
                     </button>
+                </div>
+                <div v-else>
+                    <p class="text-gray-700 dark:text-gray-300 mb-2">
+                        No payment method added.
+                    </p>
                 </div>
             </div>
 

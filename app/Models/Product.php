@@ -62,9 +62,13 @@ class Product extends Model
             $record->save();
         });
 
-        static::deleting(function($record)
-        {
-           if( $record->product_infos()) $record->product_infos()->delete();
+        static::deleting(function ($record) {
+            if ($record->isForceDeleting()) {
+                if ($record->product_infos()) $record->product_infos()->forceDelete();
+                Storage::delete($record->qr_code);
+            } else {
+                if ($record->product_infos()) $record->product_infos()->delete();
+            }
         });
     }
 

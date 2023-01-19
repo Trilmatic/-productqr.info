@@ -53,7 +53,7 @@ onMounted(() => {
                 <div class="flex flex-wrap md:flex-nowrap mt-8">
                     <aside class="w-full md:w-64 pb-8">
                         <div
-                            class="px-3 py-4 overflow-y-auto rounded bg-gray-50 dark:bg-gray-800 md:sticky md:top-0"
+                            class="px-3 py-4 overflow-y-auto rounded-lg bg-gray-50 dark:bg-gray-800 md:sticky md:top-0"
                         >
                             <ul class="space-y-2 list-none pl-0">
                                 <li>

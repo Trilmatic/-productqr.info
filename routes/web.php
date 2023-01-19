@@ -67,6 +67,7 @@ Route::middleware([
         Route::post('/user/subscribtion/change', 'change')->name('subscription.change');
         Route::get('/user/subscribtion/success', 'success_page')->name('subscription.success-page');
         Route::get('/user/subscribtion/cancel', 'cancel_page')->name('subscription.cancel-page');
+        Route::get('/user/payments', 'payments_page')->name('subscription.payments-page');
         Route::delete('/user/subscribtion/cancel-subscription', 'cancel')->name('subscription.cancel');
         Route::get('/user/subscribtion/upgrade', 'upgrade_page')->name('subscription.upgrade');
         Route::get('/user/subscribtion/change', 'change_page')->name('subscription.change-page');

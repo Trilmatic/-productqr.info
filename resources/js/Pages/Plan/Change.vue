@@ -53,7 +53,6 @@ function changeSubscriptions() {
                 <div class="py-12 md:py-20">
                     <section class="md:pb-20">
                         <p class="h3 text-center">Change plan</p>
-                        <div class="max-w-3xl mx-auto text-center mt-6"></div>
                         <div class="max-w-3xl mx-auto text-center mt-6">
                             <div
                                 class="bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-6"
@@ -70,7 +69,7 @@ function changeSubscriptions() {
                                 <form class="mb-4" @submit.prevent="">
                                     <div
                                         class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700 mb-4"
-                                        v-for="p in not_subscribed"
+                                        v-for="(p, i) in not_subscribed"
                                         :key="p.id"
                                     >
                                         <input
@@ -78,7 +77,9 @@ function changeSubscriptions() {
                                             :id="p.slug"
                                             name="plan"
                                             :value="p.id"
-                                            :checked="p.slug === 'pro-yearly'"
+                                            :checked="
+                                                i === not_subscribed.length - 1
+                                            "
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                         />
                                         <label
