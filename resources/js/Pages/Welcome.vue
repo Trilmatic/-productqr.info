@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link } from "@inertiajs/inertia-vue3";
+import { Head, Link } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import PricingTables from "@/Components/PricingTables.vue";
 defineProps({
@@ -688,12 +688,12 @@ defineProps({
                             <p class="text-gray-500">
                                 Yes, you can change plans whenever you want, but
                                 the changes for new subscription will be charged
-                                immediately regardless of your previous
-                                subscription. Just be aware that if you will
-                                downgrade a plan you will loose the abilities of
-                                that plan, so if you have more products than
-                                plan allows, users will not be able to access
-                                theese products.
+                                immediately. You will be discounted based on
+                                remaining time from previous subscription. Just be
+                                aware that if you will downgrade a plan you will
+                                loose the abilities of that plan, so if you have
+                                more products than plan allows, users will not
+                                be able to access theese products.
                             </p>
                         </div>
                         <!-- Item -->

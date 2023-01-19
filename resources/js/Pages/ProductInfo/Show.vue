@@ -4,8 +4,8 @@ import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 import ContentIcon from "@/Components/ContentIcon.vue";
 import { reactive, onMounted, ref } from "vue";
-import { Inertia } from "@inertiajs/inertia";
-import { Link } from "@inertiajs/inertia-vue3";
+import { router } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 import Sidebar from "@/Components/Sidebar.vue";
 const props = defineProps({
     product: Object,
@@ -14,7 +14,7 @@ const props = defineProps({
 const qropened = ref(false);
 function deleteRecord(hash) {
     if (confirm("Are you sure you want to delete?")) {
-        Inertia.delete(
+        router.delete(
             "/product/" + props.product.hash + "/info/" + hash + "/delete"
         );
     }

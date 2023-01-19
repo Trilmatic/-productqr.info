@@ -1,8 +1,8 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { reactive, onMounted, ref, nextTick, computed } from "vue";
-import { Inertia } from "@inertiajs/inertia";
-import { Link } from "@inertiajs/inertia-vue3";
+import { router } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 import TomSelect from "tom-select/dist/js/tom-select.complete.min";
 import Quill from "quill/dist/quill.min";
 const props = defineProps({
@@ -68,7 +68,7 @@ async function loadInputData() {
 }
 function removeSection(section, index) {
     if (section.id) {
-        Inertia.delete(
+        router.delete(
             "/product/" +
                 props.product.hash +
                 "/info/section/" +
@@ -94,7 +94,7 @@ function submit() {
     editors.value.forEach((editor, index) => {
         sections.value[index].content = editor.root.innerHTML;
     });
-    Inertia.put(
+    router.put(
         "/product/" +
             props.product.hash +
             "/info/" +

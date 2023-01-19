@@ -1,5 +1,5 @@
 <script setup>
-import { Link } from "@inertiajs/inertia-vue3";
+import { Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 import Sidebar from "@/Components/Sidebar.vue";
 const sidebarComponent = ref(null);

@@ -1,7 +1,7 @@
 <script setup>
-import { Head, Link } from "@inertiajs/inertia-vue3";
+import { Head, Link } from "@inertiajs/vue3";
 import { onMounted, ref, computed, reactive } from "vue";
-import { Inertia } from "@inertiajs/inertia";
+import { router } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import PricingTables from "@/Components/PricingTables.vue";
 import "@stripe/stripe-js";
@@ -121,7 +121,7 @@ async function initStripe() {
 
 function submitStripePayment(paymentMethod) {
     form.payment_method = paymentMethod;
-    Inertia.post("/user/subscribe", form);
+    router.post("/user/subscribe", form);
 }
 
 const handleNextStep = async () => {
@@ -131,7 +131,7 @@ const handleNextStep = async () => {
 
     if (complete) {
         loadningAdress.value = true;
-        Inertia.post(
+        router.post(
             "/user/billing-details",
             {
                 ...billing_details_new.value.address,

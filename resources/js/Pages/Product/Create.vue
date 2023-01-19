@@ -1,13 +1,13 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { reactive } from "vue";
-import { Inertia } from "@inertiajs/inertia";
+import { router } from "@inertiajs/vue3";
 const form = reactive({
   name: null,
   identification_code: null,
 });
 function submit() {
-  Inertia.post("/product/store", form);
+  router.post("/product/store", form);
 }
 </script>
 <template>

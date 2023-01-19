@@ -1,8 +1,8 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { reactive, onMounted, ref, nextTick } from "vue";
-import { Inertia } from "@inertiajs/inertia";
-import { Link } from "@inertiajs/inertia-vue3";
+import { router } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 import TomSelect from "tom-select/dist/js/tom-select.complete.min";
 import Quill from "quill/dist/quill.min";
 const props = defineProps({
@@ -73,7 +73,7 @@ function submit() {
         sections.value[index].sort = index;
     });
     let language_id = document.getElementById("language").value;
-    Inertia.post("/product/" + props.product.hash + "/info/store", {
+    router.post("/product/" + props.product.hash + "/info/store", {
         language_id: language_id,
         sections: sections.value,
     });

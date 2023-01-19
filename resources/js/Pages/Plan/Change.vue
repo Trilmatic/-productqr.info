@@ -1,9 +1,9 @@
 <script setup>
-import { Head, Link } from "@inertiajs/inertia-vue3";
+import { Head, Link } from "@inertiajs/vue3";
 import { ref, computed } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import PricingTables from "@/Components/PricingTables.vue";
-import { Inertia } from "@inertiajs/inertia";
+import { router } from "@inertiajs/vue3";
 const props = defineProps({
     plans: Array,
     subscription: Object,
@@ -15,13 +15,23 @@ const not_subscribed = computed(() => {
     });
 });
 
+const loading = ref(false);
+
 function changeSubscriptions() {
+    loading.value = true;
     let plan = document.querySelector("input[name=plan]:checked");
-    console.log(plan.value);
     if (!plan) return;
-    Inertia.post("/user/subscribtion/change", {
-        plan: plan,
-    });
+    router.post(
+        "/user/subscribtion/change",
+        {
+            plan: plan,
+        },
+        {
+            onSuccess: () => {
+                loading.value = false;
+            },
+        }
+    );
 }
 </script>
 
@@ -57,15 +67,6 @@ function changeSubscriptions() {
                             <div
                                 class="bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-6"
                             >
-                                <div
-                                    class="rounded-lg bg-secondary-focus font-bold text-white p-4 mb-4"
-                                >
-                                    <p>
-                                        The changes for new subscription will be
-                                        charged immediately regardless of your
-                                        previous subscription.
-                                    </p>
-                                </div>
                                 <form class="mb-4" @submit.prevent="">
                                     <div
                                         class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700 mb-4"
@@ -91,9 +92,11 @@ function changeSubscriptions() {
                                         >
                                     </div>
                                 </form>
+
                                 <button
                                     class="btn inline-flex items-center text-white bg-primary hover:bg-primary-focus group"
                                     @click="changeSubscriptions"
+                                    v-show="!loading"
                                 >
                                     Change
                                     <span

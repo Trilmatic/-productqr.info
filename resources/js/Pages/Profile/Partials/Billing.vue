@@ -1,5 +1,5 @@
 <script setup>
-import { Link } from "@inertiajs/inertia-vue3";
+import { Link } from "@inertiajs/vue3";
 import { ref, reactive, onMounted, nextTick } from "vue";
 import "@stripe/stripe-js";
 import { loadStripe } from "@stripe/stripe-js/pure";
@@ -7,7 +7,7 @@ import ActionSection from "@/Components/ActionSection.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import WarningButton from "@/Components/WarningButton.vue";
 import DialogModal from "@/Components/DialogModal.vue";
-import { Inertia } from "@inertiajs/inertia";
+import { router } from "@inertiajs/vue3";
 
 const props = defineProps({
     subscription: Object,
@@ -37,7 +37,7 @@ const handleBillingsSubmit = async () => {
     billing_details_new.value = value;
 
     if (complete) {
-        Inertia.post(
+        router.post(
             "/user/billing-details",
             {
                 ...billing_details_new.value.address,
@@ -52,7 +52,7 @@ const handleBillingsSubmit = async () => {
 
 function deletePaymentMethod() {
     if (confirm("Are you sure you want to delete your payment method?")) {
-        Inertia.post("/user/payment-method/delete", {
+        router.post("/user/payment-method/delete", {
             payment_method: props.payment_method.id,
         });
     }
@@ -67,7 +67,7 @@ function updateNameOnCard(event) {
 
 function cancelSubscription() {
     if (confirm("Are you sure you want to cancel your subscription?")) {
-        Inertia.delete("/user/subscribtion/cancel-subscription");
+        router.delete("/user/subscribtion/cancel-subscription");
     }
 }
 
@@ -93,7 +93,7 @@ function updatePaymentMethod() {
                 var errorElement = document.getElementById("card-errors");
                 errorElement.textContent = result.error.message;
             } else {
-                Inertia.post(
+                router.post(
                     "/user/payment-method/update",
                     {
                         payment_method: result.setupIntent.payment_method,
@@ -185,11 +185,11 @@ onMounted(() => {
                 <div class="text-gray-700 dark:text-gray-300 mb-6">
                     <p class="mb-2">
                         Switch you subscription to any other plan or cancel it
-                        at any time.
-                        <span
-                            >The changes for new subscription will be charged
-                            immediately regardless of your previous
-                            subscription.</span
+                        at any time. The changes for new subscription will be
+                        charged immediately.
+                        <span class="text-warning"
+                            >You will be discounted based on remaining time from
+                            previous subscription.</span
                         >
                     </p>
                     <div v-if="subscription.ends_at">

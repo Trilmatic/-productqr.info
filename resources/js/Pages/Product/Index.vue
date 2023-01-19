@@ -1,8 +1,8 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { reactive, ref, onMounted, computed } from "vue";
-import { Inertia } from "@inertiajs/inertia";
-import { Link } from "@inertiajs/inertia-vue3";
+import { router } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 import TomSelect from "tom-select/dist/js/tom-select.complete.min";
 import Sidebar from "@/Components/Sidebar.vue";
 import NoDataIcon from "@/Components/NoDataIcon.vue";
@@ -64,7 +64,7 @@ const sort_split = computed(() => {
 
 function deleteRecord(hash) {
     if (confirm("Are you sure you want to delete?")) {
-        Inertia.delete("/product/" + hash + "/delete");
+        router.delete("/product/" + hash + "/delete");
     }
 }
 
@@ -92,7 +92,7 @@ function search(e) {
 }
 
 function reload() {
-    Inertia.get(window.location.pathname, filters, {
+    router.get(window.location.pathname, filters, {
         preserveState: true,
         preserveScroll: true,
     });
@@ -134,8 +134,8 @@ function addNew() {
 }
 
 function submit() {
-    if (!form.hash) Inertia.post("/product/store", form);
-    else Inertia.put("/product/" + form.hash + "/update", form);
+    if (!form.hash) router.post("/product/store", form);
+    else router.put("/product/" + form.hash + "/update", form);
     if (sidebarComponent.value) sidebarComponent.value.close();
 }
 

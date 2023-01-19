@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link } from "@inertiajs/inertia-vue3";
+import { Head, Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 const props = defineProps({
