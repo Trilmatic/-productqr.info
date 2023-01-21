@@ -46,6 +46,11 @@ class ProductApiController extends Controller
             'user_id' => $user->id,
         ]);
         $product->save();
+        $threshold = $user->threshold()->first();
+        $count = $user->products()->count();
+        if ($count === $threshold->basic_threshold_limit) $threshold->basic_threshold_id = $product->id;
+        if ($count === $threshold->pro_threshold_limit) $threshold->pro_threshold_id = $product->id;
+        $threshold->save();
         $user->call_api();
         return response()->json($product);
     }

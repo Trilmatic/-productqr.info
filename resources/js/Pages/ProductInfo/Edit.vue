@@ -113,7 +113,7 @@ onMounted(() => {
 });
 </script>
 <template>
-    <AppLayout title="Dashboard">
+    <AppLayout title="Edit product info">
         <section class="relative overflow-hidden p-8">
             <!-- Bg -->
             <div

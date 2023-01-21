@@ -29,7 +29,11 @@
     }
 }
 
-/* See Alpine.js: https://github.com/alpinejs/alpine#x-cloak */
-[x-cloak=""] {
-    display: none;
+::-webkit-scrollbar {
+    @apply bg-black/10 dark:bg-white/10 w-2 h-2;
+}
+    
+::-webkit-scrollbar-thumb {
+    @apply bg-black/20 dark:bg-white/20 rounded-lg;
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,0.10),inset 0 -1px 0 rgba(0,0,0,0.07);
 }

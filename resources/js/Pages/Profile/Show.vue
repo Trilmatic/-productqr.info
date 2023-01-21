@@ -64,6 +64,7 @@ onMounted(() => {
                                                 ? 'bg-gray-100 dark:bg-gray-700'
                                                 : ''
                                         "
+                                        href="#profile"
                                         @click="tab = 'profile'"
                                     >
                                         <span>Profile</span>

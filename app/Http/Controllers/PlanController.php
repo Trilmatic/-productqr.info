@@ -19,18 +19,6 @@ class PlanController extends Controller
         $this->stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
     }
 
-    public function welcome()
-    {
-        $plans = Plan::select('id', 'name', 'slug', 'price')->get();
-        $user = Auth::user();
-        if ($user) $subscription = $user->subscriptions()->select('name')->first();
-        else $subscription = null;
-        return Inertia::render('Welcome', [
-            'plans' => $plans,
-            'subscription' => $subscription
-        ]);
-    }
-
     public function index()
     {
         $plans = Plan::select('id', 'name', 'slug', 'price')->get();

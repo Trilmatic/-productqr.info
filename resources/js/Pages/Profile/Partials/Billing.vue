@@ -139,7 +139,6 @@ async function initStripe() {
     const secret = props.intent.client_secret;
     stripe.value = await loadStripe(props.stripe_key, { locale: locale });
     elements.value = stripe.value.elements({
-        secret,
         appearance,
     });
     var defaultValues = {};
@@ -198,7 +197,7 @@ onMounted(() => {
                             <span>{{
                                 new Date(
                                     subscription.ends_at
-                                ).toLocaleDateString("en-GB")
+                                ).toLocaleString("en-GB")
                             }}</span>
                         </p>
                         <div class="mt-4">
@@ -449,7 +448,7 @@ onMounted(() => {
                 <div class="mt-4 flex flex-wrap space-x-4">
                     <button
                         type="button"
-                        class="btn bg-primary hover:bg-primary-focus mb-2"
+                        class="btn bg-primary hover:bg-primary-focus"
                         @click="openUpdatePaymentModal"
                     >
                         <svg
@@ -478,7 +477,7 @@ onMounted(() => {
                     </button>
                     <button
                         type="button"
-                        class="btn bg-error hover:bg-error-focus mb-2"
+                        class="btn bg-error hover:bg-error-focus"
                         @click="deletePaymentMethod"
                     >
                         <svg

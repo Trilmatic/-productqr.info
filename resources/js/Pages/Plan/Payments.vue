@@ -15,7 +15,7 @@ const formatter = ref(
 </script>
 
 <template>
-    <Head title="About us" />
+    <Head title="Payments" />
     <AppLayout>
         <section class="relative overflow-hidden p-8">
             <!-- Bg -->
@@ -44,7 +44,7 @@ const formatter = ref(
                         <p class="h3 text-center">Payments.</p>
                         <div class="max-w-3xl mx-auto text-center mt-6">
                             <div
-                                class="bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-6"
+                                class="bg-white dark:bg-gray-800 rounded-lg overflow-x-auto"
                             >
                                 <table
                                     class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
@@ -57,7 +57,7 @@ const formatter = ref(
                                                 Transanction
                                             </th>
                                             <th class="px-6 py-3">
-                                                Date & Time
+                                                Date
                                             </th>
                                             <th class="px-6 py-3">Ammount</th>
                                             <th class="px-6 py-3">
@@ -70,7 +70,7 @@ const formatter = ref(
                                         <tr
                                             v-for="invoice in invoices"
                                             :key="invoice.id"
-                                            class="hover:cursor-pointer border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                                            class="hover:cursor-pointer border-b dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-slate-800"
                                         >
                                             <td>
                                                 <a
@@ -102,7 +102,7 @@ const formatter = ref(
                                                                     .status_transitions
                                                                     .paid_at *
                                                                     1000
-                                                            ).toLocaleDateString(
+                                                            ).toLocaleString(
                                                                 "en-GB"
                                                             )
                                                         }}</span
@@ -141,7 +141,7 @@ const formatter = ref(
                                                             new Date(
                                                                 invoice.next_payment_attempt *
                                                                     1000
-                                                            ).toLocaleDateString(
+                                                            ).toLocaleString(
                                                                 "en-GB"
                                                             )
                                                         }}</span

@@ -21,8 +21,8 @@ class ProductFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'identification_code' => Str::random(10),
-            'user_id' => 1,
+            'identification_code' => 'P' . Str::random(9),
+            'user_id' => 2,
         ];
     }
 }

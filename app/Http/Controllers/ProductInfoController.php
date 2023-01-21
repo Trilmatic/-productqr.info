@@ -76,6 +76,42 @@ class ProductInfoController extends Controller
         return redirect('/product/' . $product->hash . '/info?hash=' . $info->hash);
     }
 
+    public function get_custom_qr(Request $request)
+    {
+        $user = Auth::user();
+        $request->validate([
+            'product_id' => 'required',
+        ]);
+        $product = Product::where('id', $request->get('product_id'))->first();
+        if(!$product) abort(404);
+        if ($user->id != $product->user_id) abort(403);
+        $size = $request->get('size') ? $request->get('size') : '200x200';
+        $url = "/products/" . $product->hash . '/info';
+        $protocol = stripos($_SERVER['SERVER_PROTOCOL'], 'https') === 0 ? 'https://' : 'http://';
+        $data =  $protocol . $_SERVER['HTTP_HOST'] . $url;
+        //Get QR code
+        $QR = imagecreatefrompng('https://chart.googleapis.com/chart?cht=qr&chld=H|1&chs=' . $size . '&chl=' . urlencode($data));
+        //Add logo into QR
+        $logo = $request->get('image') ? imagecreatefromstring(file_get_contents($request->get('image'))) : imagecreatefromstring(file_get_contents(public_path("qr-logo.png")));
+        $QR_width = imagesx($QR);
+        $QR_height = imagesy($QR);
+
+        $logo_width = imagesx($logo);
+        $logo_height = imagesy($logo);
+
+        // Scale logo to fit in the QR Code
+        $logo_qr_width = $QR_width / 3;
+        $scale = $logo_width / $logo_qr_width;
+        $logo_qr_height = $logo_height / $scale;
+
+        imagecopyresampled($QR, $logo, $QR_width / 3, $QR_height / 3, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height);
+        ob_start();
+        imagepng($QR);
+        $stringdata = ob_get_contents();
+        ob_end_clean();
+        dd($stringdata);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -87,7 +123,7 @@ class ProductInfoController extends Controller
         $product = Product::with("product_infos", "product_infos.language", "owner")->where('hash', $hash)->first();
         if (!$product) abort(404);
         $user = User::where('id', $product->user_id)->first();
-        if ($user->is_over_product_limit($product->id)) {
+        if ($user->product_over_limit($product->id)) {
             if (Auth::user() && Auth::user()->id === $user->id) return redirect()->route('subscription.upgrade');
             abort(404);
         }
@@ -99,10 +135,17 @@ class ProductInfoController extends Controller
             if (!$info) $info = $product->product_infos()->with("sections")->first();
         }
 
-        return Inertia::render('ProductInfo/Show', [
-            'product' => $product,
-            'info' => $info,
-        ]);
+        if (Auth::user()) {
+            return Inertia::render('ProductInfo/Show', [
+                'product' => $product,
+                'info' => $info,
+            ]);
+        } else {
+            return Inertia::render('ProductInfo/ShowNoLayout', [
+                'product' => $product,
+                'info' => $info,
+            ]);
+        }
     }
 
     /**

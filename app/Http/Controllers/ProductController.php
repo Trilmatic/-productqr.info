@@ -71,7 +71,7 @@ class ProductController extends Controller
     {
         $product = Product::where('hash', $hash)->first();
         $user = User::where('id', $product->user_id)->first();
-        if ($user->is_over_product_limit($product->id)) {
+        if ($user->product_over_limit($product->id)) {
             if (Auth::user() && Auth::user()->id === $user->id) return redirect()->route('subscription.upgrade');
             abort(404);
         }

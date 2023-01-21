@@ -53,6 +53,11 @@ const fields = ref([
         key: "identification_code",
         sortable: true,
     },
+    {
+        label: "Last update",
+        key: "updated_at",
+        sortable: true,
+    },
 ]);
 
 const sidebarComponent = ref(null);
@@ -146,7 +151,7 @@ onMounted(() => {
 });
 </script>
 <template>
-    <AppLayout title="Dashboard">
+    <AppLayout title="Product list">
         <section class="relative overflow-hidden p-8">
             <!-- Bg -->
             <div
@@ -389,6 +394,11 @@ onMounted(() => {
                                     >{{ p[field.key] }}</Link
                                 ></span
                             >
+                            <span v-else-if="field.key === 'updated_at'">{{
+                                new Date(p[field.key]).toLocaleString(
+                                    "en-GB"
+                                )
+                            }}</span>
                             <span v-else>{{ p[field.key] }}</span>
                         </td>
                         <td>
@@ -777,6 +787,7 @@ onMounted(() => {
                                 type="text"
                                 class="form-input w-full"
                                 @change="form.name = $event.target.value"
+                                autocomplete="off"
                             />
                         </div>
                         <div>
@@ -793,6 +804,7 @@ onMounted(() => {
                                     form.identification_code =
                                         $event.target.value
                                 "
+                                autocomplete="off"
                             />
                         </div>
                     </div>

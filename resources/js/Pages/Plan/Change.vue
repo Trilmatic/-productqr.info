@@ -36,7 +36,7 @@ function changeSubscriptions() {
 </script>
 
 <template>
-    <Head title="About us" />
+    <Head title="Change subscription" />
     <AppLayout>
         <section class="relative overflow-hidden p-8">
             <!-- Bg -->

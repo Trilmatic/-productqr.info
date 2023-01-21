@@ -130,7 +130,7 @@ class User extends Authenticatable
         return $threshold->api_calls_count > $threshold->api_calls_limit;
     }
 
-    public function is_over_product_limit($id)
+    public function product_over_limit($id)
     {
         $subscription = $this->subscriptions()->select('name')->first();
         $threshold = $this->threshold()->first();
@@ -139,10 +139,26 @@ class User extends Authenticatable
         return false;
     }
 
+    public function is_over_product_limit()
+    {
+        $subscription = $this->subscriptions()->select('name')->first();
+        $products = $this->products()->count();
+        $threshold = $this->threshold()->first();
+        if (!$subscription && $threshold->basic_threshold_limit) return $products > $threshold->basic_threshold_limit;
+        if ($subscription && str_starts_with($subscription->name, 'basic') && $threshold->pro_threshold_limit) return $products > $threshold->pro_threshold_limit;
+        return false;
+    }
+
     public function call_api()
     {
         $threshold = $this->threshold()->first();
         $threshold->api_calls_count++;
         $threshold->save();
+    }
+
+    public function api_calls_count()
+    {
+        $threshold = $this->threshold()->first();
+        return $threshold->api_calls_count;
     }
 }

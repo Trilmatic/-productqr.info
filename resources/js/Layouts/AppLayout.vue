@@ -648,10 +648,10 @@ const logout = () => {
                             </h6>
                             <ul class="text-sm space-y-2">
                                 <li>
-                                    <a
+                                    <Link
                                         class="text-blue-300 hover:text-white transition duration-150 ease-in-out"
-                                        href="#0"
-                                        >Documentation</a
+                                        href="/docs"
+                                        >Documentation</Link
                                     >
                                 </li>
                                 <li>

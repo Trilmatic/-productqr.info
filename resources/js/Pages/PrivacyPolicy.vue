@@ -4,7 +4,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 </script>
 
 <template>
-    <Head title="About us" />
+    <Head title="Privacy policy" />
     <AppLayout>
         <!-- Hero -->
         <section class="relative overflow-hidden">

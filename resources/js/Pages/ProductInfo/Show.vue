@@ -21,7 +21,7 @@ function deleteRecord(hash) {
 }
 </script>
 <template>
-    <AppLayout title="Dashboard">
+    <AppLayout title="Info">
         <section class="relative overflow-hidden p-8">
             <!-- Bg -->
             <div

@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\BaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,13 +21,9 @@ use App\Http\Controllers\PlanController;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+Route::get('/', [BaseController::class, 'welcome'])->name('welcome');
+Route::get('/docs', function () {
+    return Inertia::render('Docs/Docs');
 });
 
 Route::get('language/{language}', function ($language) {
@@ -39,9 +36,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [BaseController::class, 'dashboard'])->name('dashboard');
     Route::controller(ProductController::class)->prefix('product')->name('product.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
@@ -58,7 +53,6 @@ Route::middleware([
         Route::delete('/{hash}/info/section/{hash2}/delete', 'destroy_section')->name('destroy_section');
     });
     Route::controller(PlanController::class)->group(function () {
-        Route::get('/', 'welcome')->name('plan.show');
         Route::get('/user/subscribe/{slug}', 'show')->name('plan.show');
         Route::post('/user/subscribe', 'subscribe')->name('subscription.create');
         Route::post('/user/billing-details', 'billing_details')->name('details.save');

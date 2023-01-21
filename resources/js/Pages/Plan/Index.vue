@@ -9,7 +9,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <Head title="About us" />
+    <Head title="Subscriptions" />
     <AppLayout>
         <section class="relative overflow-hidden p-8">
             <!-- Bg -->

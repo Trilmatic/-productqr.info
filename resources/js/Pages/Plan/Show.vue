@@ -57,7 +57,6 @@ async function initStripe() {
     stripe.value = await loadStripe(props.stripe_key, { locale: locale });
     const secret = props.intent.client_secret;
     elements.value = stripe.value.elements({
-        secret,
         appearance,
     });
     const cardElement = elements.value.create("card");
@@ -153,7 +152,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <Head title="About us" />
+    <Head title="Subscribe" />
     <AppLayout>
         <section class="relative overflow-hidden p-8">
             <!-- Bg -->

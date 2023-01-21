@@ -40,7 +40,7 @@ const hasActions = computed(() => !!useSlots().actions);
 
                 <div
                     v-if="hasActions"
-                    class="flex items-center justify-end py-3 text-right sm:rounded-bl-md sm:rounded-br-md"
+                    class="flex items-center justify-end pt-3 text-right sm:rounded-bl-md sm:rounded-br-md"
                 >
                     <slot name="actions" />
                 </div>

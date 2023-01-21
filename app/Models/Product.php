@@ -29,11 +29,13 @@ class Product extends Model
         static::created(function ($record) {
             $hashids = new Hashids(env('PRODUCT_HASH_KEY', 1), 8);
             $record->hash = $hashids->encode($record->id);
+            $record->save();
             //base settings
             $size = '200x200';
-            $url = "/products/" . $record->hash . '/info';
+            /*$url = "/products/" . $record->hash . '/info';
             $protocol = stripos($_SERVER['SERVER_PROTOCOL'], 'https') === 0 ? 'https://' : 'http://';
-            $data =  $protocol . $_SERVER['HTTP_HOST'] . $url;
+            $data =  $protocol . $_SERVER['HTTP_HOST'] . $url;*/
+            $data = 'https://www.productqr.info';
             //Get QR code
             $QR = imagecreatefrompng('https://chart.googleapis.com/chart?cht=qr&chld=H|1&chs=' . $size . '&chl=' . urlencode($data));
             //Add logo into QR

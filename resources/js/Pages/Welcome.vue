@@ -670,11 +670,11 @@ defineProps({
                                 How much is this going to cost?
                             </h4>
                             <p class="text-gray-500">
-                                It depends on your requirements, if 100 products
+                                It depends on your requirements, if 50 products
                                 is enough, you can user our services for free.
                                 If you have more products, you can user our
                                 BASIC paid plan that costs 15€ per month and you
-                                will be able to have up to 1000 products. If you
+                                will be able to have up to 500 products. If you
                                 need even more products or if you need API
                                 access for some integrations, you can use our
                                 PRO plan which will cost you 40€ per month.

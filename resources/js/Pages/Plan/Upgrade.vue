@@ -7,7 +7,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <Head title="About us" />
+    <Head title="Upgrade" />
     <AppLayout>
         <section class="relative overflow-hidden p-8">
             <!-- Bg -->
