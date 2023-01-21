@@ -25,6 +25,7 @@ onMounted(() => {
     var options = {
         direction: "top",
         offset: 20,
+        viewport: 768,
     };
     isSticky("sticky", options);
 });

@@ -395,9 +395,7 @@ onMounted(() => {
                                 ></span
                             >
                             <span v-else-if="field.key === 'updated_at'">{{
-                                new Date(p[field.key]).toLocaleString(
-                                    "en-GB"
-                                )
+                                new Date(p[field.key]).toLocaleString("en-GB")
                             }}</span>
                             <span v-else>{{ p[field.key] }}</span>
                         </td>
@@ -560,6 +558,7 @@ onMounted(() => {
                 </tbody>
                 <tfoot
                     class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky bottom-0 min-w-[100vh] z-1"
+                    id="sticky-bottom"
                 >
                     <tr>
                         <td :colspan="fields.length + 1">

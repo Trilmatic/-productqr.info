@@ -3,11 +3,18 @@ import { ref, onMounted } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import WhatIsProductqr from "@/Pages/Docs/Partials/WhatIsProductqr.vue";
 import Basics from "@/Pages/Docs/Partials/Basics.vue";
+import { isSticky } from "@/sticky.js";
 
 const tab = ref("what-is-productqr");
 
 onMounted(() => {
     if (window.location.hash) tab.value = window.location.hash.substring(1);
+    var options = {
+        direction: "top",
+        offset: 20,
+        viewport: 768,
+    };
+    isSticky("sticky", options);
 });
 </script>
 
@@ -38,7 +45,8 @@ onMounted(() => {
                 <div class="flex flex-wrap md:flex-nowrap mt-8">
                     <aside class="w-full md:w-64 pb-8">
                         <div
-                            class="px-3 py-4 overflow-y-auto rounded-lg bg-gray-50 dark:bg-gray-800 md:sticky md:top-0"
+                            class="px-3 py-4 overflow-y-auto rounded-lg bg-gray-50 dark:bg-gray-800"
+                            id="sticky"
                         >
                             <ul class="space-y-2 list-none pl-0">
                                 <li>
