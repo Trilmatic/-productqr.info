@@ -37,3 +37,11 @@
     @apply bg-black/20 dark:bg-white/20 rounded-lg;
     -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,0.10),inset 0 -1px 0 rgba(0,0,0,0.07);
 }
+
+.is-sticky{
+    position: fixed;
+    top: var(--offsetTOP);
+    left: var(--offsetLEFT);
+    right: var(--offsetRIGHT);
+    bottom: var(--offsetBOTTOM);
+}

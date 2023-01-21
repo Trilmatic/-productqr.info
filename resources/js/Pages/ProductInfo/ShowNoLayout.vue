@@ -7,6 +7,7 @@ import { reactive, onMounted, ref } from "vue";
 import { router } from "@inertiajs/vue3";
 import { Head, Link } from "@inertiajs/vue3";
 import Sidebar from "@/Components/Sidebar.vue";
+import { isSticky } from "@/sticky.js";
 const props = defineProps({
     product: Object,
     info: Object,
@@ -19,6 +20,14 @@ function deleteRecord(hash) {
         );
     }
 }
+
+onMounted(() => {
+    var options = {
+        direction: "top",
+        offset: 20,
+    };
+    isSticky("sticky", options);
+});
 </script>
 <template>
     <Head title="Info" />
@@ -377,7 +386,8 @@ function deleteRecord(hash) {
                 <div class="flex flex-wrap md:flex-nowrap mt-8">
                     <aside class="w-full md:w-64 pb-8">
                         <div
-                            class="px-3 py-4 overflow-y-auto rounded-lg bg-gray-50 dark:bg-gray-800 md:sticky md:top-0"
+                            class="px-3 py-4 overflow-y-auto rounded-lg bg-gray-50 dark:bg-gray-800"
+                            id="sticky"
                         >
                             <ul class="space-y-2 list-none pl-0">
                                 <li v-for="s in info.sections" :key="s.id">
