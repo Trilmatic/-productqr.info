@@ -3,7 +3,7 @@ import { Link } from "@inertiajs/vue3";
 </script>
 <template>
     <div class="w-full bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-6">
-        <h2 class="h3">What is ProductQR?</h2>
+        <h2 class="h3 mb-2">What is ProductQR?</h2>
         <p>
             ProductQR is a lightweight app that helps to add technology into
             your physical products. You can create a product records and each of
@@ -16,12 +16,12 @@ import { Link } from "@inertiajs/vue3";
             language if available. If not it will select the most used language
             of those localized.
         </p>
-        <div class="w-full bg-gray-600 h-96 my-4"></div>
-        <p class="h4">
+        <p class="h4 mt-4">
             Our goal is to allow customers with disadvantages access necessary
             information, while improving the customers expirience of your
             products.
         </p>
+        <div class="w-full bg-gray-600 h-96 my-4"></div>
         <p class="mt-2">
             You can use our services for free, or select from a variety of
             <Link

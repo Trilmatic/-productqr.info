@@ -3,6 +3,9 @@ import { ref, onMounted } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import WhatIsProductqr from "@/Pages/Docs/Partials/WhatIsProductqr.vue";
 import Basics from "@/Pages/Docs/Partials/Basics.vue";
+import ApiSetup from "@/Pages/Docs/Partials/ApiSetup.vue";
+import ApiBasics from "@/Pages/Docs/Partials/ApiBasics.vue";
+import ApiReference from "@/Pages/Docs/Partials/ApiReference.vue";
 import { isSticky } from "@/sticky.js";
 
 const tab = ref("what-is-productqr");
@@ -128,6 +131,15 @@ onMounted(() => {
                         </div>
                         <div v-show="tab === 'basics'">
                             <Basics />
+                        </div>
+                        <div v-show="tab === 'api-setup'">
+                            <ApiSetup />
+                        </div>
+                        <div v-show="tab === 'api-basics'">
+                            <ApiBasics />
+                        </div>
+                        <div v-show="tab === 'api-reference'">
+                            <ApiReference />
                         </div>
                     </article>
                 </div>

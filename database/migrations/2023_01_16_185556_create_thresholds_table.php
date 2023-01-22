@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('basic_threshold_limit')->default(50);
             $table->integer('pro_threshold_limit')->default(500);
             $table->integer('api_calls_count')->default(0);
-            $table->integer('api_calls_limit')->default(5000);
+            $table->integer('api_calls_limit')->default(10000);
             $table->timestamps();
         });
     }

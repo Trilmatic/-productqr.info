@@ -85,6 +85,9 @@ class ProductApiController extends Controller
         $user = Auth::user();
         if(!$user->has_pro_plan()) return response('Forbidden', 403);
         if($user->is_over_api_limit()) return response('You are over monthly request limit ', 429);
+        $request->validate([
+            'name' => 'required',
+        ]);
         $product = Product::where('hash', $hash)->first();
         if (!$product) return response('Not Found', 404);
         if($user->cannot('update', $product)) return response('Forbidden', 403);

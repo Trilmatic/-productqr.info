@@ -31,7 +31,7 @@ export function isSticky(
         document.documentElement.clientWidth || 0,
         window.innerWidth || 0
     );
-    if (vw <= options.viewport) return;
+    if (vw < options.viewport) return;
     let element = el;
     let anchor = null;
     if (typeof el === "string") element = document.getElementById(el);

@@ -111,6 +111,7 @@ function copyToken(token) {
                         type="text"
                         class="mt-1 block w-full"
                         autofocus
+                        autocomplete="off"
                     />
                     <InputError
                         :message="createApiTokenForm.errors.name"
