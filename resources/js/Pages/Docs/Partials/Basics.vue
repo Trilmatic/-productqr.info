@@ -5,8 +5,49 @@ import Accordeon from "@/Components/Accordeon.vue";
 <template>
     <div class="w-full bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-6">
         <h2 class="h3 mb-4">Basics</h2>
+        <p class="mb-2">
+            Product QR has simple but effective structure that allows a lot of
+            customization. It consists of three main resources:
+        </p>
+        <ul class="list-disc ml-4 pl-4 mt-2 mb-2">
+            <li><strong>Product</strong></li>
+            <li><strong>Product inforamtion</strong></li>
+            <li><strong>Product inforamtion section</strong></li>
+        </ul>
+        <h3 class="h4">Product</h3>
+        <p class="mt-2 mb-4">
+            Product is the main resource that holds all of the product
+            information and QR code under itself. It consinsts of name (can be
+            in any language) and identification code (any public identification
+            mainly for search purposes).
+        </p>
+        <h3 class="h4">Product information</h3>
+        <p class="mt-2">
+            Product information in bind to one product and it is defined by
+            language. When customer comes to site, it gets a language from
+            customers device and looks if any product information with that
+            language exists.
+        </p>
+        <p class="mt-2 mb-4">
+            If yes it shows him the language, if not it shows the next best one.
+            Product information can have any ammount of sections under itself.
+        </p>
+        <h3 class="h4">Product information section</h3>
+        <p class="mt-2">
+            Product information section belongs to the product information and
+            defines an actual content that is visible to customer.
+        </p>
+        <p class="mt-2 mb-6">
+            It consists of title and WYSIWIG content. Customer can then easily
+            navigate through different sections and access the information that
+            he needs.
+        </p>
         <Accordeon>
-            <template #title><h3 class="h4">Products list</h3></template>
+            <template #title
+                ><h3 class="h4">
+                    Products list and product creation
+                </h3></template
+            >
             <p>
                 <Link
                     class="text-primary hover:text-primary-focus"

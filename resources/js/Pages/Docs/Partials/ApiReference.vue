@@ -4,7 +4,13 @@ import Accordeon from "@/Components/Accordeon.vue";
 </script>
 <template>
     <div class="w-full bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-6">
-        <h2 class="h4 mb-4">API reference</h2>
+        <h2 class="h4 mb-4">
+            API reference
+            <span
+                class="p-2 bg-primary rounded-lg font-medium text-base text-white ml-4"
+                >v1</span
+            >
+        </h2>
         <Accordeon>
             <template #title
                 ><p class="flex items-center">
