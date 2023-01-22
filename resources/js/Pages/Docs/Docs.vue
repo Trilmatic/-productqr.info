@@ -44,7 +44,7 @@ onMounted(() => {
             </div>
         </section>
         <div>
-            <div class="max-w-7xl mx-auto py-10 px-2 sm:px-6 lg:px-8 space-y-5">
+            <div class="max-w-7xl mx-auto py-10 px-2 sm:px-6 lg:px-8 space-y-5 mb-8">
                 <div class="flex flex-wrap md:flex-nowrap mt-8">
                     <aside class="w-full md:w-64 pb-8">
                         <div
