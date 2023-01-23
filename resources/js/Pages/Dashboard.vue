@@ -442,7 +442,9 @@ function deleteRecord(hash) {
                                             <th class="px-6 py-3"></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody
+                                        v-if="products && products.length > 0"
+                                    >
                                         <tr
                                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-slate-800 group"
                                             v-for="p in products"
@@ -604,6 +606,15 @@ function deleteRecord(hash) {
                                                         </svg>
                                                     </button>
                                                 </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody v-else>
+                                        <tr
+                                            class="border-b dark:border-gray-700 text-center"
+                                        >
+                                            <td colspan="4" class="p-8">
+                                                No products yet.
                                             </td>
                                         </tr>
                                     </tbody>
