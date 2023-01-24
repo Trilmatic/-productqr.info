@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-    <button :type="type" class="inline-flex items-center btn bg-secondary hover:bg-secondary-focus text-white">
+    <button :type="type" class="inline-flex items-center btn bg-secondary text-white hover:bg-secondary-focus text-white">
         <slot />
     </button>
 </template>

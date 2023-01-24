@@ -218,7 +218,7 @@ onMounted(() => {
                             >
                                 <div class="flex justify-end">
                                     <button
-                                        class="btn bg-error hover:bg-error-focus text-white"
+                                        class="btn bg-error text-white hover:bg-error-focus text-white"
                                         type="button"
                                         @click="removeSection(i)"
                                     >
@@ -294,7 +294,7 @@ onMounted(() => {
                         </TransitionGroup>
                         <div class="py-3 flex justify-center">
                             <button
-                                class="btn bg-secondary hover:bg-secondary-focus"
+                                class="btn bg-secondary text-white hover:bg-secondary-focus"
                                 type="button"
                                 @click="addSection()"
                             >

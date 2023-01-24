@@ -107,7 +107,7 @@ function deleteRecord(hash) {
                             <p class="h4">{{ products_count }}</p>
                             <div class="flex mt-4">
                                 <Link
-                                    class="btn bg-primary hover:bg-primary-focus"
+                                    class="btn bg-primary text-white hover:bg-primary-focus"
                                     href="/product"
                                 >
                                     <svg
@@ -263,7 +263,7 @@ function deleteRecord(hash) {
                                 <p class="h4">{{ __(subscription.name) }}</p>
                                 <div class="flex mt-4">
                                     <Link
-                                        class="btn bg-secondary hover:bg-secondary-focus"
+                                        class="btn bg-secondary text-white hover:bg-secondary-focus"
                                         href="/user/subscribtion/change"
                                     >
                                         <svg
@@ -294,7 +294,7 @@ function deleteRecord(hash) {
                                 <p class="h4">Free</p>
                                 <div class="flex mt-4">
                                     <Link
-                                        class="btn bg-secondary hover:bg-secondary-focus"
+                                        class="btn bg-secondary text-white hover:bg-secondary-focus"
                                         href="/subscriptions"
                                     >
                                         <svg
@@ -358,7 +358,7 @@ function deleteRecord(hash) {
                             <p class="h4">{{ api_calls_count }}</p>
                             <div class="flex mt-4">
                                 <Link
-                                    class="btn bg-warning hover:bg-warning-focus"
+                                    class="btn bg-warning text-white hover:bg-warning-focus"
                                     href="/user/api-tokens"
                                 >
                                     <svg

@@ -81,13 +81,13 @@ const logout = () => {
                                 <div v-if="!$page.props.user" class="space-x-4">
                                     <Link
                                         :href="route('login')"
-                                        class="text-sm underline"
+                                        class="text-white text-sm underline"
                                         >Log in</Link
                                     >
 
                                     <Link
                                         :href="route('register')"
-                                        class="text-sm underline"
+                                        class="text-white text-sm underline"
                                         >Register</Link
                                     >
                                 </div>

@@ -250,7 +250,7 @@ onMounted(() => {
                             >
                                 <div class="flex justify-end space-x-2">
                                     <button
-                                        class="btn bg-warning hover:bg-warning-focus text-white"
+                                        class="btn bg-warning text-white hover:bg-warning-focus text-white"
                                         type="button"
                                         @click="moveUp(section, i)"
                                         v-if="section.sort != 0"
@@ -279,7 +279,7 @@ onMounted(() => {
                                         </svg>
                                     </button>
                                     <button
-                                        class="btn bg-warning hover:bg-warning-focus text-white"
+                                        class="btn bg-warning text-white hover:bg-warning-focus text-white"
                                         type="button"
                                         @click="moveDown(section, i)"
                                         v-if="
@@ -310,7 +310,7 @@ onMounted(() => {
                                         </svg>
                                     </button>
                                     <button
-                                        class="btn bg-error hover:bg-error-focus text-white"
+                                        class="btn bg-error text-white hover:bg-error-focus text-white"
                                         type="button"
                                         @click="removeSection(section, i)"
                                     >
@@ -389,7 +389,7 @@ onMounted(() => {
                         </TransitionGroup>
                         <div class="py-3 flex justify-center">
                             <button
-                                class="btn bg-secondary hover:bg-secondary-focus"
+                                class="btn bg-secondary text-white hover:bg-secondary-focus"
                                 type="button"
                                 @click="addSection()"
                             >

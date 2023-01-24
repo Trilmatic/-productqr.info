@@ -105,7 +105,7 @@
             y1="8"
             x2="12.01"
             y2="8"
-            class="stroke-black dark:stroke-white"
+            class="stroke-white"
         ></line>
         <rect
             x="4"
@@ -113,11 +113,11 @@
             width="16"
             height="16"
             rx="2"
-            class="stroke-black dark:stroke-white"
+            class="stroke-white"
         ></rect>
         <polyline
             points="11 12 12 12 12 16 13 16"
-            class="stroke-black dark:stroke-white"
+            class="stroke-white"
         ></polyline>
     </svg>
 </template>

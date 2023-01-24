@@ -268,7 +268,7 @@ onMounted(() => {
                                 <button
                                     type="button"
                                     @click="handleNextStep"
-                                    class="btn bg-primary hover:bg-primary-focus"
+                                    class="btn bg-primary text-white hover:bg-primary-focus"
                                 >
                                     Continue
                                 </button>
@@ -350,7 +350,7 @@ onMounted(() => {
                                 <div>
                                     <button
                                         id="card-button"
-                                        class="btn bg-secondary hover:bg-secondary-focus"
+                                        class="btn bg-secondary text-white hover:bg-secondary-focus"
                                         type="submit"
                                     >
                                         Subscribe to {{ plan.name }} plan

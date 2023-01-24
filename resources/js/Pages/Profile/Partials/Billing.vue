@@ -202,7 +202,7 @@ onMounted(() => {
                         </p>
                         <div class="mt-4">
                             <Link
-                                class="btn bg-secondary hover:bg-secondary-focus"
+                                class="btn bg-secondary text-white hover:bg-secondary-focus"
                                 href="/user/payments"
                             >
                                 <svg
@@ -242,7 +242,7 @@ onMounted(() => {
                 </div>
                 <div class="flex space-x-4" v-if="!subscription.ends_at">
                     <Link
-                        class="btn bg-primary hover:bg-primary-focus"
+                        class="btn bg-primary text-white hover:bg-primary-focus"
                         href="/user/subscribtion/change"
                     >
                         <svg
@@ -268,7 +268,7 @@ onMounted(() => {
                         Change plan
                     </Link>
                     <Link
-                        class="btn bg-secondary hover:bg-secondary-focus"
+                        class="btn bg-secondary text-white hover:bg-secondary-focus"
                         href="/user/payments"
                     >
                         <svg
@@ -360,7 +360,7 @@ onMounted(() => {
                 <button
                     type="button"
                     @click="handleBillingsSubmit"
-                    class="btn bg-primary hover:bg-primary-focus"
+                    class="btn bg-primary text-white hover:bg-primary-focus"
                 >
                     Save
                 </button>
@@ -448,7 +448,7 @@ onMounted(() => {
                 <div class="mt-4 flex flex-wrap space-x-4">
                     <button
                         type="button"
-                        class="btn bg-primary hover:bg-primary-focus"
+                        class="btn bg-primary text-white hover:bg-primary-focus"
                         @click="openUpdatePaymentModal"
                     >
                         <svg
@@ -477,7 +477,7 @@ onMounted(() => {
                     </button>
                     <button
                         type="button"
-                        class="btn bg-error hover:bg-error-focus"
+                        class="btn bg-error text-white hover:bg-error-focus"
                         @click="deletePaymentMethod"
                     >
                         <svg
@@ -526,7 +526,7 @@ onMounted(() => {
                     </div>
                     <a
                         href="/subscriptions"
-                        class="btn bg-primary hover:bg-primary-focus mb-2"
+                        class="btn bg-primary text-white hover:bg-primary-focus mb-2"
                     >
                         Subscribe
                     </a>
@@ -545,7 +545,7 @@ onMounted(() => {
                     </div>
                     <button
                         type="button"
-                        class="btn bg-primary hover:bg-primary-focus mb-2"
+                        class="btn bg-primary text-white hover:bg-primary-focus mb-2"
                         @click="openUpdatePaymentModal"
                     >
                         <svg

@@ -271,7 +271,7 @@ onMounted(() => {
                                     </div>
                                     <button
                                         @click="sidebarComponent.open()"
-                                        class="btn bg-primary hover:bg-primary-focus dark:text-white"
+                                        class="btn bg-primary text-white hover:bg-primary-focus dark:text-white"
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
