@@ -1,4 +1,5 @@
 <h1 align="center"><a href="https://productqr.info/" target="_blank">productqr.info</a></h1>
+
 ## About ProductQR
 
 Not everybody can read the small format product information or guides, but everybody should have access to it.
