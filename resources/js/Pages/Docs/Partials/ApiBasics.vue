@@ -13,9 +13,8 @@ import { Link } from "@inertiajs/vue3";
             <li>UTF-8 encoding is used in every request and server response</li>
             <li>Only JSON format is used in every request and response</li>
             <li>
-                Usage of this API is limited. You can make 20 requests/second,
-                1000 requests/hour, 10000 requests/month. If you need more
-                contact us at
+                Usage of this API is limited. You can make 60 requests/minute,
+                10000 requests/month. If you need more contact us at
                 <a
                     href="mailto:hello@productqr.info"
                     class="text-warning hover:text-warning-focus"
